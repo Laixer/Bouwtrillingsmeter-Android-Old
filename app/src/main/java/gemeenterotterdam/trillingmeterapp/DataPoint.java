@@ -1,5 +1,7 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import java.util.Date;
+
 /**
  * Created by Marijn Otte on 26-8-2017.
  * DataPoint is a measured point from a sensor containing the time of the measurement and the value
@@ -7,15 +9,15 @@ package gemeenterotterdam.trillingmeterapp;
  */
 
 public class DataPoint {
-    private long time;
+    private Date time;
     private float[] values;
 
-    public DataPoint(long time, float[] values) {
+    public DataPoint(Date time, float[] values) {
         this.time = time;
         this.values = values;
     }
 
-    public long getTime(){
+    public Date getTime(){
         return time;
     }
 

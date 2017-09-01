@@ -10,7 +10,8 @@ import android.util.Log;
  */
 
 public class StartActivity extends AppCompatActivity {
-
+    private AcceleroMeter acceleroMeter;
+    private GyroscopeMeter gyroscopeMeter;
     // Automatically called when activity starts.
     //Starts accelerometer and gyroscopemeter.
 
@@ -18,8 +19,10 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //AcceleroMeter.getInstance().start(this.getApplicationContext());
-        GyroscopeMeter.getInstance().start(this.getApplicationContext());
+        acceleroMeter = new AcceleroMeter();
+        acceleroMeter.start(this.getApplicationContext());
+        gyroscopeMeter = new GyroscopeMeter();
+        gyroscopeMeter.start(this.getApplicationContext());
 
 
     }

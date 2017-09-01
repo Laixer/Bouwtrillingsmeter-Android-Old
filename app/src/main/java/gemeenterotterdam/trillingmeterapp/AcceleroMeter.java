@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 
 import static android.content.Context.SENSOR_SERVICE;
@@ -15,41 +16,32 @@ import static android.content.Context.SENSOR_SERVICE;
 /**
  * Created by Marijn Otte on 28-8-2017.
  * Retrieves data from AcceleroMeter sensor
- * Singleton class.
  */
 
 public class AcceleroMeter extends HardwareSensor {
-    private static AcceleroMeter acceleroMeter = null;
     private ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
     private SensorManager sensorManager;
-    private long startTime;
-
-    protected AcceleroMeter(){};
-
-    public static AcceleroMeter getInstance(){
-        if(acceleroMeter == null){
-            acceleroMeter = new AcceleroMeter();
-        }
-        return acceleroMeter;
-    }
+    private Date startTime;
+    private DataHandler dataHandler = new DataHandler();
 
     // reset startTime and List with data every second
     // save data gathered from last second in DataHandler
     public void reset() {
-        startTime = System.currentTimeMillis();
-        DataHandler.getInstance().saveData(dataPoints, "Accelerometer");
+        dataHandler.saveData(dataPoints, "Accelerometer");
         dataPoints = new ArrayList<DataPoint>();
+        startTime = new Date();
     }
 
     // Verify whether accelerometer exists.
     // Start the accelerometer to measure data.
     public void start(Context context){
+        dataHandler = new DataHandler();
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
             sensorManager.registerListener(this,
                     sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
                     0);
-            startTime = System.currentTimeMillis();
+            startTime = new Date();
         }
         else{
             Log.d("ACCELEROSTATUS", "No Accelerometer available");
@@ -64,18 +56,13 @@ public class AcceleroMeter extends HardwareSensor {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
             float[] values = event.values;
-            final float x = values[0];
-            final float y = values[1];
-            final float z = values[2];
-            float[] data = {x, y, z};
-            DataPoint d = new DataPoint(System.currentTimeMillis(), data);
-            if (startTime + 1000 >= System.currentTimeMillis()) {
+            DataPoint d = new DataPoint(new Date(), values);
+            if (startTime.getTime() + 1000 >= System.currentTimeMillis()) {
                 dataPoints.add(d);
             }
             else{
                 reset();
             }
-
         }
     }
 

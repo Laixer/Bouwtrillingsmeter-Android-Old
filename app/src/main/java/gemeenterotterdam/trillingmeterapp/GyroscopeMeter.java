@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,42 +17,32 @@ import static android.content.Context.SENSOR_SERVICE;
 /**
  * Created by Marijn Otte on 28-8-2017.
  * Retrieves data from AcceleroMeter sensor.
- * Singleton Class.
  */
 
 public class GyroscopeMeter extends HardwareSensor {
-    private static GyroscopeMeter gyroscopeMeter = null;
     private ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
     private SensorManager sensorManager;
-    private long startTime;
+    private DataHandler dataHandler;
+    private Date startTime;
 
-
-
-    protected GyroscopeMeter(){};
-
-    public static GyroscopeMeter getInstance(){
-        if(gyroscopeMeter == null){
-            gyroscopeMeter = new GyroscopeMeter();
-        }
-        return gyroscopeMeter;
-    }
     // reset startTime and List with data every second
     // save data gathered from last second in DataHandler
 
     public void reset() {
-        startTime = System.currentTimeMillis();
-        DataHandler.getInstance().saveData(dataPoints, "Gyroscopemeter");
+        startTime = new Date();
+        dataHandler.saveData(dataPoints, "Gyroscopemeter");
         dataPoints = new ArrayList<DataPoint>();
     }
 
     // start the gyroscopemeter to measure data
     public void start(Context context){
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        dataHandler = new DataHandler();
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) {
             sensorManager.registerListener(this,
                     sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
                     5);
-            startTime = System.currentTimeMillis();
+            startTime = new Date();
         }
         else{
             Log.d("GYROSCOPESTATUS", "No Gyroscope Available");
@@ -64,7 +55,7 @@ public class GyroscopeMeter extends HardwareSensor {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-            if (startTime + 1000 >= System.currentTimeMillis()) {
+            if (startTime.getTime() + 1000 >= System.currentTimeMillis()) {
                 float[] vectors;
                 if (event.values.length > 4) {
                     float[] truncatedRotationVector = new float[4];
@@ -73,7 +64,7 @@ public class GyroscopeMeter extends HardwareSensor {
                 } else {
                     vectors = event.values;
                 }
-                DataPoint d = new DataPoint(System.currentTimeMillis(), vectors);
+                DataPoint d = new DataPoint(new Date(), vectors);
                 dataPoints.add(d);
             }
             else{
