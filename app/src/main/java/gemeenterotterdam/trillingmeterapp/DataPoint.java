@@ -21,7 +21,7 @@ public class DataPoint {
         return time;
     }
 
-    public float[] getValue(){
+    public float[] getValues(){
         return values;
     }
 }

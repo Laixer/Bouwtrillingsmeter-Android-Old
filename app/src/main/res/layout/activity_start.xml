@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,12 +7,137 @@
     tools:context="gemeenterotterdam.trillingmeterapp.StartActivity">
 
     <TextView
+        android:id="@+id/textAcceleration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/acceleration"
+        android:layout_marginTop="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textXacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Xvalue"
+
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/textAcceleration"
+        android:layout_toStartOf="@+id/xAcc"
+        android:layout_marginEnd="96dp" />
+
+        <TextView
+            android:id="@+id/xAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XVALUE"
+            android:layout_marginStart="13dp"
+            android:layout_alignBaseline="@+id/textXacc"
+            android:layout_alignBottom="@+id/textXacc"
+            android:layout_toEndOf="@+id/textAcceleration" />
+
+        <TextView
+            android:id="@+id/textYacc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Yvalue"
+            android:layout_below="@+id/textXacc"
+            android:layout_alignStart="@+id/textXacc"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:id="@+id/yAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YVALUE"
+
+            android:layout_alignBaseline="@+id/textYacc"
+            android:layout_alignBottom="@+id/textYacc"
+            android:layout_alignStart="@+id/xAcc" />
+
+        <TextView
+            android:id="@+id/textZacc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Zvalue"
+            android:layout_below="@+id/textYacc"
+            android:layout_alignEnd="@+id/textXacc"
+            android:layout_marginTop="30dp" />
+
+            <TextView
+                android:id="@+id/zAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ZVALUE"
+
+                android:layout_alignBaseline="@+id/textZacc"
+                android:layout_alignBottom="@+id/textZacc"
+                android:layout_alignEnd="@+id/xAcc" />
+
+            <TextView
+                android:id="@+id/textVelocity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/velocity"
+                android:layout_below="@+id/zAcc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="42dp" />
+
+           <TextView
+               android:id="@+id/textXvel"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/Xvalue"
+               android:layout_below="@+id/textVelocity"
+               android:layout_alignStart="@+id/textZacc"
+               android:layout_marginTop="14dp" />
+
+           <TextView
+               android:id="@+id/xVel"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="XVALUE"
+
+               android:layout_alignBaseline="@+id/textXvel"
+               android:layout_alignBottom="@+id/textXvel"
+               android:layout_alignStart="@+id/zAcc" />
+
+               <TextView
+                   android:id="@+id/textYvel"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/Yvalue"
+                   android:layout_below="@+id/textXvel"
+                   android:layout_alignEnd="@+id/textXvel"
+                   android:layout_marginTop="24dp" />
+
+              <TextView
+                  android:id="@+id/yVel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="YVALUE"
+
+                  android:layout_alignBaseline="@+id/textYvel"
+                  android:layout_alignBottom="@+id/textYvel"
+                  android:layout_alignEnd="@+id/xVel" />
+
+             <TextView
+                 android:id="@+id/textZvel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/Zvalue"
+                 android:layout_below="@+id/textYvel"
+                 android:layout_alignEnd="@+id/textYacc"
+                 android:layout_marginTop="24dp" />
+
+               <TextView
+                   android:id="@+id/zVel"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="ZVALUE"
+                   android:layout_alignBaseline="@+id/textZvel"
+                   android:layout_alignBottom="@+id/textZvel"
+                   android:layout_alignEnd="@+id/yVel" />
+
+</android.widget.RelativeLayout>

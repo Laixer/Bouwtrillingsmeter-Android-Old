@@ -47,7 +47,6 @@ public class AcceleroMeter extends HardwareSensor {
             Log.d("ACCELEROSTATUS", "No Accelerometer available");
         }
     }
-
     // Automatically called when gyroscope sensor measures new data
     // Data is added to List for 1 second, then List and startTime will be reset
     // Currently only z-direction is saved
