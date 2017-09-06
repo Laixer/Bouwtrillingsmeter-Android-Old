@@ -40,7 +40,7 @@ public class AcceleroMeter extends HardwareSensor {
         if (sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
             sensorManager.registerListener(this,
                     sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
-                    0);
+                    SensorManager.SENSOR_DELAY_GAME);
             startTime = new Date();
         }
         else{
@@ -55,7 +55,9 @@ public class AcceleroMeter extends HardwareSensor {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
             float[] values = event.values;
-            DataPoint d = new DataPoint(new Date(), values);
+            Date date = new Date();
+            //Log.d("TImE", date.getTime()+"");
+            DataPoint d = new DataPoint(date, values);
             if (startTime.getTime() + 1000 >= System.currentTimeMillis()) {
                 dataPoints.add(d);
             }
