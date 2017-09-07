@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/acceleration"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="16dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -80,9 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/velocity"
+                android:layout_marginTop="17dp"
                 android:layout_below="@+id/zAcc"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="42dp" />
+                android:layout_centerHorizontal="true" />
 
            <TextView
                android:id="@+id/textXvel"
@@ -139,5 +139,66 @@
                    android:layout_alignBaseline="@+id/textZvel"
                    android:layout_alignBottom="@+id/textZvel"
                    android:layout_alignEnd="@+id/yVel" />
+
+    <TextView
+        android:id="@+id/textFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/zVel"
+        android:layout_marginTop="33dp"
+        android:layout_toStartOf="@+id/xAcc"
+        android:text="@string/frequency" />
+
+    <TextView
+        android:id="@+id/textXfreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textYvel"
+        android:layout_below="@+id/textFrequency"
+        android:layout_marginTop="18dp"
+        android:text="@string/Xvalue" />
+
+    <TextView
+        android:id="@+id/xFreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XVALUE"
+        android:layout_alignBaseline="@+id/textXfreq"
+        android:layout_alignBottom="@+id/textXfreq"
+        android:layout_alignStart="@+id/zVel" />
+
+    <TextView
+        android:id="@+id/textYfreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textZvel"
+        android:layout_below="@+id/textXfreq"
+        android:layout_marginTop="25dp"
+        android:text="@string/Yvalue" />
+
+    <TextView
+        android:id="@+id/yFreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textYfreq"
+        android:layout_alignStart="@+id/xFreq"
+        android:text="YVALUE" />
+
+    <TextView
+        android:id="@+id/textzFreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textXfreq"
+        android:layout_marginBottom="18dp"
+        android:text="@string/Zvalue" />
+
+    <TextView
+        android:id="@+id/zFreq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/yFreq"
+        android:layout_alignTop="@+id/textzFreq"
+        android:text="ZVALUE" />
 
 </android.widget.RelativeLayout>

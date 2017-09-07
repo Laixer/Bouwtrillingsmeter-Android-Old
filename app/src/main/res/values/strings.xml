@@ -2,6 +2,7 @@
     <string name="app_name">TrillingmeterApp</string>
     <string name="acceleration">Acceleration</string>
     <string name="velocity">Velocity</string>
+    <string name="frequency">Frequency</string>
     <string name="Xvalue">X:</string>
     <string name="Yvalue">Y:</string>
     <string name="Zvalue">Z:</string>

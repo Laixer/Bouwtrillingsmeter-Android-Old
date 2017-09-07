@@ -1,5 +1,6 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorDirectChannel;
@@ -20,42 +21,32 @@ import static android.content.Context.SENSOR_SERVICE;
  */
 
 public class GyroscopeMeter extends HardwareSensor {
-    private ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
-    private SensorManager sensorManager;
-    private DataHandler dataHandler;
-    private Date startTime;
+    private static final int sensorType = Sensor.TYPE_ROTATION_VECTOR;
+    private static final int sensorRate = SensorManager.SENSOR_DELAY_GAME;
 
-    // reset startTime and List with data every second
-    // save data gathered from last second in DataHandler
+    public GyroscopeMeter(StartActivity activity) {
+        super(activity);
 
-    public void reset() {
-        startTime = new Date();
-        dataHandler.saveData(dataPoints, "Gyroscopemeter");
-        dataPoints = new ArrayList<DataPoint>();
-    }
-
-    // start the gyroscopemeter to measure data
-    public void start(Context context){
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        dataHandler = new DataHandler();
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) {
-            sensorManager.registerListener(this,
-                    sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
-                    5);
-            startTime = new Date();
-        }
-        else{
-            Log.d("GYROSCOPESTATUS", "No Gyroscope Available");
+        /** Register this class as sensor handler callback, or throw exception if hardware is not present */
+        Sensor sensor = sensorManager.getDefaultSensor(sensorType);
+        if (sensor != null) {
+            sensorManager.registerListener(this, sensor, sensorRate);
+        } else{
+            throw new UnsupportedOperationException("No Gyroscope Available");
         }
     }
+
+
 
     // Automatically called when gyroscope sensor measures new data
     // Data is added to List for 1 second, then List and startTime will be reset
     // Currently only z-direction is saved
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-            if (startTime.getTime() + 1000 >= System.currentTimeMillis()) {
+        if (event.sensor.getType() == sensorType) {
+
+            /** */
+            if (withinTimeRange()) {
                 float[] vectors;
                 if (event.values.length > 4) {
                     float[] truncatedRotationVector = new float[4];
@@ -64,17 +55,18 @@ public class GyroscopeMeter extends HardwareSensor {
                 } else {
                     vectors = event.values;
                 }
-                DataPoint d = new DataPoint(new Date(), vectors);
-                dataPoints.add(d);
-            }
-            else{
-                reset();
+
+                dataPoints.add(new DataPoint(new Date(), vectors));
+            } else {
+                commit();
             }
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
+        /**
+         * Not implemented
+         */
     }
 }

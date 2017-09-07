@@ -1,5 +1,6 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,55 +20,46 @@ import static android.content.Context.SENSOR_SERVICE;
  */
 
 public class AcceleroMeter extends HardwareSensor {
-    private ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
-    private SensorManager sensorManager;
-    private Date startTime;
-    private DataHandler dataHandler = new DataHandler();
+   private static final int sensorType = Sensor.TYPE_LINEAR_ACCELERATION;
+    private static final int sensorRate = 0;
 
+    /**
+    * Constructor
+     */
+    public AcceleroMeter(StartActivity activity){
+        super(activity);
+
+        /** Register this class as sensor handler callback, or throw exception if hardware is not present */
+        Sensor sensor = sensorManager.getDefaultSensor((sensorType));
+        if (sensor != null) {
+            sensorManager.registerListener(this, sensor, sensorRate);
+        } else{
+            throw new UnsupportedOperationException("No Accelerometer available");
+        }
+    }
+
+    /**
+     * Automatically called when sensor measures new data
+     * @param event Automatically generated. Contains data about sensor
+     *
+     */
     // reset startTime and List with data every second
     // save data gathered from last second in DataHandler
-    public void reset() {
-        dataHandler.saveData(dataPoints, "Accelerometer");
-        dataPoints = new ArrayList<DataPoint>();
-        startTime = new Date();
-    }
-
-    // Verify whether accelerometer exists.
-    // Start the accelerometer to measure data.
-    public void start(Context context){
-        dataHandler = new DataHandler();
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
-            sensorManager.registerListener(this,
-                    sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
-                    SensorManager.SENSOR_DELAY_GAME);
-            startTime = new Date();
-        }
-        else{
-            Log.d("ACCELEROSTATUS", "No Accelerometer available");
-        }
-    }
-    // Automatically called when gyroscope sensor measures new data
-    // Data is added to List for 1 second, then List and startTime will be reset
-    // Currently only z-direction is saved
-
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
-            float[] values = event.values;
-            Date date = new Date();
-            //Log.d("TImE", date.getTime()+"");
-            DataPoint d = new DataPoint(date, values);
-            if (startTime.getTime() + 1000 >= System.currentTimeMillis()) {
-                dataPoints.add(d);
+        if (event.sensor.getType() == sensorType) {
+
+            if (withinTimeRange()) {
+                dataPoints.add(new DataPoint(new Date(), event.values.clone()));
+            } else {
+                commit();
             }
-            else{
-                reset();
-            }
+
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
+        /** Not implemented */
     }
 }

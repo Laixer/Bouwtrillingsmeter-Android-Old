@@ -8,20 +8,21 @@ import java.util.Date;
  * of the measurement.
  */
 
+/**
+ * Storage Object
+ */
+
 public class DataPoint {
-    private Date time;
-    private float[] values;
+    public Date time;
+    public float[] values;
+
+    /**
+     * Class Constructor
+     **/
 
     public DataPoint(Date time, float[] values) {
         this.time = time;
         this.values = values;
     }
 
-    public Date getTime(){
-        return time;
-    }
-
-    public float[] getValues(){
-        return values;
-    }
 }

@@ -15,12 +15,15 @@ import java.util.ArrayList;
 public class StartActivity extends AppCompatActivity {
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
-    private static TextView Xvelocity;
-    private static TextView Yvelocity;
-    private static TextView Zvelocity;
-    private static TextView Xacceleration;
-    private static TextView Yacceleration;
-    private static TextView Zacceleration;
+    private TextView Xvelocity;
+    private TextView Yvelocity;
+    private TextView Zvelocity;
+    private TextView Xacceleration;
+    private TextView Yacceleration;
+    private TextView Zacceleration;
+    private TextView Xfrequency;
+    private TextView Yfrequency;
+    private TextView Zfrequency;
 
     // Automatically called when activity starts.
     //Starts accelerometer and gyroscopemeter.
@@ -29,30 +32,52 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        acceleroMeter = new AcceleroMeter();
-        acceleroMeter.start(this.getApplicationContext());
-        gyroscopeMeter = new GyroscopeMeter();
+        acceleroMeter = new AcceleroMeter(this);
+       // gyroscopeMeter = new GyroscopeMeter(this);
+
         Xvelocity = (TextView) findViewById(R.id.xVel);
         Yvelocity = (TextView) findViewById(R.id.yVel);
         Zvelocity = (TextView) findViewById(R.id.zVel);
+
         Xacceleration = (TextView) findViewById(R.id.xAcc);
         Yacceleration = (TextView) findViewById(R.id.yAcc);
         Zacceleration = (TextView) findViewById(R.id.zAcc);
 
-       // gyroscopeMeter.start(this.getApplicationContext());
+        Xfrequency = (TextView) findViewById(R.id.xFreq);
+        Yfrequency = (TextView) findViewById(R.id.yFreq);
+        Zfrequency = (TextView) findViewById(R.id.zFreq);
     }
 
-    /*Update values of textViews every second*/
-    public static void updateVelocityData(float[] data){
-        Xvelocity.setText(data[0]+"");
-        Yvelocity.setText(data[1]+"");
-        Zvelocity.setText(data[2]+"");
+
+    /**
+     * Update values of velocity textViews every second
+     * @param velData values of Velocity in x, y, z direction
+     *
+     */
+    public void updateVelocityData(float[] velData){
+        Xvelocity.setText(velData[0]+"");
+        Yvelocity.setText(velData[1]+"");
+        Zvelocity.setText(velData[2]+"");
     }
 
-    /*Update values of textViews every second*/
-    public static void updateAccelarationData(float[] data){
-        Xacceleration.setText(data[0]+"");
-        Yacceleration.setText(data[1]+"");
-        Zacceleration.setText(data[2]+"");
+    /**
+     * Update values of acceleration textViews every second
+     * @param accData values of Acceleration in x, y, z direction
+     */
+    public void updateAccelarationData(float[] accData){
+        Xacceleration.setText(accData[0]+"");
+        Yacceleration.setText(accData[1]+"");
+        Zacceleration.setText(accData[2]+"");
     }
+
+    /**
+     * Update values of frequency textViews every second
+     * @param freqData values of Frequency in x, y, z direction
+     */
+    public void updateFrequencyData(float[] freqData){
+        Xfrequency.setText(freqData[0]+"");
+        Yfrequency.setText(freqData[1]+"");
+        Zfrequency.setText(freqData[2]+"");
+    }
+
 }
