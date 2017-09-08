@@ -57,6 +57,7 @@ public class DataHandler {
         ArrayList<DataPoint> differentiatedData  = Calculator.differentiate(data);
         float[] maxAcceleration                  = Calculator.MaxValueInArray(data);
         float[] maxVelocity                      = Calculator.MaxValueInArray(differentiatedData);
+        maxVelocity                              = Calculator.addMargin(maxVelocity);
         float[] fftVelocity                      = Calculator.FFT(differentiatedData);
 
         return new Tuple(maxAcceleration, maxVelocity, fftVelocity);

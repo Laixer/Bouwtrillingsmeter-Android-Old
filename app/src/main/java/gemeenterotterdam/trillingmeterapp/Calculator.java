@@ -131,5 +131,19 @@ public class Calculator {
         return maxFreq;
     }
 
+    /**
+     * Adds margin to the maximum speed. See documentation for more information
+     * @param data maximum speed in x, y and z direction
+     * @return float maximum speed multiplied with margin
+     */
+    public static float[] addMargin(float[] data){
+        data[0] *= yv;
+        data[1] *= yv;
+        data[2] *= yv;
+        return data;
+     }
+
+     
+
 
 }

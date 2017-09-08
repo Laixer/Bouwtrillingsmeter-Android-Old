@@ -50,6 +50,7 @@ public class AcceleroMeter extends HardwareSensor {
         if (event.sensor.getType() == sensorType) {
 
             if (withinTimeRange()) {
+                Log.d("ZACC", event.values.clone()[2]+"");
                 dataPoints.add(new DataPoint(new Date(), event.values.clone()));
             } else {
                 commit();
