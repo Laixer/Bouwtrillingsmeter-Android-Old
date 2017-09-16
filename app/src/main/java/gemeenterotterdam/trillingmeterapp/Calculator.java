@@ -23,14 +23,14 @@ public class Calculator {
      *  Calculates velocity from acceleration data
      * @param data values from acceleroMeter (retrieved for 1 second)
      */
-    public static ArrayList<DataPoint> differentiate(ArrayList<DataPoint> data){
-        ArrayList<DataPoint> velocities = new ArrayList<DataPoint>();
+    public static ArrayList<TimeDataPoint> differentiate(ArrayList<TimeDataPoint> data){
+        ArrayList<TimeDataPoint> velocities = new ArrayList<TimeDataPoint>();
         float[] accvalues = data.get(0).values;
         float Vx = accvalues[0];
         float Vy = accvalues[1];
         float Vz = accvalues[2];
         float[] currVelocity = new float[] {Vx, Vy, Vz};
-        velocities.add(new DataPoint(data.get(0).time, currVelocity));
+        velocities.add(new TimeDataPoint(data.get(0).time, currVelocity));
         for (int i = 1; i < data.size(); i++){
             accvalues = data.get(i).values;
             Date currTime = data.get(i).time;
@@ -40,7 +40,7 @@ public class Calculator {
             Vy += accvalues[1] * dTime;
             Vz += accvalues[2] * dTime;
             currVelocity = new float[] {Vx, Vy, Vz};
-            velocities.add(new DataPoint(data.get(i).time, currVelocity));
+            velocities.add(new TimeDataPoint(data.get(i).time, currVelocity));
 
         }
 
@@ -51,12 +51,12 @@ public class Calculator {
      * Calculates max acceleration from arraylist with different acceleration datapoints
      * @param dataArray array with DataPoints, corresponding to accelerations or velocities
      */
-    public static float[] MaxValueInArray(ArrayList<DataPoint> dataArray){
+    public static float[] MaxValueInArray(ArrayList<TimeDataPoint> dataArray){
         float maxx = 0;
         float maxy = 0;
         float maxz = 0;
 
-        for (DataPoint dataPoint : dataArray){
+        for (TimeDataPoint dataPoint : dataArray){
             float xAcc = Math.abs(dataPoint.values[0]);
             float yAcc = Math.abs(dataPoint.values[1]);
             float zAcc = Math.abs(dataPoint.values[2]);
@@ -79,7 +79,7 @@ public class Calculator {
      * @return float maximum frequency in x, y and z direction
      */
 
-    public static float[] FFT(ArrayList<DataPoint> velocities){
+    public static float[] FFT(ArrayList<TimeDataPoint> velocities){
         float maxIX = 0;
         float maxMagX = 0;
         float maxIY = 0;
@@ -89,7 +89,7 @@ public class Calculator {
         float[] xvelo = new float[velocities.size()];
         float[] yvelo = new float[velocities.size()];
         float[] zvelo = new float[velocities.size()];
-        ArrayList<DataPoint> datapoints = new ArrayList<DataPoint>();
+        ArrayList<FrequencyDataPoint> datapoints = new ArrayList<FrequencyDataPoint>();
         FloatFFT_1D fft = new FloatFFT_1D(velocities.size());
 
         for (int i = 0; i < velocities.size(); i++){
@@ -102,15 +102,15 @@ public class Calculator {
         fft.realForward(zvelo);
 
         for (int i = 0; i < velocities.size()/2; i++){
-            double ReX = velocities.get(2*i).values[0];
-            double ImX = velocities.get(2*i+1).values[0];
-            float MagX = (float)Math.sqrt(ReX*ReX+ImX*ImX);
-            double ReY = velocities.get(2*i).values[1];
-            double ImY = velocities.get(2*i+1).values[1];
-            float MagY = (float)Math.sqrt(ReY*ReY+ImY*ImY);
-            double ReZ = velocities.get(2*i).values[2];
-            double ImZ = velocities.get(2*i+1).values[2];
-            float MagZ = (float)Math.sqrt(ReZ*ReZ+ImZ*ImZ);
+            double ReX = xvelo[2*i];
+            double ImX = xvelo[2*i+1];
+            float MagX = (float)Math.hypot(ReX,ImX);
+            double ReY = yvelo[2*i];
+            double ImY = yvelo[2*i+1];
+            float MagY = (float)Math.hypot(ReY,ImY);
+            double ReZ = yvelo[2*i];
+            double ImZ = yvelo[2*i+1];
+            float MagZ = (float)Math.hypot(ReZ,ImZ);
 
             if (MagX > maxMagX){
                 maxMagX = MagX;
@@ -124,10 +124,12 @@ public class Calculator {
                 maxMagZ = MagZ;
                 maxIZ = i;
             }
-            DataPoint d = new DataPoint(velocities.get(i).time, new float[] {MagX, MagY, MagZ});
+
+            FrequencyDataPoint d = new FrequencyDataPoint(new float[] {maxIX, maxIY, maxIZ}, new float[] {maxMagX, maxMagY, maxMagZ});
             datapoints.add(d);
         }
-        float[] maxFreq = {maxIX*2, maxIY*2, maxIZ*2};
+        Log.d("MAXZFREQ", maxIZ+"");
+        float[] maxFreq = {maxIX, maxIY, maxIZ};
         return maxFreq;
     }
 
@@ -143,7 +145,7 @@ public class Calculator {
         return data;
      }
 
-     
+
 
 
 }

@@ -39,7 +39,7 @@ public class DataHandler {
      * Push data in arraylist, shows results in textviews
      * @param data data retrieved for 1 second by Sensor
      */
-    public void pushData(ArrayList<DataPoint> data){
+    public void pushData(ArrayList<TimeDataPoint> data){
         Tuple result = performCalculations(data);
 
         /** Propagate changes back to activity */
@@ -52,13 +52,14 @@ public class DataHandler {
      * Perform all needed calculations with use of Calculator
      * @param data data retrieved for 1 second by Sensor
      */
-    private Tuple performCalculations(ArrayList<DataPoint> data) {
+    private Tuple performCalculations(ArrayList<TimeDataPoint> data) {
 
-        ArrayList<DataPoint> differentiatedData  = Calculator.differentiate(data);
+        ArrayList<TimeDataPoint> differentiatedData  = Calculator.differentiate(data);
         float[] maxAcceleration                  = Calculator.MaxValueInArray(data);
+       // Log.d("MAXACC", maxAcceleration[2]+"");
         float[] maxVelocity                      = Calculator.MaxValueInArray(differentiatedData);
         maxVelocity                              = Calculator.addMargin(maxVelocity);
-        float[] fftVelocity                      = Calculator.FFT(differentiatedData);
+        float[] fftVelocity                      = Calculator.FFT(data);
 
         return new Tuple(maxAcceleration, maxVelocity, fftVelocity);
     }

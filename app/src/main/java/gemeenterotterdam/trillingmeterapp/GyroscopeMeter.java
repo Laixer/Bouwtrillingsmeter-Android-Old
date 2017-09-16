@@ -56,7 +56,7 @@ public class GyroscopeMeter extends HardwareSensor {
                     vectors = event.values;
                 }
 
-                dataPoints.add(new DataPoint(new Date(), vectors));
+                dataPoints.add(new TimeDataPoint(new Date(), vectors));
             } else {
                 commit();
             }
