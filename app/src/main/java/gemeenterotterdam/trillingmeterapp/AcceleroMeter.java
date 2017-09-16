@@ -50,7 +50,7 @@ public class AcceleroMeter extends HardwareSensor {
         if (event.sensor.getType() == sensorType) {
 
             if (withinTimeRange()) {
-                dataPoints.add(new TimeDataPoint(new Date(), event.values.clone()));
+                dataPoints.add(new DataPoint<Date>(new Date(), event.values.clone()));
             } else {
                 commit();
             }

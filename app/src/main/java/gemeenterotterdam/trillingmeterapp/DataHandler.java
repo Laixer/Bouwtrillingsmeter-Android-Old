@@ -1,7 +1,5 @@
 package gemeenterotterdam.trillingmeterapp;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -39,7 +37,7 @@ public class DataHandler {
      * Push data in arraylist, shows results in textviews
      * @param data data retrieved for 1 second by Sensor
      */
-    public void pushData(ArrayList<TimeDataPoint> data){
+    public void pushData(ArrayList<DataPoint<Date>> data){
         Tuple result = performCalculations(data);
 
         /** Propagate changes back to activity */
@@ -52,15 +50,15 @@ public class DataHandler {
      * Perform all needed calculations with use of Calculator
      * @param data data retrieved for 1 second by Sensor
      */
-    private Tuple performCalculations(ArrayList<TimeDataPoint> data) {
+    private Tuple performCalculations(ArrayList<DataPoint<Date>> data) {
 
-        ArrayList<TimeDataPoint> differentiatedData  = Calculator.differentiate(data);
-        float[] maxAcceleration                  = Calculator.MaxValueInArray(data);
-       // Log.d("MAXACC", maxAcceleration[2]+"");
-        float[] maxVelocity                      = Calculator.MaxValueInArray(differentiatedData);
-        maxVelocity                              = Calculator.addMargin(maxVelocity);
-        float[] fftVelocity                      = Calculator.FFT(data);
+        ArrayList<DataPoint<Date>> differentiatedData                   = Calculator.differentiate(data);
+        float[] maxAcceleration                                         = Calculator.MaxValueInArray(data);
+        float[] maxVelocity                                             = Calculator.MaxValueInArray(differentiatedData);
+        maxVelocity                                                     = Calculator.addMargin(maxVelocity);
+        ArrayList<DataPoint<float[]>> fftAcceleration                   = Calculator.FFT(data);
+        float[] maxFrequency                                            = Calculator.MaxFrequency(fftAcceleration);
 
-        return new Tuple(maxAcceleration, maxVelocity, fftVelocity);
+        return new Tuple(maxAcceleration, maxVelocity, maxFrequency);
     }
 }

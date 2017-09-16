@@ -22,7 +22,7 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
     private Date startTime = new Date();
 
     protected SensorManager sensorManager;
-    protected ArrayList<TimeDataPoint> dataPoints = new ArrayList<TimeDataPoint>();
+    protected ArrayList<DataPoint<Date>> dataPoints = new ArrayList<DataPoint<Date>>();
 
     protected HardwareSensor(StartActivity activity) {
         Context context = activity.getApplicationContext();
@@ -46,7 +46,7 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
     protected void commit() {
         startTime = new Date();
         dataHandler.pushData(dataPoints);
-        dataPoints = new ArrayList<TimeDataPoint>();
+        dataPoints = new ArrayList<DataPoint<Date>>();
     }
 
     @Override
