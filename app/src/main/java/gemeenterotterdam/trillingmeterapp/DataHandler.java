@@ -58,6 +58,7 @@ public class DataHandler {
         maxVelocity                                                     = Calculator.addMargin(maxVelocity);
         ArrayList<DataPoint<float[]>> fftAcceleration                   = Calculator.FFT(data);
         float[] maxFrequency                                            = Calculator.MaxFrequency(fftAcceleration);
+        ArrayList<DataPoint<float[]>> velocityFreqDomain                = Calculator.calcVelocityFreqDomain(fftAcceleration);
 
         return new Tuple(maxAcceleration, maxVelocity, maxFrequency);
     }
