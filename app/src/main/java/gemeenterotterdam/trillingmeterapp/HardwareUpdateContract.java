@@ -11,8 +11,5 @@ package gemeenterotterdam.trillingmeterapp;
     public interface HardwareUpdateContract {
         public void updateVelocityCounter(float[] maxVelocity);
         public void updateAccelarationCounter(float[] maxAcceleration);
-        public void updateFrequencyCounter(float[] maxFrequency);
-
-
-
+        public void updateFrequencyCounter(int[] maxFrequency);
     }

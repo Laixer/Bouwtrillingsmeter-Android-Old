@@ -6,6 +6,7 @@ import org.jtransforms.fft.FloatFFT_1D;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 
 
 /**
@@ -74,23 +75,23 @@ public class Calculator {
      * @param dataArray array of frequency datapoints
      * @return max frequency of array in x,y and z direction
      */
-    public static float[] MaxFrequency(ArrayList<DataPoint<float[]>> dataArray){
-        float maxx = 0;
-        float maxy = 0;
-        float maxz = 0;
+    public static int[] MaxFrequency(ArrayList<DataPoint<int[]>> dataArray){
+        int maxx = 0;
+        int maxy = 0;
+        int maxz = 0;
 
         for (DataPoint dataPoint : dataArray){
-            float[] frequencies = (float[])dataPoint.domain;
-            float xAcc = Math.abs(frequencies[0]);
-            float yAcc = Math.abs(frequencies[1]);
-            float zAcc = Math.abs(frequencies[2]);
+            int[] frequencies = (int[])dataPoint.domain;
+            int xAcc = Math.abs(frequencies[0]);
+            int yAcc = Math.abs(frequencies[1]);
+            int zAcc = Math.abs(frequencies[2]);
 
             maxx = Math.max(maxx, xAcc);
             maxy = Math.max(maxy, yAcc);
             maxz = Math.max(maxz, zAcc);
         }
 
-        float[] results = new float[] {maxx, maxy, maxz};
+        int[] results = new int[] {maxx, maxy, maxz};
         return results;
     }
 
@@ -102,17 +103,17 @@ public class Calculator {
      * @return float maximum frequency in x, y and z direction
      */
 
-    public static ArrayList<DataPoint<float[]>> FFT(ArrayList<DataPoint<Date>> velocities){
-        float maxIX = 0;
+    public static ArrayList<DataPoint<int[]>> FFT(ArrayList<DataPoint<Date>> velocities){
+        int maxIX = 0;
         float maxMagX = 0;
-        float maxIY = 0;
+        int maxIY = 0;
         float maxMagY = 0;
-        float maxIZ = 0;
+        int maxIZ = 0;
         float maxMagZ = 0;
         float[] xvelo = new float[velocities.size()];
         float[] yvelo = new float[velocities.size()];
         float[] zvelo = new float[velocities.size()];
-        ArrayList<DataPoint<float[]>> datapoints = new ArrayList<>();
+        ArrayList<DataPoint<int[]>> datapoints = new ArrayList<>();
         FloatFFT_1D fft = new FloatFFT_1D(velocities.size());
 
         for (int i = 0; i < velocities.size(); i++){
@@ -148,7 +149,7 @@ public class Calculator {
                 maxIZ = i;
             }
 
-            DataPoint<float[]> d = new DataPoint<float[]>(new float[] {maxIX, maxIY, maxIZ}, new float[] {maxMagX, maxMagY, maxMagZ});
+            DataPoint<int[]> d = new DataPoint<int[]>(new int[] {maxIX, maxIY, maxIZ}, new float[] {maxMagX, maxMagY, maxMagZ});
             datapoints.add(d);
         }
 
@@ -172,23 +173,48 @@ public class Calculator {
      * @param acc acceleration data in frequency domain (frequency + acceleration)
      * @return velocity data in frequency domain (frequency + velocity)
      */
-    public static ArrayList<DataPoint<float[]>> calcVelocityFreqDomain(ArrayList<DataPoint<float[]>> acc){
-         ArrayList<DataPoint<float[]>> velocities = new ArrayList<DataPoint<float[]>>();
-         for(DataPoint<float[]> dataPoint : acc){
+    public static ArrayList<DataPoint<int[]>> calcVelocityFreqDomain(ArrayList<DataPoint<int[]>> acc){
+         ArrayList<DataPoint<int[]>> velocities = new ArrayList<DataPoint<int[]>>();
+         for(DataPoint<int[]> dataPoint : acc){
              float xAcc = dataPoint.values[0];
              float yAcc = dataPoint.values[1];
              float zAcc = dataPoint.values[2];
 
-             float xFreq = dataPoint.domain[0];
-             float yFreq = dataPoint.domain[1];
-             float zFreq = dataPoint.domain[2];
+             int xFreq = dataPoint.domain[0];
+             int yFreq = dataPoint.domain[1];
+             int zFreq = dataPoint.domain[2];
 
              float xVel = xAcc / (2 * (float)Math.PI * xFreq);
              float yVel = yAcc / (2 * (float)Math.PI * yFreq);
              float zVel = zAcc / (2 * (float)Math.PI * zFreq);
-             velocities.add(new DataPoint<float[]>(new float[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
+             velocities.add(new DataPoint<int[]>(new int[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
          }
          return velocities;
+     }
+
+     public static ArrayList<DataPoint<int[]>> limitValue(ArrayList<DataPoint<int[]>> velocities){
+         ArrayList<DataPoint<int[]>> limitValues = new ArrayList<DataPoint<int[]>>();
+         for (DataPoint<int[]> dataPoint : velocities){
+             int xfreq = dataPoint.domain[0];
+             int yfreq = dataPoint.domain[1];
+             int zfreq = dataPoint.domain[2];
+
+             findLimit(xfreq);
+             findLimit(yfreq);
+             findLimit(zfreq);
+
+         }
+         return limitValues;
+     }
+
+     private static float findLimit(int freq){
+         float limitValue = 0f;
+         int i = 0;
+         while (freq >= LimitValueTable.getInstance().getTable().get(i).frequency){
+             limitValue = LimitValueTable.getInstance().getTable().get(i).cat1;
+             i++;
+         }
+    return limitValue;
      }
 
 

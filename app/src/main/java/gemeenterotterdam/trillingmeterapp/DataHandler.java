@@ -17,9 +17,9 @@ public class DataHandler {
     private final class Tuple {
         public final float[] maxAcc;
         public final float[] maxVel;
-        public final float[] maxFreq;
+        public final int[] maxFreq;
 
-        public Tuple(float[] maxAcc, float[] maxVel, float[] maxFreq) {
+        public Tuple(float[] maxAcc, float[] maxVel, int[] maxFreq) {
             this.maxAcc = maxAcc;
             this.maxVel = maxVel;
             this.maxFreq = maxFreq;
@@ -56,9 +56,10 @@ public class DataHandler {
         float[] maxAcceleration                                         = Calculator.MaxValueInArray(data);
         float[] maxVelocity                                             = Calculator.MaxValueInArray(differentiatedData);
         maxVelocity                                                     = Calculator.addMargin(maxVelocity);
-        ArrayList<DataPoint<float[]>> fftAcceleration                   = Calculator.FFT(data);
-        float[] maxFrequency                                            = Calculator.MaxFrequency(fftAcceleration);
-        ArrayList<DataPoint<float[]>> velocityFreqDomain                = Calculator.calcVelocityFreqDomain(fftAcceleration);
+        ArrayList<DataPoint<int[]>> fftAcceleration                     = Calculator.FFT(data);
+        int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
+        ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
+        ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);
 
         return new Tuple(maxAcceleration, maxVelocity, maxFrequency);
     }

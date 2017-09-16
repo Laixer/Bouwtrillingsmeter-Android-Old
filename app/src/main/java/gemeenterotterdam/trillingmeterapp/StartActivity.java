@@ -74,7 +74,7 @@ public class StartActivity extends AppCompatActivity {
      * Update values of frequency textViews every second
      * @param freqData values of Frequency in x, y, z direction
      */
-    public void updateFrequencyData(float[] freqData){
+    public void updateFrequencyData(int[] freqData){
         Xfrequency.setText(freqData[0]+"");
         Yfrequency.setText(freqData[1]+"");
         Zfrequency.setText(freqData[2]+"");
