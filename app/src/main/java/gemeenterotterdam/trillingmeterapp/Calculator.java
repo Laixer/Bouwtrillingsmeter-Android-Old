@@ -17,7 +17,6 @@ public class Calculator {
      * yv: margin on speeddata. Each speed value calculated is multiplied with this value
      */
     private static final float yv = 1.6f;
-    private static final float i = (float)Math.sqrt(-1);
 
     /**
      *  Calculates velocity from acceleration data
@@ -70,6 +69,11 @@ public class Calculator {
         return results;
     }
 
+    /**
+     *
+     * @param dataArray array of frequency datapoints
+     * @return max frequency of array in x,y and z direction
+     */
     public static float[] MaxFrequency(ArrayList<DataPoint<float[]>> dataArray){
         float maxx = 0;
         float maxy = 0;
@@ -163,6 +167,11 @@ public class Calculator {
         return data;
      }
 
+    /**
+     *
+     * @param acc acceleration data in frequency domain (frequency + acceleration)
+     * @return velocity data in frequency domain (frequency + velocity)
+     */
     public static ArrayList<DataPoint<float[]>> calcVelocityFreqDomain(ArrayList<DataPoint<float[]>> acc){
          ArrayList<DataPoint<float[]>> velocities = new ArrayList<DataPoint<float[]>>();
          for(DataPoint<float[]> dataPoint : acc){
@@ -178,7 +187,6 @@ public class Calculator {
              float yVel = yAcc / (2 * (float)Math.PI * yFreq);
              float zVel = zAcc / (2 * (float)Math.PI * zFreq);
              velocities.add(new DataPoint<float[]>(new float[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
-             Log.d("ZVEL", zVel+"");
          }
          return velocities;
      }
