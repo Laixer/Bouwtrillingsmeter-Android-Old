@@ -1,5 +1,7 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -60,6 +62,11 @@ public class DataHandler {
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
         ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
         ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);
+        int[] domFreq                                                   = Calculator.domFreq(limitValue, velocityFreqDomain);
+        Log.d("DOMX", domFreq[0]+"");
+        Log.d("DOMY", domFreq[1]+"");
+        Log.d("DOMZ", domFreq[2]+"");
+
 
         return new Tuple(maxAcceleration, maxVelocity, maxFrequency);
     }

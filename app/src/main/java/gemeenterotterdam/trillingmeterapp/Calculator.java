@@ -132,8 +132,8 @@ public class Calculator {
             double ReY = yvelo[2*i];
             double ImY = yvelo[2*i+1];
             float MagY = (float)Math.hypot(ReY,ImY);
-            double ReZ = yvelo[2*i];
-            double ImZ = yvelo[2*i+1];
+            double ReZ = zvelo[2*i];
+            double ImZ = zvelo[2*i+1];
             float MagZ = (float)Math.hypot(ReZ,ImZ);
 
             if (MagX > maxMagX){
@@ -192,6 +192,12 @@ public class Calculator {
          return velocities;
      }
 
+    /**
+     *
+     * @param velocities list of velocities obtained for 1 second in frequency domain
+     * @return limitValue (m/s) for each velocity
+     */
+
      public static ArrayList<DataPoint<int[]>> limitValue(ArrayList<DataPoint<int[]>> velocities){
          ArrayList<DataPoint<int[]>> limitValues = new ArrayList<DataPoint<int[]>>();
          for (DataPoint<int[]> dataPoint : velocities){
@@ -199,22 +205,67 @@ public class Calculator {
              int yfreq = dataPoint.domain[1];
              int zfreq = dataPoint.domain[2];
 
-             findLimit(xfreq);
-             findLimit(yfreq);
-             findLimit(zfreq);
+             float xLimit = findLimit(xfreq);
+             float yLimit = findLimit(yfreq);
+             float zLimit = findLimit(zfreq);
 
+             limitValues.add(new DataPoint<int[]>(new int[]{xfreq, yfreq, zfreq}, new float[]{xLimit, yLimit, zLimit}));
          }
          return limitValues;
      }
 
+    /**
+     *
+     * @param freq frequency
+     * @return limitValue corresponding to frequency obtained from LimitValueTable (see doc for more information)
+     */
      private static float findLimit(int freq){
          float limitValue = 0f;
          int i = 0;
-         while (freq >= LimitValueTable.getInstance().getTable().get(i).frequency){
+         while (freq >= LimitValueTable.getInstance().getTable().get(i).frequency) {
              limitValue = LimitValueTable.getInstance().getTable().get(i).cat1;
              i++;
          }
-    return limitValue;
+         return limitValue;
+     }
+
+    /**
+     * Calculates dominant frequency (highest ratio limitValue / velocity)
+     * @param limitValues array with limitValue for each frequency
+     * @param velocities array with velocity for each frequency
+     * @return dominant frequency for each direction (x,y,z)
+     */
+     public static int[] domFreq(ArrayList<DataPoint <int[]>> limitValues, ArrayList<DataPoint<int[]>> velocities){
+         int domFreqX = -1;
+         float ratioX = -1;
+         int domFreqY = -1;
+         float ratioY = -1;
+         int domFreqZ = -1;
+         float ratioZ = -1;
+
+         for (int i = 0; i < limitValues.size(); i++){
+             DataPoint<int[]> limitValue = limitValues.get(i);
+             DataPoint<int[]> velocity = velocities.get(i);
+
+             if (limitValue.values[0] / velocity.values[0] > ratioX){
+                 ratioX = limitValue.values[0] / velocity.values[0];
+                 domFreqX = limitValue.domain[0];
+             }
+
+             if (limitValue.values[1] / velocity.values[1] > ratioY){
+                 ratioY = limitValue.values[1] / velocity.values[1];
+                 domFreqY = limitValue.domain[1];
+             }
+
+             if (limitValue.values[2] / velocity.values[2] > ratioZ){
+                 ratioZ = limitValue.values[2] / velocity.values[2];
+                 domFreqZ = limitValue.domain[2];
+             }
+
+         }
+
+         return new int[]{domFreqX, domFreqY, domFreqZ};
+
      }
 
 

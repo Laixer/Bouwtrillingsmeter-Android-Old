@@ -3,7 +3,8 @@ package gemeenterotterdam.trillingmeterapp;
 import java.util.ArrayList;
 
 /**
- * Created by User on 16-9-2017.
+ * Created by Marijn Otte on 16-9-2017.
+ * Class containing limitValues (velocity) for each frequency
  */
 
 public class LimitValueTable {
