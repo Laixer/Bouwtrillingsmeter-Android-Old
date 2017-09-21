@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LimitValueTable {
     private static LimitValueTable limitValueTable;
-    private ArrayList<LimitValue> table = null;
+    private ArrayList<DataPoint <Integer>> table = null;
 
     public static LimitValueTable getInstance() {
         if(limitValueTable == null){
@@ -19,20 +19,20 @@ public class LimitValueTable {
     }
 
     private LimitValueTable() {
-        table = new ArrayList<LimitValue>();
-        table.add(new LimitValue(5, 20f));
-        table.add(new LimitValue(10, 20f));
-        table.add(new LimitValue(15, 20.5f));
-        table.add(new LimitValue(20, 25f));
-        table.add(new LimitValue(25, 27.5f));
-        table.add(new LimitValue(30, 30f));
-        table.add(new LimitValue(35, 32.5f));
-        table.add(new LimitValue(40, 35f));
-        table.add(new LimitValue(45, 37.5f));
-        table.add(new LimitValue(50, 40f));
+        table = new ArrayList<DataPoint <Integer>>();
+        table.add(new DataPoint<Integer>(5, new float[]{0.20f}));
+        table.add(new DataPoint<Integer>(10, new float[]{0.20f}));
+        table.add(new DataPoint<Integer>(15, new float[]{0.205f}));
+        table.add(new DataPoint<Integer>(20, new float[]{0.25f}));
+        table.add(new DataPoint<Integer>(25, new float[]{0.275f}));
+        table.add(new DataPoint<Integer>(30, new float[]{0.30f}));
+        table.add(new DataPoint<Integer>(35, new float[]{0.325f}));
+        table.add(new DataPoint<Integer>(40, new float[]{0.35f}));
+        table.add(new DataPoint<Integer>(45, new float[]{0.375f}));
+        table.add(new DataPoint<Integer>(50, new float[]{0.40f}));
     }
 
-    public ArrayList<LimitValue> getTable(){
+    public ArrayList<DataPoint<Integer>> getTable(){
         return table;
     }
 }

@@ -222,8 +222,8 @@ public class Calculator {
      private static float findLimit(int freq){
          float limitValue = 0f;
          int i = 0;
-         while (freq >= LimitValueTable.getInstance().getTable().get(i).frequency) {
-             limitValue = LimitValueTable.getInstance().getTable().get(i).cat1;
+         while (freq >= LimitValueTable.getInstance().getTable().get(i).domain) {
+             limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
              i++;
          }
          return limitValue;
@@ -259,6 +259,7 @@ public class Calculator {
 
              if (limitValue.values[2] / velocity.values[2] > ratioZ){
                  ratioZ = limitValue.values[2] / velocity.values[2];
+                 Log.d("RATIO", ratioZ+"");
                  domFreqZ = limitValue.domain[2];
              }
 
