@@ -24,6 +24,12 @@ public class StartActivity extends AppCompatActivity {
     private TextView Xfrequency;
     private TextView Yfrequency;
     private TextView Zfrequency;
+    private TextView Xfdom;
+    private TextView Yfdom;
+    private TextView Zfdom;
+    private TextView Xexceed;
+    private TextView Yexceed;
+    private TextView Zexceed;
 
     // Automatically called when activity starts.
     //Starts accelerometer and gyroscopemeter.
@@ -46,6 +52,14 @@ public class StartActivity extends AppCompatActivity {
         Xfrequency = (TextView) findViewById(R.id.xFreq);
         Yfrequency = (TextView) findViewById(R.id.yFreq);
         Zfrequency = (TextView) findViewById(R.id.zFreq);
+
+        Xfdom = (TextView) findViewById(R.id.xFdom);
+        Yfdom = (TextView) findViewById(R.id.yFdom);
+        Zfdom = (TextView) findViewById(R.id.zFdom);
+
+        Xexceed = (TextView) findViewById(R.id.exceedX);
+        Yexceed = (TextView) findViewById(R.id.exceedY);
+        Zexceed = (TextView) findViewById(R.id.exceedZ);
     }
 
 
@@ -78,6 +92,15 @@ public class StartActivity extends AppCompatActivity {
         Xfrequency.setText(freqData[0]+"");
         Yfrequency.setText(freqData[1]+"");
         Zfrequency.setText(freqData[2]+"");
+    }
+
+    public void updateFdomData(Fdom fdomData){
+        Xfdom.setText(fdomData.frequencies[0]+"");
+        Yfdom.setText(fdomData.frequencies[1]+"");
+        Zfdom.setText(fdomData.frequencies[2]+"");
+        Xexceed.setText(fdomData.exceed[0]+"");
+        Yexceed.setText(fdomData.exceed[1]+"");
+        Zexceed.setText(fdomData.exceed[2]+"");
     }
 
 }

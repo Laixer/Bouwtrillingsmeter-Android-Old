@@ -76,22 +76,40 @@ public class Calculator {
      * @return max frequency of array in x,y and z direction
      */
     public static int[] MaxFrequency(ArrayList<DataPoint<int[]>> dataArray){
-        int maxx = 0;
-        int maxy = 0;
-        int maxz = 0;
+        float maxx = 0;
+        float maxy = 0;
+        float maxz = 0;
+        int freqx = 0;
+        int freqy = 0;
+        int freqz = 0;
 
         for (DataPoint dataPoint : dataArray){
             int[] frequencies = (int[])dataPoint.domain;
-            int xAcc = Math.abs(frequencies[0]);
-            int yAcc = Math.abs(frequencies[1]);
-            int zAcc = Math.abs(frequencies[2]);
+            float[] magnitudes = (float[])dataPoint.values;
+            float xVel = magnitudes[0];
+            float yVel = magnitudes[1];
+            float zVel = magnitudes[2];
 
-            maxx = Math.max(maxx, xAcc);
-            maxy = Math.max(maxy, yAcc);
-            maxz = Math.max(maxz, zAcc);
+            if(xVel > maxx){
+                freqx = frequencies[0];
+            }
+
+            if(yVel > maxy){
+                freqy = frequencies[1];
+            }
+
+            if(zVel > maxz){
+                freqz = frequencies[2];
+            }
+
+            maxx = Math.max(maxx, xVel);
+            maxy = Math.max(maxy, yVel);
+            maxz = Math.max(maxz, zVel);
+
+
         }
 
-        int[] results = new int[] {maxx, maxy, maxz};
+        int[] results = new int[] {freqx, freqy, freqz};
         return results;
     }
 
@@ -148,11 +166,9 @@ public class Calculator {
                 maxMagZ = MagZ;
                 maxIZ = i;
             }
-
-            DataPoint<int[]> d = new DataPoint<int[]>(new int[] {maxIX, maxIY, maxIZ}, new float[] {maxMagX, maxMagY, maxMagZ});
+            DataPoint<int[]> d = new DataPoint<int[]>(new int[] {i, i, i}, new float[] {MagX, MagY, MagZ});
             datapoints.add(d);
         }
-
         return datapoints;
     }
 
@@ -180,13 +196,15 @@ public class Calculator {
              float yAcc = dataPoint.values[1];
              float zAcc = dataPoint.values[2];
 
+
              int xFreq = dataPoint.domain[0];
              int yFreq = dataPoint.domain[1];
              int zFreq = dataPoint.domain[2];
 
-             float xVel = xAcc / (2 * (float)Math.PI * xFreq);
-             float yVel = yAcc / (2 * (float)Math.PI * yFreq);
-             float zVel = zAcc / (2 * (float)Math.PI * zFreq);
+             float xVel = xAcc / (2f * (float)Math.PI * (float)xFreq);
+             float yVel = yAcc / (2f * (float)Math.PI * (float)yFreq);
+             float zVel = zAcc / (2f * (float)Math.PI * (float)zFreq);
+             //Log.d("ZVEL", zVel+"");
              velocities.add(new DataPoint<int[]>(new int[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
          }
          return velocities;
@@ -208,7 +226,6 @@ public class Calculator {
              float xLimit = findLimit(xfreq);
              float yLimit = findLimit(yfreq);
              float zLimit = findLimit(zfreq);
-
              limitValues.add(new DataPoint<int[]>(new int[]{xfreq, yfreq, zfreq}, new float[]{xLimit, yLimit, zLimit}));
          }
          return limitValues;
@@ -222,11 +239,12 @@ public class Calculator {
      private static float findLimit(int freq){
          float limitValue = 0f;
          int i = 0;
-         while (freq >= LimitValueTable.getInstance().getTable().get(i).domain) {
-             limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
-             i++;
-         }
-         return limitValue;
+        // while (freq >= LimitValueTable.getInstance().getTable().get(i).domain) {
+       //      limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
+       //      i++;
+       //  }
+        return 1f;
+        // return limitValue;
      }
 
     /**
@@ -235,38 +253,34 @@ public class Calculator {
      * @param velocities array with velocity for each frequency
      * @return dominant frequency for each direction (x,y,z)
      */
-     public static int[] domFreq(ArrayList<DataPoint <int[]>> limitValues, ArrayList<DataPoint<int[]>> velocities){
+     public static Fdom domFreq(ArrayList<DataPoint <int[]>> limitValues, ArrayList<DataPoint<int[]>> velocities){
          int domFreqX = -1;
-         float ratioX = -1;
+         float ratioX = 100;
          int domFreqY = -1;
-         float ratioY = -1;
+         float ratioY = 100;
          int domFreqZ = -1;
-         float ratioZ = -1;
+         float ratioZ = 100;
 
          for (int i = 0; i < limitValues.size(); i++){
              DataPoint<int[]> limitValue = limitValues.get(i);
              DataPoint<int[]> velocity = velocities.get(i);
 
-             if (limitValue.values[0] / velocity.values[0] > ratioX){
+             if (limitValue.values[0] / velocity.values[0] < ratioX){
                  ratioX = limitValue.values[0] / velocity.values[0];
                  domFreqX = limitValue.domain[0];
              }
 
-             if (limitValue.values[1] / velocity.values[1] > ratioY){
+             if (limitValue.values[1] / velocity.values[1] < ratioY){
                  ratioY = limitValue.values[1] / velocity.values[1];
                  domFreqY = limitValue.domain[1];
              }
-
-             if (limitValue.values[2] / velocity.values[2] > ratioZ){
+             if (limitValue.values[2] / velocity.values[2] < ratioZ){
+             //    Log.d("VELZ", velocity.values[2]+"");
                  ratioZ = limitValue.values[2] / velocity.values[2];
-                 Log.d("RATIO", ratioZ+"");
                  domFreqZ = limitValue.domain[2];
              }
-
          }
-
-         return new int[]{domFreqX, domFreqY, domFreqZ};
-
+         return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new boolean[]{ratioX < 0, ratioY < 0, ratioZ < 0});
      }
 
 

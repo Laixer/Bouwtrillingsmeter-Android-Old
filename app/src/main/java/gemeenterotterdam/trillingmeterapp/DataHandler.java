@@ -20,11 +20,13 @@ public class DataHandler {
         public final float[] maxAcc;
         public final float[] maxVel;
         public final int[] maxFreq;
+        public final Fdom fdom;
 
-        public Tuple(float[] maxAcc, float[] maxVel, int[] maxFreq) {
+        public Tuple(float[] maxAcc, float[] maxVel, int[] maxFreq, Fdom fdom) {
             this.maxAcc = maxAcc;
             this.maxVel = maxVel;
             this.maxFreq = maxFreq;
+            this.fdom = fdom;
         }
     }
 
@@ -46,6 +48,7 @@ public class DataHandler {
         this.hws.updateVelocityCounter(result.maxVel);
         this.hws.updateAccelarationCounter(result.maxAcc);
         this.hws.updateFrequencyCounter(result.maxFreq);
+        this.hws.updateFdomCounter(result.fdom);
     }
 
     /**
@@ -59,10 +62,15 @@ public class DataHandler {
         float[] maxVelocity                                             = Calculator.MaxValueInArray(differentiatedData);
         maxVelocity                                                     = Calculator.addMargin(maxVelocity);
         ArrayList<DataPoint<int[]>> fftAcceleration                     = Calculator.FFT(data);
+
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
         ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
         ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);
-        int[] domFreq                                                   = Calculator.domFreq(limitValue, velocityFreqDomain);
-        return new Tuple(maxAcceleration, maxVelocity, maxFrequency);
+        for (int i = 0; i < velocityFreqDomain.size(); i++){
+            Log.d("XVEL", velocityFreqDomain.get(i).values[0]+"");
+        }
+        Fdom domFreq                                                    = Calculator.domFreq(limitValue, velocityFreqDomain);
+       // Log.d("FDOM", domFreq.frequencies[2]+"");
+        return new Tuple(maxAcceleration, maxVelocity, maxFrequency, domFreq);
     }
 }

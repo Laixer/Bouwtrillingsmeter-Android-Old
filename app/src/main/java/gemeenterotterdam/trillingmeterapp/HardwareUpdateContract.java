@@ -12,4 +12,5 @@ package gemeenterotterdam.trillingmeterapp;
         public void updateVelocityCounter(float[] maxVelocity);
         public void updateAccelarationCounter(float[] maxAcceleration);
         public void updateFrequencyCounter(int[] maxFrequency);
+        public void updateFdomCounter(Fdom fdom);
     }

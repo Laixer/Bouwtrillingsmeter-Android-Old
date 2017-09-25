@@ -63,4 +63,9 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
     public void updateFrequencyCounter(int[] maxFrequency) {
         this.activity.updateFrequencyData(maxFrequency);
     }
+
+    @Override
+    public void updateFdomCounter(Fdom fdom) {
+        this.activity.updateFdomData(fdom);
+    }
 }

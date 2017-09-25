@@ -3,7 +3,9 @@
     <string name="acceleration">Acceleration</string>
     <string name="velocity">Velocity</string>
     <string name="frequency">Frequency</string>
+    <string name="fdom">Fdom</string>
     <string name="Xvalue">X:</string>
     <string name="Yvalue">Y:</string>
     <string name="Zvalue">Z:</string>
+
 </resources>
