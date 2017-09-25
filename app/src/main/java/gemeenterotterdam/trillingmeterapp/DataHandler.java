@@ -66,11 +66,7 @@ public class DataHandler {
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
         ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
         ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);
-        for (int i = 0; i < velocityFreqDomain.size(); i++){
-            Log.d("XVEL", velocityFreqDomain.get(i).values[0]+"");
-        }
         Fdom domFreq                                                    = Calculator.domFreq(limitValue, velocityFreqDomain);
-       // Log.d("FDOM", domFreq.frequencies[2]+"");
         return new Tuple(maxAcceleration, maxVelocity, maxFrequency, domFreq);
     }
 }

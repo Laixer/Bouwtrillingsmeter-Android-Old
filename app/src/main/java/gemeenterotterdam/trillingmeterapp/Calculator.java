@@ -118,7 +118,7 @@ public class Calculator {
      * realForward returns Re+Im values
      * Calculate Magnitude from Re + Im
      * @param velocities list of velocities obtained for 1 second
-     * @return float maximum frequency in x, y and z direction
+     * @return float frequency in x, y and z direction in range (0-50)Hz with corresponding magnitude
      */
 
     public static ArrayList<DataPoint<int[]>> FFT(ArrayList<DataPoint<Date>> velocities){
@@ -190,23 +190,27 @@ public class Calculator {
      * @return velocity data in frequency domain (frequency + velocity)
      */
     public static ArrayList<DataPoint<int[]>> calcVelocityFreqDomain(ArrayList<DataPoint<int[]>> acc){
+        float xVel = 0;
+        float yVel = 0;
+        float zVel = 0;
+        float maxzvel = 0;
          ArrayList<DataPoint<int[]>> velocities = new ArrayList<DataPoint<int[]>>();
          for(DataPoint<int[]> dataPoint : acc){
              float xAcc = dataPoint.values[0];
              float yAcc = dataPoint.values[1];
              float zAcc = dataPoint.values[2];
 
-
              int xFreq = dataPoint.domain[0];
              int yFreq = dataPoint.domain[1];
              int zFreq = dataPoint.domain[2];
 
-             float xVel = xAcc / (2f * (float)Math.PI * (float)xFreq);
-             float yVel = yAcc / (2f * (float)Math.PI * (float)yFreq);
-             float zVel = zAcc / (2f * (float)Math.PI * (float)zFreq);
-             //Log.d("ZVEL", zVel+"");
+             xVel = xAcc / (2f * (float)Math.PI * (float)xFreq) * 100;
+             yVel = yAcc / (2f * (float)Math.PI * (float)yFreq) * 100;
+             zVel = zAcc / (2f * (float)Math.PI * (float)zFreq) * 100;
+             maxzvel = Math.max(zVel, maxzvel);
              velocities.add(new DataPoint<int[]>(new int[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
          }
+         velocities.remove(0);
          return velocities;
      }
 
@@ -239,12 +243,10 @@ public class Calculator {
      private static float findLimit(int freq){
          float limitValue = 0f;
          int i = 0;
-        // while (freq >= LimitValueTable.getInstance().getTable().get(i).domain) {
-       //      limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
-       //      i++;
-       //  }
-        return 1f;
-        // return limitValue;
+         do{ limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
+             i++;}
+         while (freq > LimitValueTable.getInstance().getTable().get(i).domain);
+        return limitValue;
      }
 
     /**
@@ -255,32 +257,35 @@ public class Calculator {
      */
      public static Fdom domFreq(ArrayList<DataPoint <int[]>> limitValues, ArrayList<DataPoint<int[]>> velocities){
          int domFreqX = -1;
-         float ratioX = 100;
+         float ratioX = 0;
          int domFreqY = -1;
-         float ratioY = 100;
+         float ratioY = 0;
          int domFreqZ = -1;
-         float ratioZ = 100;
+         float ratioZ = 0;
 
          for (int i = 0; i < limitValues.size(); i++){
              DataPoint<int[]> limitValue = limitValues.get(i);
              DataPoint<int[]> velocity = velocities.get(i);
 
-             if (limitValue.values[0] / velocity.values[0] < ratioX){
-                 ratioX = limitValue.values[0] / velocity.values[0];
+             Log.d("VELO", velocity.values[2]+"");
+             Log.d("LIM", limitValue.values[2]+"");
+
+             if (velocity.values[0] / limitValue.values[0] > ratioX){
+                 ratioX = velocity.values[0] / limitValue.values[0];
                  domFreqX = limitValue.domain[0];
              }
 
-             if (limitValue.values[1] / velocity.values[1] < ratioY){
-                 ratioY = limitValue.values[1] / velocity.values[1];
+             if (velocity.values[1] / limitValue.values[1] > ratioY){
+                 ratioY = velocity.values[1] / limitValue.values[1];
                  domFreqY = limitValue.domain[1];
              }
-             if (limitValue.values[2] / velocity.values[2] < ratioZ){
-             //    Log.d("VELZ", velocity.values[2]+"");
-                 ratioZ = limitValue.values[2] / velocity.values[2];
+
+             if (velocity.values[2] / limitValue.values[2] > ratioZ){
+                 ratioZ = velocity.values[2] / limitValue.values[2];
                  domFreqZ = limitValue.domain[2];
              }
          }
-         return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new boolean[]{ratioX < 0, ratioY < 0, ratioZ < 0});
+         return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new boolean[]{ratioX > 1, ratioY > 1, ratioZ > 1});
      }
 
 
