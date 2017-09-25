@@ -62,7 +62,6 @@ public class DataHandler {
         float[] maxVelocity                                             = Calculator.MaxValueInArray(differentiatedData);
         maxVelocity                                                     = Calculator.addMargin(maxVelocity);
         ArrayList<DataPoint<int[]>> fftAcceleration                     = Calculator.FFT(data);
-
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
         ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
         ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);

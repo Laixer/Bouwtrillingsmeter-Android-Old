@@ -204,9 +204,9 @@ public class Calculator {
              int yFreq = dataPoint.domain[1];
              int zFreq = dataPoint.domain[2];
 
-             xVel = xAcc / (2f * (float)Math.PI * (float)xFreq) * 100;
-             yVel = yAcc / (2f * (float)Math.PI * (float)yFreq) * 100;
-             zVel = zAcc / (2f * (float)Math.PI * (float)zFreq) * 100;
+             xVel = xAcc / (2f * (float)Math.PI * (float)xFreq);
+             yVel = yAcc / (2f * (float)Math.PI * (float)yFreq);
+             zVel = zAcc / (2f * (float)Math.PI * (float)zFreq);
              maxzvel = Math.max(zVel, maxzvel);
              velocities.add(new DataPoint<int[]>(new int[]{xFreq, yFreq, zFreq}, new float[]{xVel, yVel, zVel}));
          }
@@ -266,9 +266,6 @@ public class Calculator {
          for (int i = 0; i < limitValues.size(); i++){
              DataPoint<int[]> limitValue = limitValues.get(i);
              DataPoint<int[]> velocity = velocities.get(i);
-
-             Log.d("VELO", velocity.values[2]+"");
-             Log.d("LIM", limitValue.values[2]+"");
 
              if (velocity.values[0] / limitValue.values[0] > ratioX){
                  ratioX = velocity.values[0] / limitValue.values[0];
