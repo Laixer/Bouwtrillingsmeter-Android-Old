@@ -24,8 +24,8 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
     protected SensorManager sensorManager;
     protected ArrayList<DataPoint<Date>> dataPoints = new ArrayList<DataPoint<Date>>();
 
-    protected HardwareSensor(StartActivity activity) {
-        Context context = activity.getApplicationContext();
+    protected HardwareSensor( StartActivity activity) {
+        Context context = activity.getContext();
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         this.activity =  activity;
     }

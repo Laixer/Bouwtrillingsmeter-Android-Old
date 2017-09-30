@@ -1,5 +1,7 @@
 package gemeenterotterdam.trillingmeterapp;
 
+
+
 /**
  * Created by Marijn Otte on 16-9-2017.
  * DataPoint, used for storage.

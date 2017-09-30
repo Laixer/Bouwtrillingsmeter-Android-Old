@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LimitValueTable {
     private static LimitValueTable limitValueTable;
-    private ArrayList<DataPoint <Integer>> table = null;
+    public ArrayList<DataPoint <Integer>> table = null;
 
     public static LimitValueTable getInstance() {
         if(limitValueTable == null){
@@ -30,9 +30,5 @@ public class LimitValueTable {
         table.add(new DataPoint<Integer>(40, new float[]{0.35f}));
         table.add(new DataPoint<Integer>(45, new float[]{0.375f}));
         table.add(new DataPoint<Integer>(50, new float[]{0.40f}));
-    }
-
-    public ArrayList<DataPoint<Integer>> getTable(){
-        return table;
     }
 }

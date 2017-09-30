@@ -241,12 +241,20 @@ public class Calculator {
      * @return limitValue corresponding to frequency obtained from LimitValueTable (see doc for more information)
      */
      private static float findLimit(int freq){
-         float limitValue = 0f;
-         int i = 0;
-         do{ limitValue = LimitValueTable.getInstance().getTable().get(i).values[0];
-             i++;}
-         while (freq > LimitValueTable.getInstance().getTable().get(i).domain);
-        return limitValue;
+         try {
+             float limitValue = 0f;
+             int i = 0;
+             do {
+                 limitValue = LimitValueTable.getInstance().table.get(i).values[0];
+                 i++;
+             }
+             while (freq > LimitValueTable.getInstance().table.get(i).domain);
+             return limitValue;
+         }
+         catch(IndexOutOfBoundsException e){
+             Log.d("ditwerktniet", "ERROR");
+             return LimitValueTable.getInstance().table.get(LimitValueTable.getInstance().table.size()-1).values[0];
+         }
      }
 
     /**

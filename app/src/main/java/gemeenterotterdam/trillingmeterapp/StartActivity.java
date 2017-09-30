@@ -1,8 +1,14 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,7 +18,7 @@ import java.util.ArrayList;
  * Activity corresponding to gathering data from different sensors
  */
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends Fragment {
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
     private TextView Xvelocity;
@@ -35,31 +41,35 @@ public class StartActivity extends AppCompatActivity {
     //Starts accelerometer and gyroscopemeter.
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.activity_start, container, false);
+
+
         acceleroMeter = new AcceleroMeter(this);
        // gyroscopeMeter = new GyroscopeMeter(this);
 
-        Xvelocity = (TextView) findViewById(R.id.xVel);
-        Yvelocity = (TextView) findViewById(R.id.yVel);
-        Zvelocity = (TextView) findViewById(R.id.zVel);
+        Xvelocity = (TextView) rootView.findViewById(R.id.xVel);
+        Yvelocity = (TextView) rootView.findViewById(R.id.yVel);
+        Zvelocity = (TextView) rootView.findViewById(R.id.zVel);
 
-        Xacceleration = (TextView) findViewById(R.id.xAcc);
-        Yacceleration = (TextView) findViewById(R.id.yAcc);
-        Zacceleration = (TextView) findViewById(R.id.zAcc);
+        Xacceleration = (TextView) rootView.findViewById(R.id.xAcc);
+        Yacceleration = (TextView) rootView.findViewById(R.id.yAcc);
+        Zacceleration = (TextView) rootView.findViewById(R.id.zAcc);
 
-        Xfrequency = (TextView) findViewById(R.id.xFreq);
-        Yfrequency = (TextView) findViewById(R.id.yFreq);
-        Zfrequency = (TextView) findViewById(R.id.zFreq);
+        Xfrequency = (TextView) rootView.findViewById(R.id.xFreq);
+        Yfrequency = (TextView) rootView.findViewById(R.id.yFreq);
+        Zfrequency = (TextView) rootView.findViewById(R.id.zFreq);
 
-        Xfdom = (TextView) findViewById(R.id.xFdom);
-        Yfdom = (TextView) findViewById(R.id.yFdom);
-        Zfdom = (TextView) findViewById(R.id.zFdom);
+        Xfdom = (TextView) rootView.findViewById(R.id.xFdom);
+        Yfdom = (TextView) rootView.findViewById(R.id.yFdom);
+        Zfdom = (TextView) rootView.findViewById(R.id.zFdom);
 
-        Xexceed = (TextView) findViewById(R.id.exceedX);
-        Yexceed = (TextView) findViewById(R.id.exceedY);
-        Zexceed = (TextView) findViewById(R.id.exceedZ);
+        Xexceed = (TextView) rootView.findViewById(R.id.exceedX);
+        Yexceed = (TextView) rootView.findViewById(R.id.exceedY);
+        Zexceed = (TextView) rootView.findViewById(R.id.exceedZ);
+        return rootView;
     }
 
 

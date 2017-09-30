@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile files('libs/JTransforms-3.1-with-dependencies.jar')
+	compile 'com.jjoe64:graphview:4.2.1'
 }
