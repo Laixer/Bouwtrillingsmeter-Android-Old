@@ -18,13 +18,13 @@ import java.util.Timer;
 
 public abstract class HardwareSensor implements SensorEventListener, HardwareUpdateContract {
     private DataHandler dataHandler = new DataHandler(this);
-    private StartActivity activity;
+    private StartFragment activity;
     private Date startTime = new Date();
 
     protected SensorManager sensorManager;
     protected ArrayList<DataPoint<Date>> dataPoints = new ArrayList<DataPoint<Date>>();
 
-    protected HardwareSensor( StartActivity activity) {
+    protected HardwareSensor( StartFragment activity) {
         Context context = activity.getContext();
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         this.activity =  activity;

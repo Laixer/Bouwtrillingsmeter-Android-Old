@@ -20,6 +20,7 @@ import gemeenterotterdam.trillingmeterapp.R;
 
 /**
  * Created by Marijn Otte on 28-9-2017.
+ * Fragment for accelerometer graph
  */
 
 public class AcceleroGraphFragment extends Fragment {
@@ -42,4 +43,5 @@ public class AcceleroGraphFragment extends Fragment {
         layout.addView(graphView);
         return rootView;
     }
+
 }

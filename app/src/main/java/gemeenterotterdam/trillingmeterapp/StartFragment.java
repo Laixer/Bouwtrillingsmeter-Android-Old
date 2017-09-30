@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 /**
  * Created by Marijn Otte on 28-8-2017.
- * Activity corresponding to gathering data from different sensors
+ * Fragment corresponding to gathering data from different sensors, showing data
  */
 
-public class StartActivity extends Fragment {
+public class StartFragment extends Fragment {
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
     private TextView Xvelocity;

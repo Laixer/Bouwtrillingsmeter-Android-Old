@@ -7,19 +7,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 /**
- * Created by User on 28-9-2017.
+ * Created by Marijn Otte on 28-9-2017.
+ * Activity handles different fragements to swipe between graphs
  */
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
     private static final int NUM_PAGES = 6;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
-    private StartActivity startActivity;
+    private StartFragment startFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -38,7 +40,9 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
-
+    /**
+     * Adapter to handle different fragments
+     */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -47,10 +51,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                return new StartActivity();
+                return new StartFragment();
             }
             else{
-                return new ActivityFragment1();
+                return new AcceleroGraphFragment();
             }
         }
 
