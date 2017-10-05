@@ -18,14 +18,14 @@ import java.util.Timer;
 
 public abstract class HardwareSensor implements SensorEventListener, HardwareUpdateContract {
     private DataHandler dataHandler = new DataHandler(this);
-    private StartFragment activity;
+    private ScreenSlidePagerActivity activity;
     private Date startTime = new Date();
 
     protected SensorManager sensorManager;
     protected ArrayList<DataPoint<Date>> dataPoints = new ArrayList<DataPoint<Date>>();
 
-    protected HardwareSensor( StartFragment activity) {
-        Context context = activity.getContext();
+    protected HardwareSensor( ScreenSlidePagerActivity activity) {
+        Context context = activity.getApplicationContext();
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         this.activity =  activity;
     }
@@ -51,21 +51,22 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
 
     @Override
     public void updateVelocityCounter(float[] maxVelocity) {
-       this.activity.updateVelocityData(maxVelocity);
+      // this.activity.updateVelocityData(maxVelocity);
     }
 
     @Override
     public void updateAccelarationCounter(float[] maxAccelaration) {
-        this.activity.updateAccelarationData(maxAccelaration);
+       // this.activity.updateAccelerationData(maxAccelaration);
     }
 
     @Override
     public void updateFrequencyCounter(int[] maxFrequency) {
-        this.activity.updateFrequencyData(maxFrequency);
+       // this.activity.updateFrequencyData(maxFrequency);
     }
 
     @Override
     public void updateFdomCounter(Fdom fdom) {
-        this.activity.updateFdomData(fdom);
+
+        this.activity.updateFdom(fdom);
     }
 }

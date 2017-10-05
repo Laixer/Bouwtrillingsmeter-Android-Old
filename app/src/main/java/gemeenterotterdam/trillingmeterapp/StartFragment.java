@@ -19,8 +19,6 @@ import java.util.ArrayList;
  */
 
 public class StartFragment extends Fragment {
-    private AcceleroMeter acceleroMeter;
-    private GyroscopeMeter gyroscopeMeter;
     private TextView Xvelocity;
     private TextView Yvelocity;
     private TextView Zvelocity;
@@ -47,8 +45,7 @@ public class StartFragment extends Fragment {
                 R.layout.activity_start, container, false);
 
 
-        acceleroMeter = new AcceleroMeter(this);
-       // gyroscopeMeter = new GyroscopeMeter(this);
+
 
         Xvelocity = (TextView) rootView.findViewById(R.id.xVel);
         Yvelocity = (TextView) rootView.findViewById(R.id.yVel);

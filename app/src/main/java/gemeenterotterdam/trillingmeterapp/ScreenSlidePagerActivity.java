@@ -9,6 +9,8 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
+import static gemeenterotterdam.trillingmeterapp.R.id.add;
+
 /**
  * Created by Marijn Otte on 28-9-2017.
  * Activity handles different fragements to swipe between graphs
@@ -19,14 +21,22 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private StartFragment startFragment;
+    private AcceleroGraphFragment acceleroFragment;
+    private AcceleroMeter acceleroMeter;
+    private GyroscopeMeter gyroscopeMeter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        acceleroMeter = new AcceleroMeter(this);
+        gyroscopeMeter = new GyroscopeMeter(this);
+        startFragment = new StartFragment();
+        acceleroFragment = new AcceleroGraphFragment();
     }
 
     @Override
@@ -40,6 +50,13 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
+
+
+    public void updateFdom(Fdom fdom) {
+        acceleroFragment.update(fdom);
+    }
+
+
     /**
      * Adapter to handle different fragments
      */
@@ -51,7 +68,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                return new StartFragment();
+                return startFragment;
+            }
+            if (position == 1){
+                return acceleroFragment;
             }
             else{
                 return new AcceleroGraphFragment();

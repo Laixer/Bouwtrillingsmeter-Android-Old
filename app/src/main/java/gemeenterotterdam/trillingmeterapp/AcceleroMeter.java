@@ -26,7 +26,7 @@ public class AcceleroMeter extends HardwareSensor {
     /**
     * Constructor
      */
-    public AcceleroMeter(StartFragment activity){
+    public AcceleroMeter(ScreenSlidePagerActivity activity){
         super(activity);
 
         /** Register this class as sensor handler callback, or throw exception if hardware is not present */

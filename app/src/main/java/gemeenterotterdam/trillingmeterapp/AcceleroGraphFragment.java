@@ -1,5 +1,6 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
@@ -25,23 +26,45 @@ import gemeenterotterdam.trillingmeterapp.R;
 
 public class AcceleroGraphFragment extends Fragment {
     com.jjoe64.graphview.series.DataPoint GraphDataPoint;
+    GraphView graphView;
+    LinearLayout layout;
+    int i = 1;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_accelerograph, container, false);
-        GraphView graphView = new GraphView(this.getActivity());
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3)
-        });
-        graphView.addSeries(series);
+        graphView = new GraphView(this.getActivity());
+        LineGraphSeries<DataPoint> seriesX = new LineGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> seriesY = new LineGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> seriesZ = new LineGraphSeries<>(new DataPoint[] {});
+        seriesX.setColor(Color.RED);
+        seriesY.setColor(Color.YELLOW);
+        seriesZ.setColor(Color.BLUE);
+        graphView.addSeries(seriesX);
+        graphView.addSeries(seriesY);
+        graphView.addSeries(seriesZ);
 
-        LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
+        layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
         layout.addView(graphView);
         return rootView;
     }
 
+    /**
+     * Update Fdom graph
+     * @param fdom Dominant frequency for every second in X, Y, Z direction
+     */
+    public void update(Fdom fdom){
+        LineGraphSeries<DataPoint> serieX = (LineGraphSeries<DataPoint>)graphView.getSeries().get(0);
+        LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
+        LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
+        serieX.appendData(new DataPoint(i, fdom.frequencies[0]), true, 40);
+        serieY.appendData(new DataPoint(i, fdom.frequencies[1]), true, 40);
+        serieZ.appendData(new DataPoint(i, fdom.frequencies[2]), true, 40);
+        i++;
+        graphView.addSeries(serieX);
+        graphView.addSeries(serieY);
+        graphView.addSeries(serieZ);
+    }
 }

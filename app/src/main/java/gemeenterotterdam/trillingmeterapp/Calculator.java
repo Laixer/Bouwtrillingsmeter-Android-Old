@@ -252,7 +252,6 @@ public class Calculator {
              return limitValue;
          }
          catch(IndexOutOfBoundsException e){
-             Log.d("ditwerktniet", "ERROR");
              return LimitValueTable.getInstance().table.get(LimitValueTable.getInstance().table.size()-1).values[0];
          }
      }
