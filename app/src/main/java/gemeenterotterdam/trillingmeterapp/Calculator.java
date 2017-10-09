@@ -265,10 +265,13 @@ public class Calculator {
      public static Fdom domFreq(ArrayList<DataPoint <int[]>> limitValues, ArrayList<DataPoint<int[]>> velocities){
          int domFreqX = -1;
          float ratioX = 0;
+         float domVelX = -1;
          int domFreqY = -1;
          float ratioY = 0;
+         float domVelY = -1;
          int domFreqZ = -1;
          float ratioZ = 0;
+         float domVelZ = -1;
 
          for (int i = 0; i < limitValues.size(); i++){
              DataPoint<int[]> limitValue = limitValues.get(i);
@@ -277,19 +280,22 @@ public class Calculator {
              if (velocity.values[0] / limitValue.values[0] > ratioX){
                  ratioX = velocity.values[0] / limitValue.values[0];
                  domFreqX = limitValue.domain[0];
+                 domVelX = velocity.values[0];
              }
 
              if (velocity.values[1] / limitValue.values[1] > ratioY){
                  ratioY = velocity.values[1] / limitValue.values[1];
                  domFreqY = limitValue.domain[1];
+                 domVelY = velocity.values[1];
              }
 
              if (velocity.values[2] / limitValue.values[2] > ratioZ){
                  ratioZ = velocity.values[2] / limitValue.values[2];
                  domFreqZ = limitValue.domain[2];
+                 domVelZ = velocity.values[2];
              }
          }
-         return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new boolean[]{ratioX > 1, ratioY > 1, ratioZ > 1});
+         return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new float[]{domVelX, domVelY, domVelZ}, new boolean[]{ratioX > 1, ratioY > 1, ratioZ > 1});
      }
 
 

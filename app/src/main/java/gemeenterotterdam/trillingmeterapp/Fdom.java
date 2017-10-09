@@ -7,13 +7,15 @@ package gemeenterotterdam.trillingmeterapp;
 
 public class Fdom {
     public int[] frequencies;
+    public float[] velocities;
     public boolean[] exceed;
 
     /**
      * Constructor
      */
-    public Fdom(int[] frequencies, boolean[] exceed){
+    public Fdom(int[] frequencies, float[] velocities, boolean[] exceed){
         this.frequencies = frequencies;
+        this.velocities = velocities;
         this.exceed = exceed;
     }
 }
