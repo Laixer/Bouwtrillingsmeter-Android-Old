@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import static gemeenterotterdam.trillingmeterapp.R.id.add;
 
@@ -17,11 +18,12 @@ import static gemeenterotterdam.trillingmeterapp.R.id.add;
  */
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
-    private static final int NUM_PAGES = 6;
+    private static final int NUM_PAGES = 3;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private StartFragment startFragment;
-    private AcceleroGraphFragment acceleroFragment;
+    private FdomGraphFragment fdomGraphFragment;
+    private AcceleroGraphFragment acceleroGraphFragment;
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
 
@@ -35,8 +37,6 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
         acceleroMeter = new AcceleroMeter(this);
         gyroscopeMeter = new GyroscopeMeter(this);
-        startFragment = new StartFragment();
-        acceleroFragment = new AcceleroGraphFragment();
     }
 
     @Override
@@ -53,7 +53,15 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
 
     public void updateFdom(Fdom fdom) {
-        acceleroFragment.update(fdom);
+        if(fdomGraphFragment != null) {
+            fdomGraphFragment.update(fdom);
+        }
+    }
+
+    public void updateAccelerationData(float[] maxAcceleration) {
+        if(acceleroGraphFragment != null) {
+            acceleroGraphFragment.update(maxAcceleration);
+        }
     }
 
 
@@ -67,22 +75,34 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return startFragment;
+            switch(position){
+                case 0: return new StartFragment();
+                case 1: return new AcceleroGraphFragment();
+                case 2: return new FdomGraphFragment();
             }
-            if (position == 1){
-                return acceleroFragment;
-            }
-            else{
-                return new AcceleroGraphFragment();
-            }
+            return null;
         }
 
         @Override
         public int getCount() {
             return NUM_PAGES;
         }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+            // save the appropriate reference depending on position
+            switch (position) {
+                case 0:
+                    startFragment = (StartFragment) createdFragment;
+                    break;
+                case 1:
+                    acceleroGraphFragment = (AcceleroGraphFragment) createdFragment;
+                    break;
+                case 2:
+                    fdomGraphFragment = (FdomGraphFragment) createdFragment;
+            }
+            return createdFragment;
+        }
     }
-
-
 }

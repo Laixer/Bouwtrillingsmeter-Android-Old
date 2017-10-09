@@ -51,12 +51,12 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
 
     @Override
     public void updateVelocityCounter(float[] maxVelocity) {
-      // this.activity.updateVelocityData(maxVelocity);
+      //this.activity.updateVelocityData(maxVelocity);
     }
 
     @Override
     public void updateAccelarationCounter(float[] maxAccelaration) {
-       // this.activity.updateAccelerationData(maxAccelaration);
+       this.activity.updateAccelerationData(maxAccelaration);
     }
 
     @Override
@@ -66,7 +66,6 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
 
     @Override
     public void updateFdomCounter(Fdom fdom) {
-
         this.activity.updateFdom(fdom);
     }
 }

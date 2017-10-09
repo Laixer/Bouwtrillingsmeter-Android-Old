@@ -21,10 +21,10 @@ import gemeenterotterdam.trillingmeterapp.R;
 
 /**
  * Created by Marijn Otte on 28-9-2017.
- * Fragment for accelerometer graph
+ * Fragment for Fdom graph
  */
 
-public class AcceleroGraphFragment extends Fragment {
+public class FdomGraphFragment extends Fragment {
     GraphView graphView;
     LinearLayout layout;
     int i = 0;
@@ -32,9 +32,9 @@ public class AcceleroGraphFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("AANGEMAAKT", "AANGEMAAKT");
+        Log.d("FDOMAANGEMAAKT", "FDOMAANGEMAAKT");
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_accelerograph, container, false);
+                R.layout.fragment_fdomgraph, container, false);
         graphView = new GraphView(this.getActivity());
         LineGraphSeries<DataPoint> seriesX = new LineGraphSeries<>(new DataPoint[] {});
         LineGraphSeries<DataPoint> seriesY = new LineGraphSeries<>(new DataPoint[] {});
@@ -46,22 +46,22 @@ public class AcceleroGraphFragment extends Fragment {
         graphView.addSeries(seriesY);
         graphView.addSeries(seriesZ);
 
-        layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
+        layout = (LinearLayout) rootView.findViewById(R.id.Fdomgraph);
         layout.addView(graphView);
         return rootView;
     }
 
     /**
-     * Update Acceleration graph
-     * @param acceleration max frequency for every second in X, Y, Z direction
+     * Update Fdom graph
+     * @param fdom Dominant frequency for every second in X, Y, Z direction
      */
-    public void update(float[] acceleration){
+    public void update(Fdom fdom){
         LineGraphSeries<DataPoint> serieX = (LineGraphSeries<DataPoint>)graphView.getSeries().get(0);
         LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
         LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
-        serieX.appendData(new DataPoint(i, acceleration[0]), true, 40);
-        serieY.appendData(new DataPoint(i, acceleration[1]), true, 40);
-        serieZ.appendData(new DataPoint(i, acceleration[2]), true, 40);
+        serieX.appendData(new DataPoint(i, fdom.frequencies[0]), true, 40);
+        serieY.appendData(new DataPoint(i, fdom.frequencies[1]), true, 40);
+        serieZ.appendData(new DataPoint(i, fdom.frequencies[2]), true, 40);
         i++;
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
