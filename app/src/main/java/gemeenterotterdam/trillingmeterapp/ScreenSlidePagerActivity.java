@@ -10,6 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static gemeenterotterdam.trillingmeterapp.R.id.add;
 
 /**
@@ -60,9 +63,6 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         if(velocityGraphFragment != null) {
             velocityGraphFragment.update(fdom);
         }
-        if(vfGraphFragment != null){
-            vfGraphFragment.update(fdom);
-        }
         if(startFragment != null){
             startFragment.updateFdomData(fdom);
         }
@@ -89,6 +89,11 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         }
     }
 
+    public void updateVFData(ArrayList<DataPoint<int[]>> velocityFrequency){
+        if(vfGraphFragment != null){
+            vfGraphFragment.update(velocityFrequency);
+        }
+    }
 
     /**
      * Adapter to handle different fragments

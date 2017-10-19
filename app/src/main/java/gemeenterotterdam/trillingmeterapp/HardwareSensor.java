@@ -68,4 +68,9 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
     public void updateFdomCounter(Fdom fdom) {
         this.activity.updateFdom(fdom);
     }
+
+    @Override
+    public void updateVFCounter(ArrayList<DataPoint<int[]>> velocityFrequency){
+        this.activity.updateVFData(velocityFrequency);
+    }
 }

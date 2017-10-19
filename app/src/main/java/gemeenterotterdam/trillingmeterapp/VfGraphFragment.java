@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import android.support.v4.app.Fragment;
@@ -51,18 +53,25 @@ public class VfGraphFragment extends Fragment {
     }
 
     /**
-     * Update Acceleration graph
-     * @param fdom velocity corresponding to dominant frequency for every second in X, Y, Z direction
+     * Update Velocity / Frequency graph
+     * @param velocityFrequency velocity corresponding to every possible frequency in X, Y, Z direction
+     *                          Graph renewed every second
      */
-    public void update(Fdom fdom){
+    public void update(ArrayList<gemeenterotterdam.trillingmeterapp.DataPoint<int[]>> velocityFrequency){
         graphView.removeAllSeries();
         LineGraphSeries<DataPoint> serieX = new LineGraphSeries<>(new DataPoint[] {});
         LineGraphSeries<DataPoint> serieY = new LineGraphSeries<>(new DataPoint[] {});
         LineGraphSeries<DataPoint> serieZ = new LineGraphSeries<>(new DataPoint[] {});
-        serieX.appendData(new DataPoint(fdom.frequencies[0], fdom.velocities[0]), true, 40);
-        serieY.appendData(new DataPoint(fdom.frequencies[1], fdom.velocities[1]), true, 40);
-        serieZ.appendData(new DataPoint(fdom.frequencies[2], fdom.velocities[2]), true, 40);
-        i++;
+        serieX.setColor(Color.RED);
+        serieY.setColor(Color.YELLOW);
+        serieZ.setColor(Color.BLUE);
+        for (gemeenterotterdam.trillingmeterapp.DataPoint<int[]> dp : velocityFrequency){
+            serieX.appendData(new DataPoint(dp.domain[0], dp.values[0]), true, 50);
+            serieY.appendData(new DataPoint(dp.domain[1], dp.values[1]), true, 50);
+            serieZ.appendData(new DataPoint(dp.domain[2], dp.values[2]), true, 50);
+        }
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setMaxX(50);
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);
