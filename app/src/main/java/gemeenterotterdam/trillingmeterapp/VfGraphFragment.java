@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.PointsGraphSeries;
+
 import gemeenterotterdam.trillingmeterapp.R;
 
 /**
@@ -37,9 +39,9 @@ public class VfGraphFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_vfgraph, container, false);
         graphView = new GraphView(this.getActivity());
-        LineGraphSeries<DataPoint> seriesX = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> seriesY = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> seriesZ = new LineGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> seriesX = new PointsGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> seriesY = new PointsGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> seriesZ = new PointsGraphSeries<>(new DataPoint[] {});
         seriesX.setColor(Color.RED);
         seriesY.setColor(Color.YELLOW);
         seriesZ.setColor(Color.BLUE);
@@ -59,9 +61,9 @@ public class VfGraphFragment extends Fragment {
      */
     public void update(ArrayList<gemeenterotterdam.trillingmeterapp.DataPoint<int[]>> velocityFrequency){
         graphView.removeAllSeries();
-        LineGraphSeries<DataPoint> serieX = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> serieY = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> serieZ = new LineGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> serieX = new PointsGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> serieY = new PointsGraphSeries<>(new DataPoint[] {});
+        PointsGraphSeries<DataPoint> serieZ = new PointsGraphSeries<>(new DataPoint[] {});
         serieX.setColor(Color.RED);
         serieY.setColor(Color.YELLOW);
         serieZ.setColor(Color.BLUE);

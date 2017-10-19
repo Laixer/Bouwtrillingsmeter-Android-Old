@@ -62,8 +62,8 @@ public class FdomGraphFragment extends Fragment {
         serieY.appendData(new DataPoint(i, fdom.frequencies[1]), true, 40);
         serieZ.appendData(new DataPoint(i, fdom.frequencies[2]), true, 40);
         i++;
-       // graphView.addSeries(serieX);
-       // graphView.addSeries(serieY);
-      //  graphView.addSeries(serieZ);
+        graphView.addSeries(serieX);
+        graphView.addSeries(serieY);
+        graphView.addSeries(serieZ);
     }
 }

@@ -62,8 +62,8 @@ public class VelocityGraphFragment extends Fragment {
         serieY.appendData(new DataPoint(i, fdom.velocities[1]), true, 40);
         serieZ.appendData(new DataPoint(i, fdom.velocities[2]), true, 40);
         i++;
-       // graphView.addSeries(serieX);
-       // graphView.addSeries(serieY);
-       // graphView.addSeries(serieZ);
+        graphView.addSeries(serieX);
+        graphView.addSeries(serieY);
+        graphView.addSeries(serieZ);
     }
 }
