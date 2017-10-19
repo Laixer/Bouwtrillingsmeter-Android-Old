@@ -41,9 +41,7 @@ public class Calculator {
             Vz += accvalues[2] * dTime;
             currVelocity = new float[] {Vx, Vy, Vz};
             velocities.add(new DataPoint<Date>(data.get(i).domain, currVelocity));
-
         }
-
         return velocities;
     }
 

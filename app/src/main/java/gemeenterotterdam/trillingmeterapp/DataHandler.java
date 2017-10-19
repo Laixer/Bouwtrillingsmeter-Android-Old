@@ -59,13 +59,15 @@ public class DataHandler {
 
         ArrayList<DataPoint<Date>> differentiatedData                   = Calculator.differentiate(data);
         float[] maxAcceleration                                         = Calculator.MaxValueInArray(data);
-        float[] maxVelocity                                             = Calculator.MaxValueInArray(differentiatedData);
-        maxVelocity                                                     = Calculator.addMargin(maxVelocity);
+
         ArrayList<DataPoint<int[]>> fftAcceleration                     = Calculator.FFT(data);
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);
         ArrayList<DataPoint<int[]>> velocityFreqDomain                  = Calculator.calcVelocityFreqDomain(fftAcceleration);
         ArrayList<DataPoint<int[]>> limitValue                          = Calculator.limitValue(velocityFreqDomain);
         Fdom domFreq                                                    = Calculator.domFreq(limitValue, velocityFreqDomain);
+        float[] maxVelocity                                             = Calculator.MaxValueInArray(velocityFreqDomain);
+        maxVelocity                                                     = Calculator.addMargin(maxVelocity);
+
         return new Tuple(maxAcceleration, maxVelocity, maxFrequency, domFreq);
     }
 }

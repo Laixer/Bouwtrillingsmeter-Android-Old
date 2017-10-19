@@ -54,7 +54,6 @@ public class AcceleroMeter extends HardwareSensor {
             } else {
                 commit();
             }
-
         }
     }
 

@@ -18,13 +18,14 @@ import static gemeenterotterdam.trillingmeterapp.R.id.add;
  */
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 5;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private StartFragment startFragment;
     private FdomGraphFragment fdomGraphFragment;
     private AcceleroGraphFragment acceleroGraphFragment;
     private VelocityGraphFragment velocityGraphFragment;
+    private VfGraphFragment vfGraphFragment;
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
 
@@ -37,7 +38,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         acceleroMeter = new AcceleroMeter(this);
-        gyroscopeMeter = new GyroscopeMeter(this);
+        //gyroscopeMeter = new GyroscopeMeter(this);
     }
 
     @Override
@@ -60,14 +61,28 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         if(velocityGraphFragment != null) {
             velocityGraphFragment.update(fdom);
         }
+        if(vfGraphFragment != null){
+            vfGraphFragment.update(fdom);
+        }
+        if(startFragment != null){
+            startFragment.updateFdomData(fdom);
+        }
     }
 
     public void updateAccelerationData(float[] maxAcceleration) {
         if(acceleroGraphFragment != null) {
             acceleroGraphFragment.update(maxAcceleration);
         }
+        if(startFragment != null){
+            startFragment.updateAccelarationData(maxAcceleration);
+        }
     }
 
+    public void updateVelocityData(float[] maxVelocity) {
+        if(startFragment != null){
+            startFragment.updateVelocityData(maxVelocity);
+        }
+    }
     /**
      * Adapter to handle different fragments
      */
@@ -83,6 +98,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 1: return new AcceleroGraphFragment();
                 case 2: return new FdomGraphFragment();
                 case 3: return new VelocityGraphFragment();
+                case 4: return new VfGraphFragment();
             }
             return null;
         }
@@ -109,6 +125,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 3:
                     velocityGraphFragment = (VelocityGraphFragment) createdFragment;
                     break;
+                case 4:
+                    vfGraphFragment = (VfGraphFragment) createdFragment;
             }
             return createdFragment;
         }
