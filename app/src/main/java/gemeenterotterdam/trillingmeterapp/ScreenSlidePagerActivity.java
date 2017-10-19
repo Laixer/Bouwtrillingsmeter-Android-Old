@@ -38,7 +38,6 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         acceleroMeter = new AcceleroMeter(this);
-        //gyroscopeMeter = new GyroscopeMeter(this);
     }
 
     @Override
@@ -83,6 +82,14 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             startFragment.updateVelocityData(maxVelocity);
         }
     }
+
+    public void updateFrequencyData(int[] maxFrequency) {
+        if(startFragment != null){
+            startFragment.updateFrequencyData(maxFrequency);
+        }
+    }
+
+
     /**
      * Adapter to handle different fragments
      */
