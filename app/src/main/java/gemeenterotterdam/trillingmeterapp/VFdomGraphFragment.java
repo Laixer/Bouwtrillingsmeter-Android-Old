@@ -32,6 +32,7 @@ import gemeenterotterdam.trillingmeterapp.R;
 public class VFdomGraphFragment extends Fragment {
     GraphView graphView;
     LinearLayout layout;
+    final int maxSize = 5;
     ArrayList<DataPoint> xSerie = new ArrayList<DataPoint>();
     ArrayList<DataPoint> ySerie = new ArrayList<DataPoint>();
     ArrayList<DataPoint> zSerie = new ArrayList<DataPoint>();
@@ -82,6 +83,12 @@ public class VFdomGraphFragment extends Fragment {
         Collections.sort(ySerie, comp);
         Collections.sort(zSerie, comp);
 
+
+        if(xSerie.size() > maxSize){
+            xSerie.remove(0);
+            ySerie.remove(0);
+            zSerie.remove(0);
+        }
 
         //arraylist to array
         DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);

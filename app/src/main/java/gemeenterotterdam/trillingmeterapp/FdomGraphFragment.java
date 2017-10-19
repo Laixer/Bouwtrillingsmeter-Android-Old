@@ -30,7 +30,7 @@ public class FdomGraphFragment extends Fragment {
     GraphView graphView;
     LinearLayout layout;
     int i = 0;
-    final int maxSize = 20;
+    final int maxSize = 5;
     ArrayList<DataPoint> xSerie = new ArrayList<DataPoint>();
     ArrayList<DataPoint> ySerie = new ArrayList<DataPoint>();
     ArrayList<DataPoint> zSerie = new ArrayList<DataPoint>();

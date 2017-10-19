@@ -120,6 +120,12 @@ public class Calculator {
      */
 
     public static ArrayList<DataPoint<int[]>> FFT(ArrayList<DataPoint<Date>> velocities){
+        Log.d("VELOCITYSIZE", velocities.size()+"");
+        if(velocities.size() == 0){
+            ArrayList<DataPoint<int[]>> data = new ArrayList<DataPoint<int[]>>();
+            data.add(new DataPoint<int[]>(new int[]{0,0,0},new float[]{0f,0f,0f}));
+            return data;
+        }
         int maxIX = 0;
         float maxMagX = 0;
         int maxIY = 0;
@@ -130,7 +136,6 @@ public class Calculator {
         float[] yvelo = new float[velocities.size()];
         float[] zvelo = new float[velocities.size()];
         ArrayList<DataPoint<int[]>> datapoints = new ArrayList<>();
-        
         FloatFFT_1D fft = new FloatFFT_1D(velocities.size());
 
 
