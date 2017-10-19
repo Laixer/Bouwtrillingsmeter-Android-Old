@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import android.support.v4.app.Fragment;
@@ -28,6 +30,10 @@ public class FdomGraphFragment extends Fragment {
     GraphView graphView;
     LinearLayout layout;
     int i = 0;
+    final int maxSize = 20;
+    ArrayList<DataPoint> xSerie = new ArrayList<DataPoint>();
+    ArrayList<DataPoint> ySerie = new ArrayList<DataPoint>();
+    ArrayList<DataPoint> zSerie = new ArrayList<DataPoint>();
 
 
     @Override
@@ -58,10 +64,26 @@ public class FdomGraphFragment extends Fragment {
         LineGraphSeries<DataPoint> serieX = (LineGraphSeries<DataPoint>)graphView.getSeries().get(0);
         LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
         LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
-        serieX.appendData(new DataPoint(i, fdom.frequencies[0]), true, 40);
-        serieY.appendData(new DataPoint(i, fdom.frequencies[1]), true, 40);
-        serieZ.appendData(new DataPoint(i, fdom.frequencies[2]), true, 40);
+
+        xSerie.add(new DataPoint(i, fdom.frequencies[0]));
+        ySerie.add(new DataPoint(i, fdom.frequencies[1]));
+        zSerie.add(new DataPoint(i, fdom.frequencies[2]));
+
+        if(xSerie.size() > maxSize){
+            xSerie.remove(0);
+            ySerie.remove(0);
+            zSerie.remove(0);
+        }
+
+        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
+        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
+        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
+
+        serieX.resetData(xPoints);
+        serieY.resetData(yPoints);
+        serieZ.resetData(zPoints);
         i++;
+
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);

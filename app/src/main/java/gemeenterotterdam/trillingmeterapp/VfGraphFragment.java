@@ -33,7 +33,6 @@ public class VfGraphFragment extends Fragment {
     LinearLayout layout;
     int i = 0;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -72,6 +71,7 @@ public class VfGraphFragment extends Fragment {
             serieY.appendData(new DataPoint(dp.domain[1], dp.values[1]), true, 50);
             serieZ.appendData(new DataPoint(dp.domain[2], dp.values[2]), true, 50);
         }
+
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMaxX(50);
         graphView.addSeries(serieX);

@@ -130,7 +130,9 @@ public class Calculator {
         float[] yvelo = new float[velocities.size()];
         float[] zvelo = new float[velocities.size()];
         ArrayList<DataPoint<int[]>> datapoints = new ArrayList<>();
+        
         FloatFFT_1D fft = new FloatFFT_1D(velocities.size());
+
 
         for (int i = 0; i < velocities.size(); i++){
             xvelo[i] = velocities.get(i).values[0];

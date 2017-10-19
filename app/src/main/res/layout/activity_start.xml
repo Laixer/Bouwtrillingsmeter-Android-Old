@@ -225,9 +225,10 @@
         android:id="@+id/xFdom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/zAcc"
-        android:layout_alignTop="@+id/textXfdom"
-        android:text="XYVALUE" />
+        android:text="XYVALUE"
+        android:layout_alignBaseline="@+id/textXfdom"
+        android:layout_alignBottom="@+id/textXfdom"
+        android:layout_toEndOf="@+id/textVelocity" />
 
     <TextView
         android:id="@+id/textYfdom"
@@ -242,9 +243,10 @@
         android:id="@+id/yFdom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/xFreq"
-        android:layout_alignTop="@+id/textYfdom"
-        android:text="YVALUE" />
+        android:text="YVALUE"
+        android:layout_alignBaseline="@+id/textYfdom"
+        android:layout_alignBottom="@+id/textYfdom"
+        android:layout_toEndOf="@+id/textFdom" />
 
     <TextView
         android:id="@+id/textZfdom"
@@ -258,25 +260,28 @@
         android:id="@+id/zFdom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/yFdom"
-        android:layout_alignTop="@+id/textZfdom"
-        android:text="ZVALUE" />
+        android:text="ZVALUE"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textFdom"
+        android:layout_marginStart="17dp" />
 
     <TextView
         android:id="@+id/exceedX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/xFdom"
-        android:text="XEXCEED" />
+        android:text="XEXCEED"
+        android:layout_alignBaseline="@+id/xFdom"
+        android:layout_alignBottom="@+id/xFdom"
+        android:layout_toEndOf="@+id/xFreq" />
 
     <TextView
         android:id="@+id/exceedY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/yFdom"
-        android:text="YEXCEED" />
+        android:text="YEXCEED"
+        android:layout_alignBaseline="@+id/yFdom"
+        android:layout_alignBottom="@+id/yFdom"
+        android:layout_toEndOf="@+id/yAcc" />
 
     <TextView
         android:id="@+id/exceedZ"
