@@ -32,7 +32,6 @@ public class FdomGraphFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("FDOMAANGEMAAKT", "FDOMAANGEMAAKT");
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_fdomgraph, container, false);
         graphView = new GraphView(this.getActivity());
@@ -63,8 +62,8 @@ public class FdomGraphFragment extends Fragment {
         serieY.appendData(new DataPoint(i, fdom.frequencies[1]), true, 40);
         serieZ.appendData(new DataPoint(i, fdom.frequencies[2]), true, 40);
         i++;
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
+       // graphView.addSeries(serieX);
+       // graphView.addSeries(serieY);
+      //  graphView.addSeries(serieZ);
     }
 }

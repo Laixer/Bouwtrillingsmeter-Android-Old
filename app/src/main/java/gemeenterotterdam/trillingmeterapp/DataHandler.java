@@ -59,8 +59,6 @@ public class DataHandler {
      * @param data data retrieved for 1 second by Sensor
      */
     private Tuple performCalculations(ArrayList<DataPoint<Date>> data) {
-
-        ArrayList<DataPoint<Date>> differentiatedData                   = Calculator.differentiate(data);
         float[] maxAcceleration                                         = Calculator.MaxValueInArray(data);
         ArrayList<DataPoint<int[]>> fftAcceleration                     = Calculator.FFT(data);
         int[] maxFrequency                                              = Calculator.MaxFrequency(fftAcceleration);

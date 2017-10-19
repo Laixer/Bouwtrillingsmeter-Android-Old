@@ -21,7 +21,7 @@ import static gemeenterotterdam.trillingmeterapp.R.id.add;
  */
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 6;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private StartFragment startFragment;
@@ -29,6 +29,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
     private AcceleroGraphFragment acceleroGraphFragment;
     private VelocityGraphFragment velocityGraphFragment;
     private VfGraphFragment vfGraphFragment;
+    private VFdomGraphFragment vfdomGraphFragment;
     private AcceleroMeter acceleroMeter;
     private GyroscopeMeter gyroscopeMeter;
 
@@ -65,6 +66,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         }
         if(startFragment != null){
             startFragment.updateFdomData(fdom);
+        }
+
+        if(vfdomGraphFragment != null){
+            vfdomGraphFragment.update(fdom);
         }
     }
 
@@ -111,6 +116,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 2: return new FdomGraphFragment();
                 case 3: return new VelocityGraphFragment();
                 case 4: return new VfGraphFragment();
+                case 5: return new VFdomGraphFragment();
             }
             return null;
         }
@@ -139,6 +145,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                     break;
                 case 4:
                     vfGraphFragment = (VfGraphFragment) createdFragment;
+                    break;
+                case 5:
+                    vfdomGraphFragment = (VFdomGraphFragment) createdFragment;
+                    break;
             }
             return createdFragment;
         }
