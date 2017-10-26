@@ -29,29 +29,13 @@ import gemeenterotterdam.trillingmeterapp.R;
  * Fragment for Fdom graph
  */
 
-public class VFdomGraphFragment extends Fragment {
-    GraphView graphView;
-    LinearLayout layout;
-    final int maxSize = 5;
-    ArrayList<DataPoint> xSerie = new ArrayList<DataPoint>();
-    ArrayList<DataPoint> ySerie = new ArrayList<DataPoint>();
-    ArrayList<DataPoint> zSerie = new ArrayList<DataPoint>();
+public class VFdomGraphFragment extends GraphFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_vfdomgraph, container, false);
-        graphView = new GraphView(this.getActivity());
-        PointsGraphSeries<DataPoint> seriesX = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> seriesY = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> seriesZ = new PointsGraphSeries<>(new DataPoint[] {});
-        seriesX.setColor(Color.RED);
-        seriesY.setColor(Color.YELLOW);
-        seriesZ.setColor(Color.BLUE);
-        graphView.addSeries(seriesX);
-        graphView.addSeries(seriesY);
-        graphView.addSeries(seriesZ);
-
+        setMainSettings(GraphType.PointGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFdomgraph);
         layout.addView(graphView);
         return rootView;

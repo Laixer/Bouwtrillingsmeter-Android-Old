@@ -26,31 +26,18 @@ import gemeenterotterdam.trillingmeterapp.R;
  * Fragment for accelerometer graph
  */
 
-public class AcceleroGraphFragment extends Fragment {
-    GraphView graphView;
-    LinearLayout layout;
+public class AcceleroGraphFragment extends GraphFragment {
+
     int i = 0;
-    final int maxSize = 5;
-    ArrayList<DataPoint> xSerie = new ArrayList<DataPoint>();
-    ArrayList<DataPoint> ySerie = new ArrayList<DataPoint>();
-    ArrayList<DataPoint> zSerie = new ArrayList<DataPoint>();
+    //final int maxSize = 5;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_accelerograph, container, false);
-        graphView = new GraphView(this.getActivity());
-        LineGraphSeries<DataPoint> seriesX = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> seriesY = new LineGraphSeries<>(new DataPoint[] {});
-        LineGraphSeries<DataPoint> seriesZ = new LineGraphSeries<>(new DataPoint[] {});
-        seriesX.setColor(Color.RED);
-        seriesY.setColor(Color.YELLOW);
-        seriesZ.setColor(Color.BLUE);
-        graphView.addSeries(seriesX);
-        graphView.addSeries(seriesY);
-        graphView.addSeries(seriesZ);
-
+        setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
         layout.addView(graphView);
         return rootView;

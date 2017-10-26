@@ -28,26 +28,14 @@ import gemeenterotterdam.trillingmeterapp.R;
  * Fragment for velocity graph
  */
 
-public class VfGraphFragment extends Fragment {
-    GraphView graphView;
-    LinearLayout layout;
+public class VfGraphFragment extends GraphFragment {
     int i = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_vfgraph, container, false);
-        graphView = new GraphView(this.getActivity());
-        PointsGraphSeries<DataPoint> seriesX = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> seriesY = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> seriesZ = new PointsGraphSeries<>(new DataPoint[] {});
-        seriesX.setColor(Color.RED);
-        seriesY.setColor(Color.YELLOW);
-        seriesZ.setColor(Color.BLUE);
-        graphView.addSeries(seriesX);
-        graphView.addSeries(seriesY);
-        graphView.addSeries(seriesZ);
-
+        setMainSettings(GraphType.PointGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFgraph);
         layout.addView(graphView);
         return rootView;
@@ -66,6 +54,7 @@ public class VfGraphFragment extends Fragment {
         serieX.setColor(Color.RED);
         serieY.setColor(Color.YELLOW);
         serieZ.setColor(Color.BLUE);
+
         for (gemeenterotterdam.trillingmeterapp.DataPoint<int[]> dp : velocityFrequency){
             serieX.appendData(new DataPoint(dp.domain[0], dp.values[0]), true, 50);
             serieY.appendData(new DataPoint(dp.domain[1], dp.values[1]), true, 50);
