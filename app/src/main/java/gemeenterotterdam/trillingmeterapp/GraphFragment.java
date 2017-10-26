@@ -13,14 +13,16 @@ import java.util.ArrayList;
 import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGraphSeries;
 
 /**
- * Created by User on 26-10-2017.
+ * Created by Marijn Otte on 26-10-2017.
+ * Abstract class for different Graph Fragments
  */
 
 public abstract class GraphFragment extends Fragment {
+    //maxSize: amount of datapoints stored in memory of graph
     protected final int maxSize = 5;
-    protected ArrayList<com.jjoe64.graphview.series.DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
-    protected ArrayList<com.jjoe64.graphview.series.DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
-    protected ArrayList<com.jjoe64.graphview.series.DataPoint> zSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
+    protected ArrayList<DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
+    protected ArrayList<DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
+    protected ArrayList<DataPoint> zSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected GraphView graphView;
     protected LinearLayout layout;
 
@@ -28,6 +30,7 @@ public abstract class GraphFragment extends Fragment {
         LineGraphSeries, PointGraphSeries
     }
 
+    //set layout of graph
     protected void setMainSettings(GraphType gt){
         graphView = new GraphView(this.getActivity());
         switch(gt){

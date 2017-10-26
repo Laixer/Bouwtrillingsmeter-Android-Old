@@ -120,7 +120,6 @@ public class Calculator {
      */
 
     public static ArrayList<DataPoint<int[]>> FFT(ArrayList<DataPoint<Date>> velocities){
-        Log.d("VELOCITYSIZE", velocities.size()+"");
         if(velocities.size() == 0){
             ArrayList<DataPoint<int[]>> data = new ArrayList<DataPoint<int[]>>();
             data.add(new DataPoint<int[]>(new int[]{0,0,0},new float[]{0f,0f,0f}));
