@@ -100,7 +100,12 @@ public class StartFragment extends Fragment {
         Yfrequency.setText(freqData[1]+"");
         Zfrequency.setText(freqData[2]+"");
     }
+    /**
+     * Update values of dominant frequency textViews every second
+     * @param fdomData values of dominant Frequency in x, y, z direction,
+     * boolean if limitvalue exceeded
 
+     */
     public void updateFdomData(Fdom fdomData){
         Xfdom.setText(fdomData.frequencies[0]+"");
         Yfdom.setText(fdomData.frequencies[1]+"");

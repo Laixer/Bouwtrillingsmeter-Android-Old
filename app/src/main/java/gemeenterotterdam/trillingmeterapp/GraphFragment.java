@@ -20,6 +20,7 @@ import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGr
 public abstract class GraphFragment extends Fragment {
     //maxSize: amount of datapoints stored in memory of graph
     protected final int maxSize = 5;
+    protected int i = 0;
     protected ArrayList<DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> zSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
@@ -57,5 +58,47 @@ public abstract class GraphFragment extends Fragment {
                 graphView.addSeries(seriesPointsZ);
                 break;
         }
+    }
+
+    protected void cleanupSeries(LineGraphSeries<DataPoint> serieX, LineGraphSeries<DataPoint> serieY, LineGraphSeries<DataPoint> serieZ ){
+        if(xSerie.size() > maxSize){
+            xSerie.remove(0);
+            ySerie.remove(0);
+            zSerie.remove(0);
+        }
+
+        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
+        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
+        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
+
+        serieX.resetData(xPoints);
+        serieY.resetData(yPoints);
+        serieZ.resetData(zPoints);
+
+        i++;
+        graphView.addSeries(serieX);
+        graphView.addSeries(serieY);
+        graphView.addSeries(serieZ);
+    }
+
+    protected void cleanupSeries(PointsGraphSeries<DataPoint> serieX, PointsGraphSeries<DataPoint> serieY, PointsGraphSeries<DataPoint> serieZ ){
+        if(xSerie.size() > maxSize){
+            xSerie.remove(0);
+            ySerie.remove(0);
+            zSerie.remove(0);
+        }
+
+        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
+        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
+        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
+
+        serieX.resetData(xPoints);
+        serieY.resetData(yPoints);
+        serieZ.resetData(zPoints);
+
+        i++;
+        graphView.addSeries(serieX);
+        graphView.addSeries(serieY);
+        graphView.addSeries(serieZ);
     }
 }

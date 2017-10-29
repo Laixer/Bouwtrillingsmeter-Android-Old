@@ -29,7 +29,6 @@ import gemeenterotterdam.trillingmeterapp.R;
  */
 
 public class VfGraphFragment extends GraphFragment {
-    int i = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,4 +66,6 @@ public class VfGraphFragment extends GraphFragment {
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);
     }
+
+
 }

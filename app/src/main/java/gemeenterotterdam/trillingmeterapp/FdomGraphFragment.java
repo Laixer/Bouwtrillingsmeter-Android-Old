@@ -27,8 +27,6 @@ import gemeenterotterdam.trillingmeterapp.R;
  */
 
 public class FdomGraphFragment extends GraphFragment {
-   private int i = 0;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -52,23 +50,6 @@ public class FdomGraphFragment extends GraphFragment {
         ySerie.add(new DataPoint(i, fdom.frequencies[1]));
         zSerie.add(new DataPoint(i, fdom.frequencies[2]));
 
-        if(xSerie.size() > maxSize){
-            xSerie.remove(0);
-            ySerie.remove(0);
-            zSerie.remove(0);
-        }
-
-        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
-        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
-        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
-
-        serieX.resetData(xPoints);
-        serieY.resetData(yPoints);
-        serieZ.resetData(zPoints);
-        i++;
-
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
+        cleanupSeries(serieX, serieY, serieZ);
     }
 }

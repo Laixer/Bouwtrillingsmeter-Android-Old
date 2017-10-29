@@ -28,11 +28,6 @@ import gemeenterotterdam.trillingmeterapp.R;
 
 public class AcceleroGraphFragment extends GraphFragment {
 
-    int i = 0;
-    //final int maxSize = 5;
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -52,28 +47,11 @@ public class AcceleroGraphFragment extends GraphFragment {
         LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
         LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
 
-
         xSerie.add(new DataPoint(i, acceleration[0]));
         ySerie.add(new DataPoint(i, acceleration[1]));
         zSerie.add(new DataPoint(i, acceleration[2]));
 
-        if(xSerie.size() > maxSize){
-            xSerie.remove(0);
-            ySerie.remove(0);
-            zSerie.remove(0);
-        }
 
-        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
-        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
-        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
-
-        serieX.resetData(xPoints);
-        serieY.resetData(yPoints);
-        serieZ.resetData(zPoints);
-
-        i++;
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
+        cleanupSeries(serieX, serieY, serieZ);
     }
 }

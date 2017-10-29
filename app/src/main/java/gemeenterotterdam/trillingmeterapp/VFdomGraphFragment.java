@@ -67,23 +67,6 @@ public class VFdomGraphFragment extends GraphFragment {
         Collections.sort(ySerie, comp);
         Collections.sort(zSerie, comp);
 
-
-        if(xSerie.size() > maxSize){
-            xSerie.remove(0);
-            ySerie.remove(0);
-            zSerie.remove(0);
-        }
-
-        //arraylist to array
-        DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
-        DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
-        DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
-
-        serieX.resetData(xPoints);
-        serieY.resetData(yPoints);
-        serieZ.resetData(zPoints);
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
+        cleanupSeries(serieX, serieY, serieZ);
     }
 }
