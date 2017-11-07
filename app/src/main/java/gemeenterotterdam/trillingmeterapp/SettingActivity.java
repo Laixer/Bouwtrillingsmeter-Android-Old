@@ -54,5 +54,23 @@ public class SettingActivity extends Activity {
         //position 0: category = 1, position 1: category = 2,  position 2: category = 3
         category = categoryPosition + 1;
         LimitValueTable.category = category;
+
+        //yv: margin on limit value.
+        // Predefined, more information in documentation
+
+        int vibrationIntensityPosition = vibrationSpinner.getFirstVisiblePosition();
+        float yt = 0f;
+        switch (vibrationIntensityPosition) {
+            case 0:
+                yt = 1.0f;
+                break;
+            case 1:
+                yt = 1.5f;
+                break;
+            case 2:
+                yt = 2.5f;
+                break;
+        }
+        Calculator.yt = yt;
     }
 }

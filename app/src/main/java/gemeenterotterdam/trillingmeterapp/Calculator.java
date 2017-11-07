@@ -15,9 +15,12 @@ import java.util.Hashtable;
 
 public class Calculator {
     /**
-     * yv: margin on speeddata. Each speed value calculated is multiplied with this value
+     * yv: margin on speeddata. Each speed value calculated is multiplied with this value.
+     * yt: margin on limitvalue.
+     * Determined by input of user on question:
      */
     private static final float yv = 1.6f;
+    public static float yt = 0f;
 
     /**
      *  Calculates velocity from acceleration data
@@ -234,6 +237,13 @@ public class Calculator {
              float xLimit = findLimit(xfreq);
              float yLimit = findLimit(yfreq);
              float zLimit = findLimit(zfreq);
+
+             //add margin
+             xLimit = xLimit / yt;
+             yLimit = yLimit / yt;
+             zLimit = zLimit / yt;
+
+             Log.d("YVvalue", yt+"");
              limitValues.add(new DataPoint<int[]>(new int[]{xfreq, yfreq, zfreq}, new float[]{xLimit, yLimit, zLimit}));
          }
          return limitValues;
