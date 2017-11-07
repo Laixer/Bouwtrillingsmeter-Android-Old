@@ -112,11 +112,11 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch(position){
                 case 0: return new StartFragment();
-               // case 1: return new AcceleroGraphFragment();
-              //  case 2: return new FdomGraphFragment();
-              //  case 3: return new VelocityGraphFragment();
-              //  case 4: return new VfGraphFragment();
-             //   case 5: return new VFdomGraphFragment();
+                case 1: return new AcceleroGraphFragment();
+                case 2: return new FdomGraphFragment();
+                case 3: return new VelocityGraphFragment();
+                case 4: return new VfGraphFragment();
+                case 5: return new VFdomGraphFragment();
             }
             return null;
         }
@@ -134,7 +134,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 0:
                     startFragment = (StartFragment) createdFragment;
                     break;
-               /* case 1:
+                case 1:
                     acceleroGraphFragment = (AcceleroGraphFragment) createdFragment;
                     break;
 
@@ -151,7 +151,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 5:
                     vfdomGraphFragment = (VFdomGraphFragment) createdFragment;
                     break;
-                    */
+
             }
             return createdFragment;
         }

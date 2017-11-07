@@ -1,5 +1,7 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ public class LimitValueTable {
     public static int category = 0;
 
     public static float getLimitValue(int freq) {
+        Log.d("Category:", category+"");
         switch(category){
             case 1:
                 if(freq < 15){
