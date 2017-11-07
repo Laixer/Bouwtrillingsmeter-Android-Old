@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/typetrilling"
+        android:padding="10pt"
+        android:layout_gravity="center" />
+
+    <Spinner
+        android:id="@+id/categorychoise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10pt"
+        android:layout_gravity="center">
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vibrationsensitive"
+        android:padding="10pt"
+        android:layout_gravity="center"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:padding="10pt">
+        <RadioButton
+            android:id="@+id/radio_sensitive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Yes"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:id="@+id/radio_notsensitive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/No"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vibrationsource"
+        android:layout_gravity="center"
+        android:padding="10pt"/>
+
+    <Spinner
+        android:id="@+id/vibrationsourcechoise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10pt"
+        android:layout_gravity="center">
+    </Spinner>
+
+
+
+</LinearLayout>
