@@ -243,7 +243,6 @@ public class Calculator {
              yLimit = yLimit / yt;
              zLimit = zLimit / yt;
 
-             Log.d("YVvalue", yt+"");
              limitValues.add(new DataPoint<int[]>(new int[]{xfreq, yfreq, zfreq}, new float[]{xLimit, yLimit, zLimit}));
          }
          return limitValues;

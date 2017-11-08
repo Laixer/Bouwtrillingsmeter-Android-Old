@@ -3,10 +3,14 @@ package gemeenterotterdam.trillingmeterapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 /**
@@ -17,6 +21,7 @@ import android.widget.Spinner;
 public class SettingActivity extends Activity {
     private Spinner categorySpinner;
     private Spinner vibrationSpinner;
+    private boolean sensitive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +34,28 @@ public class SettingActivity extends Activity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
 
-        //Choise for type of vibration
-        vibrationSpinner = (Spinner) findViewById(R.id.vibrationsourcechoise);
+        // radiobutton for choise whether building is sensitive to vibrations
+        // boolean value saved in "sensitive" when radiobutton clicked
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radiogroup_sensitive);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                          @Override
+                                          public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                                              View button = findViewById(i);
+                                              int index = radioGroup.indexOfChild(button);
+                                              switch(index){
+                                                  case 0: sensitive = true;
+                                                      break;
+                                                  case 1:
+                                                      sensitive = false;
+                                                      break;
+                                              }
+                                          }
+
+
+        });
+
+                //Choise for type of vibration
+                vibrationSpinner = (Spinner) findViewById(R.id.vibrationsourcechoise);
         ArrayAdapter <CharSequence> vibrationAdapter = ArrayAdapter.createFromResource(this,
                 R.array.vibrationsourcechoise, android.R.layout.simple_spinner_item);
         vibrationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
