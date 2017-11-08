@@ -80,22 +80,29 @@ public class SettingActivity extends Activity {
         category = categoryPosition + 1;
         LimitValueTable.category = category;
 
-        //yv: margin on limit value.
-        // Predefined, more information in documentation
-
         int vibrationIntensityPosition = vibrationSpinner.getFirstVisiblePosition();
-        float yt = 0f;
-        switch (vibrationIntensityPosition) {
-            case 0:
-                yt = 1.0f;
-                break;
-            case 1:
-                yt = 1.5f;
-                break;
-            case 2:
-                yt = 2.5f;
-                break;
+
+        //if building is sensitive, yt = 1 and yv = 1. Otherwise yt dependent on intensity of vibration and yv 1.6.
+        //For more information; see documentation
+        float yt = 1f;
+        float yv = 1f;
+        if(!sensitive) {
+            yv = 1.6f;
+            switch (vibrationIntensityPosition) {
+                case 0:
+                    yt = 1.0f;
+                    break;
+                case 1:
+                    yt = 1.5f;
+                    break;
+                case 2:
+                    yt = 2.5f;
+                    break;
+            }
         }
+        Log.d("valYV", yv+"");
+        Log.d("valYT", yt+"");
         Calculator.yt = yt;
+        Calculator.yv = yv;
     }
 }

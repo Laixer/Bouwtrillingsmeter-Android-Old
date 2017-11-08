@@ -19,7 +19,7 @@ public class Calculator {
      * yt: margin on limitvalue.
      * Determined by input of user on question:
      */
-    private static final float yv = 1.6f;
+    public static float yv = 0f;
     public static float yt = 0f;
 
     /**

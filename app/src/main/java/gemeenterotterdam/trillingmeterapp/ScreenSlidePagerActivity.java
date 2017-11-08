@@ -21,7 +21,7 @@ import static gemeenterotterdam.trillingmeterapp.R.id.add;
  */
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 6;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private StartFragment startFragment;
@@ -151,7 +151,6 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
                 case 5:
                     vfdomGraphFragment = (VFdomGraphFragment) createdFragment;
                     break;
-
             }
             return createdFragment;
         }
