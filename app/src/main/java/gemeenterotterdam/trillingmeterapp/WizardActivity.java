@@ -6,9 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 /**
@@ -19,6 +23,8 @@ public class WizardActivity extends FragmentActivity {
    private int currentQuestionId;
     private TextView questionView;
     private boolean finalQuestion;
+    private int categoryIndex;
+    private int intensityIndex;
 
 
 
@@ -50,14 +56,13 @@ public class WizardActivity extends FragmentActivity {
     }
 
     public void nextQuestion(int currentQuestion, boolean answerYes){
-        if(finalQuestion){
-            this.finish();
-        }
+
         int nextQuestion = 0;
         switch(currentQuestion){
             case 0:
                 if(answerYes){
                     nextQuestion = 6;
+                    categoryIndex = 3;
                 }
                 else{
                     nextQuestion = 1;
@@ -72,6 +77,12 @@ public class WizardActivity extends FragmentActivity {
                 }
                 break;
             case 2:
+                if(answerYes){
+                    categoryIndex = 2;
+                }
+                else{
+                    categoryIndex = 0;
+                }
                 nextQuestion = 6;
                 break;
             case 3:
@@ -83,11 +94,19 @@ public class WizardActivity extends FragmentActivity {
                 }
                 break;
             case 4:
+                if(answerYes){
+                    categoryIndex = 2;
+                }
+                else{
+                    categoryIndex = 1;
+                }
                 nextQuestion = 6;
                 break;
             case 5:
                 if(answerYes){
-                    nextQuestion = 6;
+                    finalQuestion = true;
+                    categoryIndex = -1;
+
                 }
                 else{
                     nextQuestion = 4;
@@ -95,6 +114,7 @@ public class WizardActivity extends FragmentActivity {
                 break;
             case 6:
                 if(answerYes){
+                    intensityIndex = 0;
                     finalQuestion = true;
                 }
                 else{
@@ -102,7 +122,8 @@ public class WizardActivity extends FragmentActivity {
                 }
                 break;
             case 7:
-                if(answerYes == true){
+                if(answerYes){
+                    intensityIndex = 1;
                     finalQuestion = true;
                 }
                 else{
@@ -110,10 +131,19 @@ public class WizardActivity extends FragmentActivity {
                 }
                 break;
             case 8:
+                if(answerYes) {
+                    intensityIndex = 2;
+                }
+                else{
+                    intensityIndex = -1;
+                }
                 finalQuestion = true;
                 break;
         }
 
+        if(finalQuestion) {
+            this.finish();
+        }
         questionView.setText(getQuestion(nextQuestion));
         currentQuestionId = nextQuestion;
     }
@@ -136,6 +166,8 @@ public class WizardActivity extends FragmentActivity {
                 return getResources().getString(R.string.q6);
             case 7:
                 return getResources().getString(R.string.q7);
+            case 8:
+                return getResources().getString(R.string.q8);
         }
         return "No Question";
     }
