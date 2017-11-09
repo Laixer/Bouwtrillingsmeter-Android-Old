@@ -192,6 +192,69 @@ public class LimitValueTable {
                 else{
                     return 10f;
                 }
+
+            case 4:
+                if(freq < 10){
+                    return 31.83f;
+                }
+                else if(freq < 15){
+                    return 15.92f;
+                }
+                else if(freq < 20){
+                    return 10.61f;
+                }
+                else if(freq < 25){
+                    return 7.96f;
+                }
+                else if(freq < 30){
+                    return 6.37f;
+                }
+                else if(freq < 35){
+                    return 5.31f;
+                }
+                else if(freq < 40){
+                    return 4.55f;
+                }
+                else if(freq < 45){
+                    return 3.98f;
+                }
+                else if(freq < 50){
+                    return 3.54f;
+                }
+                else if(freq < 55){
+                    return 3.18f;
+                }
+                else if(freq < 60){
+                    return 2.89f;
+                }
+                else if(freq < 65){
+                    return 2.65f;
+                }
+                else if(freq < 70){
+                    return 2.45f;
+                }
+                else if(freq < 75){
+                    return 2.27f;
+                }
+                else if(freq < 80){
+                    return 2.12f;
+                }
+                else if(freq < 85){
+                    return 1.99f;
+                }
+                else if(freq < 90) {
+                    return 1.87f;
+                }
+                else if(freq < 95) {
+                    return 1.77f;
+                }
+                else if(freq < 100){
+                    return 1.68f;
+                }
+                else{
+                    return 1.59f;
+                }
+
         }
         return 0.0f;
     }

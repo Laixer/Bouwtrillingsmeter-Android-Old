@@ -23,32 +23,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/vibrationsensitive"
-        android:padding="10pt"
-        android:layout_gravity="center"/>
-
-    <RadioGroup
-        android:id="@+id/radiogroup_sensitive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:padding="10pt">
-        <RadioButton
-            android:id="@+id/radio_sensitive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Yes"/>
-        <RadioButton
-            android:id="@+id/radio_notsensitive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/No" />
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/vibrationsource"
         android:layout_gravity="center"
         android:padding="10pt"/>
@@ -69,6 +43,13 @@
         android:text="@string/confirm"
         />
 
+    <Button
+        android:id = "@+id/helpsettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/help"
+        />
 
 
 

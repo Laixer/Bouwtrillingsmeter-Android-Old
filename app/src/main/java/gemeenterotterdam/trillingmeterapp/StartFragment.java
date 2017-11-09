@@ -44,9 +44,6 @@ public class StartFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.activity_start, container, false);
 
-
-
-
         Xvelocity = (TextView) rootView.findViewById(R.id.xVel);
         Yvelocity = (TextView) rootView.findViewById(R.id.yVel);
         Zvelocity = (TextView) rootView.findViewById(R.id.zVel);
