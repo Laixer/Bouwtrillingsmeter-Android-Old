@@ -185,7 +185,6 @@ public class Calculator {
      * @return float maximum speed multiplied with margin
      */
     public static float[] addMargin(float[] data){
-        Log.d("YV", yv+"");
         data[0] *= yv;
         data[1] *= yv;
         data[2] *= yv;
