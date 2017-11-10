@@ -3,6 +3,7 @@ package gemeenterotterdam.trillingmeterapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.IdRes;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -21,6 +22,9 @@ import android.widget.Spinner;
 public class SettingActivity extends Activity {
     private Spinner categorySpinner;
     private Spinner vibrationSpinner;
+    private int categoryWizard;
+    private int vibrationWizard;
+    static final int WIZARD_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,31 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, WizardActivity.class);
-                SettingActivity.this.startActivity(intent);
+
+                SettingActivity.this.startActivityForResult(intent, WIZARD_REQUEST);
             }
         });
+    }
+
+    //If wizard completed, set selected item of spinner to result of wizard
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == WIZARD_REQUEST){
+            int categoryIndex = data.getIntExtra("categoryIndex", 0);
+            int vibrationIndex = data.getIntExtra("vibrationIndex", 0);
+            if(categoryIndex != -1){
+                categorySpinner.setSelection(categoryIndex);
+            }
+            else{
+                this.finish();
+            }
+            if(vibrationIndex != -1) {
+                vibrationSpinner.setSelection(vibrationIndex);
+            }
+            else{
+                this.finish();
+            }
+        }
     }
 
     //save data filled in by user in form

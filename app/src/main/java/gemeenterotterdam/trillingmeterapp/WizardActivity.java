@@ -1,6 +1,7 @@
 package gemeenterotterdam.trillingmeterapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,9 +18,10 @@ import android.widget.TextView;
 
 /**
  * Created by Marijn Otte on 9-11-2017.
+ * Wizard activity. Used if user does not know settings. Iterates through list of questions
  */
 
-public class WizardActivity extends FragmentActivity {
+public class WizardActivity extends Activity {
    private int currentQuestionId;
     private TextView questionView;
     private boolean finalQuestion;
@@ -55,6 +57,9 @@ public class WizardActivity extends FragmentActivity {
 
     }
 
+    //find next question, based on answer of current question
+    //meanwhile saves values of settings in categoryIndex and intensityIndex
+    //closes activity and sends data back to SettingActivity if answered question is final question of wizard
     public void nextQuestion(int currentQuestion, boolean answerYes){
 
         int nextQuestion = 0;
@@ -142,12 +147,14 @@ public class WizardActivity extends FragmentActivity {
         }
 
         if(finalQuestion) {
+            setResult(Activity.RESULT_OK,  new Intent().putExtra("categoryIndex", categoryIndex).putExtra("vibrationIndex", intensityIndex));
             this.finish();
         }
         questionView.setText(getQuestion(nextQuestion));
         currentQuestionId = nextQuestion;
     }
 
+    //find string of question to corresponding index
     public String getQuestion(int i){
         switch (i) {
             case 0:
