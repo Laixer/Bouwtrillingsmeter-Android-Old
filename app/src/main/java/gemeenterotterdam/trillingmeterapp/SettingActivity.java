@@ -22,6 +22,7 @@ import android.widget.Spinner;
 public class SettingActivity extends Activity {
     private Spinner categorySpinner;
     private Spinner vibrationSpinner;
+    private Spinner marginSpinner;
     private int categoryWizard;
     private int vibrationWizard;
     static final int WIZARD_REQUEST = 1;
@@ -44,6 +45,13 @@ public class SettingActivity extends Activity {
                 R.array.vibrationsourcechoise, android.R.layout.simple_spinner_item);
         vibrationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vibrationSpinner.setAdapter(vibrationAdapter);
+
+        //Choise for margin on or off
+        marginSpinner = (Spinner) findViewById(R.id.marginchoise);
+        ArrayAdapter <CharSequence> marginAdapter = ArrayAdapter.createFromResource(this,
+                R.array.marginchoise, android.R.layout.simple_spinner_item);
+        marginAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        marginSpinner.setAdapter(marginAdapter);
 
         //Button to confirm settings and go to measurement activity
         Button confirmButton = (Button) findViewById(R.id.savesettings);
@@ -98,11 +106,17 @@ public class SettingActivity extends Activity {
         LimitValueTable.category = category;
 
         int vibrationIntensityPosition = vibrationSpinner.getFirstVisiblePosition();
+        int marginPosition = marginSpinner.getFirstVisiblePosition();
 
         //if building is sensitive, yt = 1 and yv = 1. Otherwise yt dependent on intensity of vibration and yv 1.6.
         //For more information; see documentation
         float yt = 1f;
         float yv = 1.6f;
+
+        //if margin off yv = 1
+        if(marginPosition == 1){
+            yv = 1f;
+        }
         switch (vibrationIntensityPosition) {
                 case 0:
                     yt = 1.0f;

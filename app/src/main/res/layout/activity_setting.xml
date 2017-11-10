@@ -35,6 +35,21 @@
         android:layout_gravity="center">
     </Spinner>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/margin"
+        android:layout_gravity="center"
+        android:padding="10pt"/>
+
+    <Spinner
+        android:id="@+id/marginchoise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10pt"
+        android:layout_gravity="center">
+    </Spinner>
+
     <Button
         android:id = "@+id/savesettings"
         android:layout_width="wrap_content"
