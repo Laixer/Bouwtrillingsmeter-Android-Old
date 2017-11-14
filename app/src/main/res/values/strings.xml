@@ -41,4 +41,21 @@
     <string name="q7">Zijn de trillingen die u wilt meten afkomstig van een van onderstaande bronnen: \n - Weg of railverkeer \n - Heiwerkzaamheden \n - Het rijden van shovels of kranen op rupsen of luchtbanden</string>
     <string name="q8">Zijn de trillingen die u wilt meten afkomstig van een van onderstaannde bronnen: \n - Intrillen van damwanden \n - trilwalsen en trilplaten</string>
     <string name="margin">Margin aan of uit (yv)</string>
+    <string name="velocitygraph">Snelheidsdiagram</string>
+    <string name="velocitygraphxaxis">Tijd [uu:mm:ss]</string>
+    <string name="velocitygraphyaxis">Snelheid [mm/s]</string>
+    <string name="accelerationgraph">Versnellingsdiagram</string>
+    <string name="accelerationgraphxaxis">Tijd [uu:mm:ss]</string>
+    <string name="accelerationgraphyaxis">Versnelling [mm/s<sup><small>2</small></sup>]</string>
+    <string name="vfgraph">Frequentiespectrum</string>
+    <string name="vfxaxis">Frequentie [Hz]</string>
+    <string name="vfyaxis">Snelheid [mm/s]</string>
+    <string name="fdomgraph">Dominante Frequentie</string>
+    <string name="fdomgraphxaxis">Tijd [uu:mm:ss]</string>
+    <string name="fdomgraphyaxis">Frequentie [Hz]</string>
+    <string name="vfdomgraph">Snelheid - Frequentie diagram</string>
+    <string name="vfdomgraphxaxis">Frequentie [Hz]</string>
+    <string name="vfdomgraphyaxis">Snelheid [mm/s]</string>
+
+
 </resources>

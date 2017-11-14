@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,9 @@ public class AcceleroGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
         layout.addView(graphView);
+        graphView.setTitle(getResources().getString(R.string.accelerationgraph));
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.accelerationgraphxaxis));
+        graphView.getGridLabelRenderer().setVerticalAxisTitle(Html.fromHtml(getResources().getString(R.string.accelerationgraphyaxis)).toString());
         return rootView;
     }
 

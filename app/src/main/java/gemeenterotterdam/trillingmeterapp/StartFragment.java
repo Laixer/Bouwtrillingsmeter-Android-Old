@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +36,8 @@ public class StartFragment extends Fragment {
     private TextView Xexceed;
     private TextView Yexceed;
     private TextView Zexceed;
-    private DecimalFormat df42 = new DecimalFormat("##.##");
-    private DecimalFormat df31 = new DecimalFormat("##.#");
+    private DecimalFormat df42 = new DecimalFormat("00.00");
+    private DecimalFormat df31 = new DecimalFormat("00.0");
 
     // Automatically called when activity starts.
     //Starts accelerometer and gyroscopemeter.
@@ -76,9 +77,9 @@ public class StartFragment extends Fragment {
      *
      */
     public void updateVelocityData(float[] velData){
-        Xvelocity.setText(df42.format(velData[0])+"");
-        Yvelocity.setText(df42.format(velData[1])+"");
-        Zvelocity.setText(df42.format(velData[2])+"");
+        Xvelocity.setText(df42.format(velData[0])+" mm/s");
+        Yvelocity.setText(df42.format(velData[1])+" mm/s");
+        Zvelocity.setText(df42.format(velData[2])+" mm/s");
     }
 
     /**
@@ -86,9 +87,9 @@ public class StartFragment extends Fragment {
      * @param accData values of Acceleration in x, y, z direction
      */
     public void updateAccelarationData(float[] accData){
-        Xacceleration.setText(df42.format(accData[0])+"");
-        Yacceleration.setText(df42.format(accData[1])+"");
-        Zacceleration.setText(df42.format(accData[2])+"");
+        Xacceleration.setText(df42.format(accData[0])+" m/s2");
+        Yacceleration.setText(df42.format(accData[1])+" m/s2");
+        Zacceleration.setText(df42.format(accData[2])+" m/s2");
     }
 
     /**
@@ -96,9 +97,9 @@ public class StartFragment extends Fragment {
      * @param freqData values of Frequency in x, y, z direction
      */
     public void updateFrequencyData(int[] freqData){
-        Xfrequency.setText(df31.format(freqData[0])+"");
-        Yfrequency.setText(df31.format(freqData[1])+"");
-        Zfrequency.setText(df31.format(freqData[2])+"");
+        Xfrequency.setText(df31.format(freqData[0])+" Hz");
+        Yfrequency.setText(df31.format(freqData[1])+" Hz");
+        Zfrequency.setText(df31.format(freqData[2])+" Hz");
     }
     /**
      * Update values of dominant frequency textViews every second
@@ -107,9 +108,9 @@ public class StartFragment extends Fragment {
 
      */
     public void updateFdomData(Fdom fdomData){
-        Xfdom.setText(df31.format(fdomData.frequencies[0])+"");
-        Yfdom.setText(df31.format(fdomData.frequencies[1])+"");
-        Zfdom.setText(df31.format(fdomData.frequencies[2])+"");
+        Xfdom.setText(df31.format(fdomData.frequencies[0])+" Hz");
+        Yfdom.setText(df31.format(fdomData.frequencies[1])+" Hz");
+        Zfdom.setText(df31.format(fdomData.frequencies[2])+" Hz");
         Xexceed.setText(fdomData.exceed[0]+"");
         Yexceed.setText(fdomData.exceed[1]+"");
         Zexceed.setText(fdomData.exceed[2]+"");

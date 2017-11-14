@@ -38,6 +38,9 @@ public class VFdomGraphFragment extends GraphFragment {
         setMainSettings(GraphType.PointGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFdomgraph);
         layout.addView(graphView);
+        graphView.setTitle(getResources().getString(R.string.vfdomgraph));
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfdomgraphxaxis));
+        graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfdomgraphyaxis));
         return rootView;
     }
 

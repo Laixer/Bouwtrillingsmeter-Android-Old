@@ -34,6 +34,9 @@ public class FdomGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Fdomgraph);
         layout.addView(graphView);
+        graphView.setTitle(getResources().getString(R.string.fdomgraph));
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.fdomgraphxaxis));
+        graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.fdomgraphyaxis));
         return rootView;
     }
 

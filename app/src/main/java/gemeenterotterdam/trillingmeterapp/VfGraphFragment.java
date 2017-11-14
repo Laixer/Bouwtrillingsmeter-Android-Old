@@ -37,6 +37,9 @@ public class VfGraphFragment extends GraphFragment {
         setMainSettings(GraphType.PointGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFgraph);
         layout.addView(graphView);
+        graphView.setTitle(getResources().getString(R.string.vfgraph));
+        graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfxaxis));
+        graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfyaxis));
         return rootView;
     }
 
