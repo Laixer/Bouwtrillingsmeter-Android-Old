@@ -45,6 +45,7 @@ public abstract class GraphFragment extends Fragment {
                 graphView.addSeries(seriesLineX);
                 graphView.addSeries(seriesLineY);
                 graphView.addSeries(seriesLineZ);
+                graphView.getLegendRenderer().setVisible(true);
                 break;
             case PointGraphSeries:
                 PointsGraphSeries<DataPoint> seriesPointsX = new PointsGraphSeries<>(new DataPoint[] {});
@@ -56,6 +57,7 @@ public abstract class GraphFragment extends Fragment {
                 graphView.addSeries(seriesPointsX);
                 graphView.addSeries(seriesPointsY);
                 graphView.addSeries(seriesPointsZ);
+                graphView.getLegendRenderer().setVisible(true);
                 break;
         }
     }
@@ -66,7 +68,6 @@ public abstract class GraphFragment extends Fragment {
             ySerie.remove(0);
             zSerie.remove(0);
         }
-
         DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
         DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
         DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
@@ -76,6 +77,10 @@ public abstract class GraphFragment extends Fragment {
         serieZ.resetData(zPoints);
 
         i++;
+        serieX.setTitle("X");
+        serieY.setTitle("Y");
+        serieZ.setTitle("Z");
+
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);
@@ -97,6 +102,9 @@ public abstract class GraphFragment extends Fragment {
         serieZ.resetData(zPoints);
 
         i++;
+        serieX.setTitle("X");
+        serieY.setTitle("Y");
+        serieZ.setTitle("Z");
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);

@@ -56,6 +56,9 @@
     <string name="vfdomgraph">Snelheid - Frequentie diagram</string>
     <string name="vfdomgraphxaxis">Frequentie [Hz]</string>
     <string name="vfdomgraphyaxis">Snelheid [mm/s]</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="z">Z</string>
 
 
 </resources>

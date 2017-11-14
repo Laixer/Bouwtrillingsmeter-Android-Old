@@ -54,8 +54,6 @@ public class AcceleroGraphFragment extends GraphFragment {
         xSerie.add(new DataPoint(i, acceleration[0]));
         ySerie.add(new DataPoint(i, acceleration[1]));
         zSerie.add(new DataPoint(i, acceleration[2]));
-
-
         cleanupSeries(serieX, serieY, serieZ);
     }
 }
