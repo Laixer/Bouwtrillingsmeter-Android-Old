@@ -39,6 +39,9 @@ public class AcceleroGraphFragment extends GraphFragment {
         graphView.setTitle(getResources().getString(R.string.accelerationgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.accelerationgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(Html.fromHtml(getResources().getString(R.string.accelerationgraphyaxis)).toString());
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getViewport().setMaxY(10);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
         return rootView;
     }
 
