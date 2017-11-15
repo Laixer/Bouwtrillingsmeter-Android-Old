@@ -34,7 +34,7 @@ public class VfGraphFragment extends GraphFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_vfgraph, container, false);
-        setMainSettings(GraphType.PointGraphSeries);
+        setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFgraph);
         layout.addView(graphView);
         graphView.setTitle(getResources().getString(R.string.vfgraph));
@@ -50,9 +50,9 @@ public class VfGraphFragment extends GraphFragment {
      */
     public void update(ArrayList<gemeenterotterdam.trillingmeterapp.DataPoint<int[]>> velocityFrequency){
         graphView.removeAllSeries();
-        PointsGraphSeries<DataPoint> serieX = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> serieY = new PointsGraphSeries<>(new DataPoint[] {});
-        PointsGraphSeries<DataPoint> serieZ = new PointsGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> serieX = new LineGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> serieY = new LineGraphSeries<>(new DataPoint[] {});
+        LineGraphSeries<DataPoint> serieZ = new LineGraphSeries<>(new DataPoint[] {});
         serieX.setColor(Color.RED);
         serieY.setColor(Color.YELLOW);
         serieZ.setColor(Color.BLUE);
