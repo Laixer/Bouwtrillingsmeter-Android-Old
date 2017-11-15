@@ -41,6 +41,8 @@ public class VFdomGraphFragment extends GraphFragment {
         graphView.setTitle(getResources().getString(R.string.vfdomgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfdomgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfdomgraphyaxis));
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setMaxX(50);
         return rootView;
     }
 
