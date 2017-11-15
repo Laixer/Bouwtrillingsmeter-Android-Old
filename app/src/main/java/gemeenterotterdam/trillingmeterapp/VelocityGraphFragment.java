@@ -37,6 +37,9 @@ public class VelocityGraphFragment extends GraphFragment {
         graphView.setTitle(getResources().getString(R.string.velocitygraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.velocitygraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.velocitygraphyaxis));
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getViewport().setMaxY(4);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
         return rootView;
     }
 
@@ -51,7 +54,7 @@ public class VelocityGraphFragment extends GraphFragment {
         xSerie.add(new DataPoint(i, fdom.velocities[0]));
         ySerie.add(new DataPoint(i, fdom.velocities[1]));
         zSerie.add(new DataPoint(i, fdom.velocities[2]));
-
+        graphView.getViewport().setMaxY(Math.max(4, graphView.getViewport().getMaxY(true)));
         cleanupSeries(serieX, serieY, serieZ);
     }
 }

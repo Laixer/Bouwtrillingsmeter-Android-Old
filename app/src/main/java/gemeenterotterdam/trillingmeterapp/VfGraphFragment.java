@@ -40,6 +40,10 @@ public class VfGraphFragment extends GraphFragment {
         graphView.setTitle(getResources().getString(R.string.vfgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfyaxis));
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setMaxX(50);
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getViewport().setMaxY(4);
         return rootView;
     }
 
@@ -63,14 +67,14 @@ public class VfGraphFragment extends GraphFragment {
             serieZ.appendData(new DataPoint(dp.domain[2], dp.values[2]), true, 50);
         }
 
-        graphView.getViewport().setXAxisBoundsManual(true);
-        graphView.getViewport().setMaxX(50);
+
         serieX.setTitle("X");
         serieY.setTitle("Y");
         serieZ.setTitle("Z");
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);
+        graphView.getViewport().setMaxY(Math.max(4, graphView.getViewport().getMaxY(true)));
     }
 
 
