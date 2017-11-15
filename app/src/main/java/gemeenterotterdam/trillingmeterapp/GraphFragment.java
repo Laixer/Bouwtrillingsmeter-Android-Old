@@ -83,11 +83,6 @@ public abstract class GraphFragment extends Fragment {
         serieZ.resetData(zPoints);
 
         i++;
-
-
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
     }
 
     protected void cleanupSeries(PointsGraphSeries<DataPoint> serieX, PointsGraphSeries<DataPoint> serieY, PointsGraphSeries<DataPoint> serieZ ){
@@ -106,8 +101,5 @@ public abstract class GraphFragment extends Fragment {
         serieZ.resetData(zPoints);
 
         i++;
-        graphView.addSeries(serieX);
-        graphView.addSeries(serieY);
-        graphView.addSeries(serieZ);
     }
 }
