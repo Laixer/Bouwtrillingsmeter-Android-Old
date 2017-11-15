@@ -37,6 +37,9 @@ public class FdomGraphFragment extends GraphFragment {
         graphView.setTitle(getResources().getString(R.string.fdomgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.fdomgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.fdomgraphyaxis));
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.getViewport().setMaxY(50);
+        graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
         return rootView;
     }
 

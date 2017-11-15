@@ -19,7 +19,7 @@ import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGr
 
 public abstract class GraphFragment extends Fragment {
     //maxSize: amount of datapoints stored in memory of graph
-    protected final int maxSize = 5;
+    protected final int maxSize = 10;
     protected int i = 0;
     protected ArrayList<DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
@@ -96,7 +96,7 @@ public abstract class GraphFragment extends Fragment {
             ySerie.remove(0);
             zSerie.remove(0);
         }
-        
+
         DataPoint[] xPoints = xSerie.toArray(new DataPoint[xSerie.size()]);
         DataPoint[] yPoints = ySerie.toArray(new DataPoint[ySerie.size()]);
         DataPoint[] zPoints = zSerie.toArray(new DataPoint[zSerie.size()]);
