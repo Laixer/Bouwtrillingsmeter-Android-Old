@@ -65,6 +65,9 @@ public class VfGraphFragment extends GraphFragment {
 
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMaxX(50);
+        serieX.setTitle("X");
+        serieY.setTitle("Y");
+        serieZ.setTitle("Z");
         graphView.addSeries(serieX);
         graphView.addSeries(serieY);
         graphView.addSeries(serieZ);
