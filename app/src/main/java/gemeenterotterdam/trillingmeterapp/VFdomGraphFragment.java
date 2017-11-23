@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import gemeenterotterdam.trillingmeterapp.R;
@@ -43,6 +44,7 @@ public class VFdomGraphFragment extends GraphFragment {
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfdomgraphyaxis));
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMaxX(50);
+        drawLimitLine();
         return rootView;
     }
 
@@ -73,5 +75,14 @@ public class VFdomGraphFragment extends GraphFragment {
         Collections.sort(zSerie, comp);
 
         cleanupSeries(serieX, serieY, serieZ);
+    }
+
+    public void drawLimitLine(){
+        LineGraphSeries<DataPoint> limitLine = new LineGraphSeries();
+        for(int i = 0; i < 50; i++){
+            float maxFreq = LimitValueTable.getLimitValue(i);
+            limitLine.appendData(new DataPoint(i,maxFreq),true, 100);
+        }
+        graphView.addSeries(limitLine);
     }
 }
