@@ -31,11 +31,11 @@
     </string-array>
     <string name="confirm">Opslaan</string>
     <string name="help">Ik weet het niet</string>
-    <string name="q0">Is het pand gefundeerd op houten funderingspalen of is het pand op staal gefundeerd?</string>
-    <string name="q1">Bestaat het pand waarin u wilt meten uit een betonnen bebouwing met metselwerk of gevelbekleding? Veel bebouwing na 1970 valt in deze categorie.</string>
-    <string name="q2">Betreft de bebouwing een monument of beschermd stadsgezicht?</string>
-    <string name="q3">Bestaat het pand waarin u wilt meten uit gemetselde wanden? Veel bebouwing van voor 1970 valt in deze categorie.</string>
-    <string name="q4">Verkeerd het pand in slechte bouwkundige staat? Zijn er bijvoorbeeld scheuren of kieren of andere schade aan het pand aanwezig?</string>
+    <string name="q9">Is het pand gefundeerd op houten funderingspalen of is het pand op staal gefundeerd?</string>
+    <string name="q0">Bestaat het pand waarin u wilt meten uit een betonnen bebouwing met metselwerk of gevelbekleding? Veel bebouwing na 1970 valt in deze categorie.</string>
+    <string name="q1">Betreft de bebouwing een monument of beschermd stadsgezicht?</string>
+    <string name="q2">Bestaat het pand waarin u wilt meten uit gemetselde wanden? Veel bebouwing van voor 1970 valt in deze categorie.</string>
+    <string name="q3">Verkeerd het pand in slechte bouwkundige staat? Zijn er bijvoorbeeld scheuren of kieren of andere schade aan het pand aanwezig?</string>
     <string name="q5">Bestaat het pand uit een stalenskelet, glas als gevelbekelding of hout? Bijvoorbeeld kantoor gebouwen met grote glazen gevels of houten schuurtjes.</string>
     <string name="q6">Zijn de trillingen die u wilt meten afkomstig van een van onderstaande bronnen: \n -explosies \n -botsingen \n - Het van hoogte legen van kraanbakken \n - Het met de kraan breken van beton \n - Storten van puin in container(bak)</string>
     <string name="q7">Zijn de trillingen die u wilt meten afkomstig van een van onderstaande bronnen: \n - Weg of railverkeer \n - Heiwerkzaamheden \n - Het rijden van shovels of kranen op rupsen of luchtbanden</string>

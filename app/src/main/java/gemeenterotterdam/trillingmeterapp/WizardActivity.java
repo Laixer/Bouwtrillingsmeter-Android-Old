@@ -66,55 +66,57 @@ public class WizardActivity extends Activity {
         switch(currentQuestion){
             case 0:
                 if(answerYes){
-                    nextQuestion = 6;
-                    categoryIndex = 3;
+                    nextQuestion = 1;
                 }
                 else{
-                    nextQuestion = 1;
+                    nextQuestion = 2;
                 }
                 break;
             case 1:
                 if(answerYes){
-                    nextQuestion = 2;
+                    nextQuestion = 6;
+                    categoryIndex = 2;
                 }
                 else{
-                    nextQuestion = 3;
+                    nextQuestion = 6;
+                    categoryIndex = 0;
                 }
                 break;
             case 2:
                 if(answerYes){
-                    categoryIndex = 2;
-                }
-                else{
-                    categoryIndex = 0;
-                }
-                nextQuestion = 6;
-                break;
-            case 3:
-                if(answerYes){
-                    nextQuestion = 4;
+                    nextQuestion = 3;
                 }
                 else{
                     nextQuestion = 5;
                 }
                 break;
-            case 4:
+            case 3:
                 if(answerYes){
+                    nextQuestion = 6;
                     categoryIndex = 2;
                 }
                 else{
-                    categoryIndex = 1;
+                    nextQuestion = 4;
                 }
-                nextQuestion = 6;
+                break;
+            case 4:
+                if(answerYes){
+                    categoryIndex = 2;
+                    nextQuestion = 6;
+                }
+                else{
+                    categoryIndex = 1;
+                    nextQuestion = 6;
+                }
                 break;
             case 5:
                 if(answerYes){
-                    finalQuestion = true;
+                    nextQuestion = 6;
                     categoryIndex = -1;
-
                 }
                 else{
-                    nextQuestion = 4;
+                    nextQuestion = 6;
+                    categoryIndex = -1;
                 }
                 break;
             case 6:
@@ -166,7 +168,7 @@ public class WizardActivity extends Activity {
             case 3:
                 return getResources().getString(R.string.q3);
             case 4:
-                return getResources().getString(R.string.q4);
+                return getResources().getString(R.string.q1);
             case 5:
                 return getResources().getString(R.string.q5);
             case 6:
@@ -175,6 +177,8 @@ public class WizardActivity extends Activity {
                 return getResources().getString(R.string.q7);
             case 8:
                 return getResources().getString(R.string.q8);
+            case 9:
+                return getResources().getString(R.string.q9);
         }
         return "No Question";
     }
