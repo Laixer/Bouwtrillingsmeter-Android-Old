@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import android.support.v4.app.Fragment;
@@ -17,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import gemeenterotterdam.trillingmeterapp.R;
@@ -42,6 +46,9 @@ public class AcceleroGraphFragment extends GraphFragment {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMaxY(10);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("hh:mm:ss")));
+        graphView.getGridLabelRenderer().setTextSize(20f);
+        graphView.getGridLabelRenderer().reloadStyles();
         return rootView;
     }
 
@@ -53,10 +60,9 @@ public class AcceleroGraphFragment extends GraphFragment {
         LineGraphSeries<DataPoint> serieX = (LineGraphSeries<DataPoint>)graphView.getSeries().get(0);
         LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
         LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
-
-        xSerie.add(new DataPoint(i, acceleration[0]));
-        ySerie.add(new DataPoint(i, acceleration[1]));
-        zSerie.add(new DataPoint(i, acceleration[2]));
+        xSerie.add(new DataPoint(time, acceleration[0]));
+        ySerie.add(new DataPoint(time, acceleration[1]));
+        zSerie.add(new DataPoint(time, acceleration[2]));
         graphView.getViewport().setMaxY(Math.max(10, graphView.getViewport().getMaxY(true)));
         cleanupSeries(serieX, serieY, serieZ);
 

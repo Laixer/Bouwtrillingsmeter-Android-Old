@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import gemeenterotterdam.trillingmeterapp.R;
@@ -40,6 +42,9 @@ public class FdomGraphFragment extends GraphFragment {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMaxY(50);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("hh:mm:ss")));
+        graphView.getGridLabelRenderer().setTextSize(20f);
+        graphView.getGridLabelRenderer().reloadStyles();
         return rootView;
     }
 
@@ -52,9 +57,9 @@ public class FdomGraphFragment extends GraphFragment {
         LineGraphSeries<DataPoint> serieY = (LineGraphSeries<DataPoint>)graphView.getSeries().get(1);
         LineGraphSeries<DataPoint> serieZ = (LineGraphSeries<DataPoint>)graphView.getSeries().get(2);
 
-        xSerie.add(new DataPoint(i, fdom.frequencies[0]));
-        ySerie.add(new DataPoint(i, fdom.frequencies[1]));
-        zSerie.add(new DataPoint(i, fdom.frequencies[2]));
+        xSerie.add(new DataPoint(time, fdom.frequencies[0]));
+        ySerie.add(new DataPoint(time, fdom.frequencies[1]));
+        zSerie.add(new DataPoint(time, fdom.frequencies[2]));
 
         cleanupSeries(serieX, serieY, serieZ);
     }

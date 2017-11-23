@@ -8,7 +8,11 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.*;
 import com.jjoe64.graphview.series.DataPoint;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGraphSeries;
 
@@ -19,13 +23,13 @@ import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGr
 
 public abstract class GraphFragment extends Fragment {
     //maxSize: amount of datapoints stored in memory of graph
-    protected final int maxSize = 10;
-    protected int i = 0;
+    protected final int maxSize = 20;
     protected ArrayList<DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> zSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected GraphView graphView;
     protected LinearLayout layout;
+    protected Date time;
 
     public enum GraphType{
         LineGraphSeries, PointGraphSeries
@@ -34,6 +38,7 @@ public abstract class GraphFragment extends Fragment {
     //set layout of graph
     protected void setMainSettings(GraphType gt){
         graphView = new GraphView(this.getActivity());
+        time = Calendar.getInstance().getTime();
         switch(gt){
             case LineGraphSeries:
                 LineGraphSeries<DataPoint> seriesLineX = new LineGraphSeries<>(new DataPoint[] {});
@@ -57,6 +62,10 @@ public abstract class GraphFragment extends Fragment {
                 seriesPointsX.setColor(Color.RED);
                 seriesPointsY.setColor(Color.YELLOW);
                 seriesPointsZ.setColor(Color.BLUE);
+                seriesPointsX.setSize(10);
+                seriesPointsY.setSize(10);
+                seriesPointsZ.setSize(10);
+
                 graphView.addSeries(seriesPointsX);
                 graphView.addSeries(seriesPointsY);
                 graphView.addSeries(seriesPointsZ);
@@ -81,8 +90,7 @@ public abstract class GraphFragment extends Fragment {
         serieX.resetData(xPoints);
         serieY.resetData(yPoints);
         serieZ.resetData(zPoints);
-
-        i++;
+        time = Calendar.getInstance().getTime();
     }
 
     protected void cleanupSeries(PointsGraphSeries<DataPoint> serieX, PointsGraphSeries<DataPoint> serieY, PointsGraphSeries<DataPoint> serieZ ){
@@ -99,7 +107,6 @@ public abstract class GraphFragment extends Fragment {
         serieX.resetData(xPoints);
         serieY.resetData(yPoints);
         serieZ.resetData(zPoints);
-
-        i++;
+        time = Calendar.getInstance().getTime();
     }
 }
