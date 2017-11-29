@@ -77,6 +77,9 @@ public class VFdomGraphFragment extends GraphFragment {
         cleanupSeries(serieX, serieY, serieZ);
     }
 
+    /**
+     * Draws line with limit values, obtained from LimitValueTable
+     */
     public void drawLimitLine(){
         LineGraphSeries<DataPoint> limitLine = new LineGraphSeries();
         for(int i = 0; i < 50; i++){

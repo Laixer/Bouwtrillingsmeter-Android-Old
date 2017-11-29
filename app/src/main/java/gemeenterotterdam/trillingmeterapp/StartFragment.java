@@ -87,9 +87,9 @@ public class StartFragment extends Fragment {
      * @param accData values of Acceleration in x, y, z direction
      */
     public void updateAccelarationData(float[] accData){
-        Xacceleration.setText(df42.format(accData[0])+" m/s2");
-        Yacceleration.setText(df42.format(accData[1])+" m/s2");
-        Zacceleration.setText(df42.format(accData[2])+" m/s2");
+        Xacceleration.setText(df42.format(accData[0])+" mm/s2");
+        Yacceleration.setText(df42.format(accData[1])+" mm/s2");
+        Zacceleration.setText(df42.format(accData[2])+" mm/s2");
     }
 
     /**

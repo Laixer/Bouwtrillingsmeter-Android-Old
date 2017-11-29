@@ -111,13 +111,12 @@ public class WizardActivity extends Activity {
                 break;
             case 5:
                 if(answerYes){
-                    nextQuestion = 6;
                     categoryIndex = -1;
                 }
                 else{
-                    nextQuestion = 6;
                     categoryIndex = -1;
                 }
+                finalQuestion = true;
                 break;
             case 6:
                 if(answerYes){

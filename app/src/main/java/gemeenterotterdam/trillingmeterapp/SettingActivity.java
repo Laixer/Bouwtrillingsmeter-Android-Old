@@ -108,7 +108,7 @@ public class SettingActivity extends Activity {
         int vibrationIntensityPosition = vibrationSpinner.getFirstVisiblePosition();
         int marginPosition = marginSpinner.getFirstVisiblePosition();
 
-        //if building is sensitive, yt = 1 and yv = 1. Otherwise yt dependent on intensity of vibration and yv 1.6.
+        //if building is sensitive (category = 4), yt = 1 and yv = 1. Otherwise yt dependent on intensity of vibration and yv 1.6.
         //For more information; see documentation
         float yt = 1f;
         float yv = 1.6f;
@@ -117,7 +117,14 @@ public class SettingActivity extends Activity {
         if(marginPosition == 1){
             yv = 1f;
         }
-        switch (vibrationIntensityPosition) {
+
+        if(category == 4){
+            yv = 1f;
+            yt = 1f;
+        }
+
+        else {
+            switch (vibrationIntensityPosition) {
                 case 0:
                     yt = 1.0f;
                     break;
@@ -127,8 +134,12 @@ public class SettingActivity extends Activity {
                 case 2:
                     yt = 2.5f;
                     break;
+            }
         }
         Calculator.yt = yt;
         Calculator.yv = yv;
+        Log.d("waardeYT", Calculator.yt+"");
+        Log.d("waardeYV", Calculator.yv+"");
+
     }
 }
