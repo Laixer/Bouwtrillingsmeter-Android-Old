@@ -9,7 +9,8 @@
     <string name="Xvalue">X:</string>
     <string name="Yvalue">Y:</string>
     <string name="Zvalue">Z:</string>
-    <string name="typetrilling">Type trilling</string>
+    <string name="typetrilling">[ Type Trilling ... ]</string>
+    <string name="category">[ Categorie ... ]</string>
     <string-array name="category">
         <item>Categorie 1</item>
         <item>Categorie 2</item>
@@ -40,7 +41,7 @@
     <string name="q6">Zijn de trillingen die u wilt meten afkomstig van een van onderstaande bronnen: \n -explosies \n -botsingen \n - Het van hoogte legen van kraanbakken \n - Het met de kraan breken van beton \n - Storten van puin in container(bak)</string>
     <string name="q7">Zijn de trillingen die u wilt meten afkomstig van een van onderstaande bronnen: \n - Weg of railverkeer \n - Heiwerkzaamheden \n - Het rijden van shovels of kranen op rupsen of luchtbanden</string>
     <string name="q8">Zijn de trillingen die u wilt meten afkomstig van een van onderstaannde bronnen: \n - Intrillen van damwanden \n - trilwalsen en trilplaten</string>
-    <string name="margin">Margin aan of uit (yv)</string>
+    <string name="margin">[ Margin ... ]</string>
     <string name="velocitygraph">Snelheidsdiagram</string>
     <string name="velocitygraphxaxis">Tijd [uu:mm:ss]</string>
     <string name="velocitygraphyaxis">Snelheid [mm/s]</string>
@@ -63,5 +64,5 @@
     <string name="buildingClassification">Er is geen kwalificatie voor het type bebouwing kunnen maken. U wordt terug naar het startscherm gestuurd.</string>
     <string name="noCategoryBuilding">Het pand kan niet worden in gedeeld in een categorie van de SBR-A richtlijn. U wordt terug naar het startscherm gestuurd.</string>
     <string name="wizardFinished">De instellingen zijn ingesteld.</string>
-
+    <string name="settings">Meetinstellingen</string>
 </resources>

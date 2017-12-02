@@ -3,17 +3,11 @@ package gemeenterotterdam.trillingmeterapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.support.annotation.IdRes;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,7 +16,7 @@ import android.widget.Toast;
  * Activity for user to set different settings based on properties of the building and vibration
  */
 
-public class SettingActivity extends Activity {
+public class SettingActivity extends AppCompatActivity {
     private Spinner categorySpinner;
     private Spinner vibrationSpinner;
     private Spinner marginSpinner;
@@ -35,27 +29,38 @@ public class SettingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+
         //Choise for category of building
         categorySpinner = (Spinner) findViewById(R.id.categorychoise);
-        ArrayAdapter <CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.category, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_item, getResources().getStringArray(R.array.category));
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_item);
+        categorySpinner.setAdapter(
+                new NothingSelectedSpinnerAdapter(
+                    categoryAdapter,
+                    R.layout.title_spinner_category,
+                    this));
 
         //Choise for type of vibration
         vibrationSpinner = (Spinner) findViewById(R.id.vibrationsourcechoise);
-        ArrayAdapter <CharSequence> vibrationAdapter = ArrayAdapter.createFromResource(this,
-                R.array.vibrationsourcechoise, android.R.layout.simple_spinner_item);
-        vibrationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        vibrationSpinner.setAdapter(vibrationAdapter);
+        ArrayAdapter<String> vibrationAdapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_item, getResources().getStringArray(R.array.vibrationsourcechoise));
+        vibrationAdapter.setDropDownViewResource(R.layout.spinner_item);
+        vibrationSpinner.setAdapter(
+                new NothingSelectedSpinnerAdapter(
+                        vibrationAdapter,
+                        R.layout.title_spinner_vibration,
+                        this));
 
         //Choise for margin on or off
         marginSpinner = (Spinner) findViewById(R.id.marginchoise);
-        ArrayAdapter <CharSequence> marginAdapter = ArrayAdapter.createFromResource(this,
-                R.array.marginchoise, android.R.layout.simple_spinner_item);
-        marginAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        marginSpinner.setAdapter(marginAdapter);
-
+        ArrayAdapter<String> marginAdapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_item, getResources().getStringArray(R.array.marginchoise));
+        marginAdapter.setDropDownViewResource(R.layout.spinner_item);
+        marginSpinner.setAdapter(new NothingSelectedSpinnerAdapter(
+                vibrationAdapter,
+                R.layout.title_spinner_margin,
+                this));
         //Button to confirm settings and go to measurement activity
         Button confirmButton = (Button) findViewById(R.id.savesettings);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +78,6 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, WizardActivity.class);
-
                 SettingActivity.this.startActivityForResult(intent, WIZARD_REQUEST);
             }
         });

@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
-    <TextView
-        android:id="@+id/textType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/typetrilling"
-        android:padding="10pt"
-        android:layout_gravity="center" />
 
     <Spinner
         android:id="@+id/categorychoise"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10pt"
-        android:layout_gravity="center">
+        android:paddingLeft="10pt"
+        android:paddingRight="10pt"
+        android:layout_gravity="left"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentEnd="true">
     </Spinner>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vibrationsource"
-        android:layout_gravity="center"
-        android:padding="10pt"/>
 
     <Spinner
         android:id="@+id/vibrationsourcechoise"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10pt"
-        android:layout_gravity="center">
+        android:paddingLeft="10pt"
+        android:paddingRight="10pt"
+        android:layout_gravity="left"
+        android:layout_below="@+id/categorychoise"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp">
     </Spinner>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/margin"
-        android:layout_gravity="center"
-        android:padding="10pt"/>
 
     <Spinner
-        android:id="@+id/marginchoise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10pt"
-        android:layout_gravity="center">
+            android:id="@+id/marginchoise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt"
+            android:layout_gravity="left"
+            android:layout_below="@+id/vibrationsourcechoise"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="18dp">
     </Spinner>
 
-    <Button
-        android:id = "@+id/savesettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/confirm"
-        />
+        <Button
+            android:id = "@+id/savesettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/confirm"
+            android:layout_marginTop="116dp"
+            android:layout_below="@+id/marginchoise"
+            android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id = "@+id/helpsettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/help"
-        />
+        <Button
+            android:id = "@+id/helpsettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/help"
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/savesettings"
+            android:layout_centerHorizontal="true" />
 
 
 
-</LinearLayout>
+</RelativeLayout>
