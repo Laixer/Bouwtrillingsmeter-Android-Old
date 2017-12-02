@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.support.annotation.IdRes;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by Marijn Otte on 29-10-2017.
@@ -82,20 +85,22 @@ public class SettingActivity extends Activity {
         if(requestCode == WIZARD_REQUEST){
             int categoryIndex = data.getIntExtra("categoryIndex", 0);
             int vibrationIndex = data.getIntExtra("vibrationIndex", 0);
-            if(categoryIndex != -1){
-                categorySpinner.setSelection(categoryIndex);
+            if(categoryIndex == -1 || vibrationIndex == -1){
+                this.finish();
+                String popupMessage = data.getStringExtra("popupMessage");
+                Toast.makeText(getApplicationContext(), popupMessage, Toast.LENGTH_LONG).show();
+
             }
             else{
-                this.finish();
-            }
-            if(vibrationIndex != -1) {
                 vibrationSpinner.setSelection(vibrationIndex);
-            }
-            else{
-                this.finish();
+                categorySpinner.setSelection(categoryIndex);
             }
         }
     }
+
+   // public void popupMessage(String message){
+     //   Snackbar snackbar =
+    //}
 
     //save data filled in by user in form
     public void saveData(){
@@ -138,8 +143,5 @@ public class SettingActivity extends Activity {
         }
         Calculator.yt = yt;
         Calculator.yv = yv;
-        Log.d("waardeYT", Calculator.yt+"");
-        Log.d("waardeYV", Calculator.yv+"");
-
     }
 }

@@ -63,6 +63,8 @@ public class WizardActivity extends Activity {
     public void nextQuestion(int currentQuestion, boolean answerYes){
 
         int nextQuestion = 0;
+        String popupMessage = getResources().getString(R.string.wizardFinished);
+
         switch(currentQuestion){
             case 0:
                 if(answerYes){
@@ -112,9 +114,11 @@ public class WizardActivity extends Activity {
             case 5:
                 if(answerYes){
                     categoryIndex = -1;
+                    popupMessage = getResources().getString(R.string.noCategoryBuilding);
                 }
                 else{
                     categoryIndex = -1;
+                    popupMessage = getResources().getString(R.string.buildingClassification);
                 }
                 finalQuestion = true;
                 break;
@@ -142,17 +146,20 @@ public class WizardActivity extends Activity {
                 }
                 else{
                     intensityIndex = -1;
+                    popupMessage = getResources().getString(R.string.vibrationClassification);
                 }
                 finalQuestion = true;
                 break;
         }
 
         if(finalQuestion) {
-            setResult(Activity.RESULT_OK,  new Intent().putExtra("categoryIndex", categoryIndex).putExtra("vibrationIndex", intensityIndex));
+            setResult(Activity.RESULT_OK,  new Intent().putExtra("categoryIndex", categoryIndex).putExtra("vibrationIndex", intensityIndex).putExtra("popupMessage", popupMessage));
             this.finish();
         }
-        questionView.setText(getQuestion(nextQuestion));
-        currentQuestionId = nextQuestion;
+        if(!finalQuestion) {
+            questionView.setText(getQuestion(nextQuestion));
+            currentQuestionId = nextQuestion;
+        }
     }
 
     //find string of question to corresponding index

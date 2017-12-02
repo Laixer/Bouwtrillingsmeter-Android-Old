@@ -59,6 +59,9 @@
     <string name="x">X</string>
     <string name="y">Y</string>
     <string name="z">Z</string>
-
+    <string name="vibrationClassification">Er is geen kwalificatie voor het type trilling kunnen maken. U wordt terug naar het startscherm gestuurd.</string>
+    <string name="buildingClassification">Er is geen kwalificatie voor het type bebouwing kunnen maken. U wordt terug naar het startscherm gestuurd.</string>
+    <string name="noCategoryBuilding">Het pand kan niet worden in gedeeld in een categorie van de SBR-A richtlijn. U wordt terug naar het startscherm gestuurd.</string>
+    <string name="wizardFinished">De instellingen zijn ingesteld.</string>
 
 </resources>

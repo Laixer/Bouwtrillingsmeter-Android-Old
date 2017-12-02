@@ -82,10 +82,14 @@ public class VFdomGraphFragment extends GraphFragment {
      */
     public void drawLimitLine(){
         LineGraphSeries<DataPoint> limitLine = new LineGraphSeries();
-        for(int i = 0; i < 50; i++){
-            float maxFreq = LimitValueTable.getLimitValue(i);
-            limitLine.appendData(new DataPoint(i,maxFreq),true, 100);
-        }
+        float maxFreq = LimitValueTable.getLimitValue(0);
+        limitLine.appendData(new DataPoint(0,maxFreq),true, 100);
+        maxFreq = LimitValueTable.getLimitValue(10);
+        limitLine.appendData(new DataPoint(10,maxFreq),true, 100);
+        maxFreq = LimitValueTable.getLimitValue(50);
+        limitLine.appendData(new DataPoint(50,maxFreq),true, 100);
+
+        limitLine.setTitle("Grenswaarde");
         graphView.addSeries(limitLine);
     }
 }
