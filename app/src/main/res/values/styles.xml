@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Rotterdam" parent="AppTheme" >
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:colorForeground">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@android:color/primary_text_light</item>
+        <item name="android:textColorPrimaryInverse">@android:color/darker_gray</item>
+    </style>
+
 </resources>
