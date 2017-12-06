@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,7 +59,7 @@ public class SettingActivity extends AppCompatActivity {
                 this, R.layout.spinner_item, getResources().getStringArray(R.array.marginchoise));
         marginAdapter.setDropDownViewResource(R.layout.spinner_item);
         marginSpinner.setAdapter(new NothingSelectedSpinnerAdapter(
-                vibrationAdapter,
+                marginAdapter,
                 R.layout.title_spinner_margin,
                 this));
         //Button to confirm settings and go to measurement activity
@@ -66,9 +67,10 @@ public class SettingActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SettingActivity.this, ScreenSlidePagerActivity.class);
-                SettingActivity.this.startActivity(intent);
-                saveData();
+                if(saveData()){
+                    Intent intent = new Intent(SettingActivity.this, ScreenSlidePagerActivity.class);
+                    SettingActivity.this.startActivity(intent);
+                };
             }
         });
 
@@ -107,15 +109,19 @@ public class SettingActivity extends AppCompatActivity {
     //}
 
     //save data filled in by user in form
-    public void saveData(){
+    public boolean saveData(){
         int categoryPosition = categorySpinner.getSelectedItemPosition();
-        int category;
-        //position 0: category = 1, position 1: category = 2,  position 2: category = 3
-        category = categoryPosition + 1;
-        LimitValueTable.category = category;
+        LimitValueTable.category = categoryPosition;
 
-        int vibrationIntensityPosition = vibrationSpinner.getFirstVisiblePosition();
-        int marginPosition = marginSpinner.getFirstVisiblePosition();
+        int vibrationIntensityPosition = vibrationSpinner.getSelectedItemPosition();
+        int marginPosition = marginSpinner.getSelectedItemPosition();
+
+        //message if one of settings is not filled in
+        if(categoryPosition == 0 || vibrationIntensityPosition == 0 || marginPosition == 0){
+            String popupMessage = "Vul alle velden in aub";
+            Toast.makeText(getApplicationContext(), popupMessage, Toast.LENGTH_LONG).show();
+            return false;
+        }
 
         //if building is sensitive (category = 4), yt = 1 and yv = 1. Otherwise yt dependent on intensity of vibration and yv 1.6.
         //For more information; see documentation
@@ -123,29 +129,30 @@ public class SettingActivity extends AppCompatActivity {
         float yv = 1.6f;
 
         //if margin off yv = 1
-        if(marginPosition == 1){
+        if(marginPosition == 2){
             yv = 1f;
         }
 
-        if(category == 4){
+        if(categoryPosition == 4){
             yv = 1f;
             yt = 1f;
         }
 
         else {
             switch (vibrationIntensityPosition) {
-                case 0:
+                case 1:
                     yt = 1.0f;
                     break;
-                case 1:
+                case 2:
                     yt = 1.5f;
                     break;
-                case 2:
+                case 3:
                     yt = 2.5f;
                     break;
             }
         }
         Calculator.yt = yt;
         Calculator.yv = yv;
+        return true;
     }
 }
