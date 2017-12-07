@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/confirm"
-            android:layout_marginTop="116dp"
-            android:layout_below="@+id/marginchoise"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/helpsettings"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -56,8 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/help"
-            android:layout_marginTop="23dp"
-            android:layout_below="@+id/savesettings"
+            android:layout_marginTop="146dp"
+            android:layout_below="@+id/marginchoise"
             android:layout_centerHorizontal="true" />
 
 

@@ -7,13 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import static gemeenterotterdam.trillingmeterapp.R.id.add;
 
 /**
  * Created by Marijn Otte on 28-9-2017.
@@ -24,7 +20,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
     private static final int NUM_PAGES = 6;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
-    private StartFragment startFragment;
+    private NumericalFragment startFragment;
     private FdomGraphFragment fdomGraphFragment;
     private AcceleroGraphFragment acceleroGraphFragment;
     private VelocityGraphFragment velocityGraphFragment;
@@ -111,7 +107,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             switch(position){
-                case 0: return new StartFragment();
+                case 0: return new NumericalFragment();
                 case 1: return new AcceleroGraphFragment();
                 case 2: return new FdomGraphFragment();
                 case 3: return new VelocityGraphFragment();
@@ -132,7 +128,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             // save the appropriate reference depending on position
             switch (position) {
                 case 0:
-                    startFragment = (StartFragment) createdFragment;
+                    startFragment = (NumericalFragment) createdFragment;
                     break;
                 case 1:
                     acceleroGraphFragment = (AcceleroGraphFragment) createdFragment;

@@ -65,4 +65,6 @@
     <string name="noCategoryBuilding">Het pand kan niet worden in gedeeld in een categorie van de SBR-A richtlijn. U wordt terug naar het startscherm gestuurd.</string>
     <string name="wizardFinished">De instellingen zijn ingesteld.</string>
     <string name="settings">Meetinstellingen</string>
+    <string name="start">Start</string>
+    <string name="logo">Logo Gemeente Rotterdam</string>
 </resources>

@@ -1,26 +1,20 @@
 package gemeenterotterdam.trillingmeterapp;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 /**
  * Created by Marijn Otte on 28-8-2017.
  * Fragment corresponding to gathering data from different sensors, showing data
  */
 
-public class StartFragment extends Fragment {
+public class NumericalFragment extends Fragment {
     private TextView Xvelocity;
     private TextView Yvelocity;
     private TextView Zvelocity;
@@ -46,7 +40,7 @@ public class StartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.activity_start, container, false);
+                R.layout.activity_numerical, container, false);
 
         Xvelocity = (TextView) rootView.findViewById(R.id.xVel);
         Yvelocity = (TextView) rootView.findViewById(R.id.yVel);

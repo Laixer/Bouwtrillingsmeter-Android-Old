@@ -42,7 +42,7 @@ public class VelocityGraphFragment extends GraphFragment {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMaxY(4);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("hh:mm:ss")));
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("HH:mm:ss")));
         graphView.getGridLabelRenderer().setTextSize(20f);
         graphView.getGridLabelRenderer().reloadStyles();
         return rootView;

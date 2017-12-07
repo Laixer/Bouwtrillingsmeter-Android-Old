@@ -28,9 +28,6 @@ public class WizardActivity extends Activity {
     private int categoryIndex;
     private int intensityIndex;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +60,15 @@ public class WizardActivity extends Activity {
     public void nextQuestion(int currentQuestion, boolean answerYes){
 
         int nextQuestion = 0;
+        final int nocategory = -1;
+        final int category1 = 1;
+        final int category2 = 2;
+        final int category3 = 3;
+        final int shortintensity = 1;
+        final int middleintensity = 2;
+        final int longintensity = 3;
+        final int nointensity = -1;
+
         String popupMessage = getResources().getString(R.string.wizardFinished);
 
         switch(currentQuestion){
@@ -77,11 +83,11 @@ public class WizardActivity extends Activity {
             case 1:
                 if(answerYes){
                     nextQuestion = 6;
-                    categoryIndex = 2;
+                    categoryIndex = category1;
                 }
                 else{
                     nextQuestion = 6;
-                    categoryIndex = 0;
+                    categoryIndex = category1;
                 }
                 break;
             case 2:
@@ -95,7 +101,7 @@ public class WizardActivity extends Activity {
             case 3:
                 if(answerYes){
                     nextQuestion = 6;
-                    categoryIndex = 2;
+                    categoryIndex = category3;
                 }
                 else{
                     nextQuestion = 4;
@@ -103,28 +109,28 @@ public class WizardActivity extends Activity {
                 break;
             case 4:
                 if(answerYes){
-                    categoryIndex = 2;
+                    categoryIndex = category3;
                     nextQuestion = 6;
                 }
                 else{
-                    categoryIndex = 1;
+                    categoryIndex = 2;
                     nextQuestion = 6;
                 }
                 break;
             case 5:
                 if(answerYes){
-                    categoryIndex = -1;
+                    categoryIndex = nocategory;
                     popupMessage = getResources().getString(R.string.noCategoryBuilding);
                 }
                 else{
-                    categoryIndex = -1;
+                    categoryIndex = nocategory;
                     popupMessage = getResources().getString(R.string.buildingClassification);
                 }
                 finalQuestion = true;
                 break;
             case 6:
                 if(answerYes){
-                    intensityIndex = 0;
+                    intensityIndex = shortintensity;
                     finalQuestion = true;
                 }
                 else{
@@ -133,7 +139,7 @@ public class WizardActivity extends Activity {
                 break;
             case 7:
                 if(answerYes){
-                    intensityIndex = 1;
+                    intensityIndex = middleintensity;
                     finalQuestion = true;
                 }
                 else{
@@ -142,10 +148,10 @@ public class WizardActivity extends Activity {
                 break;
             case 8:
                 if(answerYes) {
-                    intensityIndex = 2;
+                    intensityIndex = longintensity;
                 }
                 else{
-                    intensityIndex = -1;
+                    intensityIndex = nointensity;
                     popupMessage = getResources().getString(R.string.vibrationClassification);
                 }
                 finalQuestion = true;
@@ -156,7 +162,7 @@ public class WizardActivity extends Activity {
             setResult(Activity.RESULT_OK,  new Intent().putExtra("categoryIndex", categoryIndex).putExtra("vibrationIndex", intensityIndex).putExtra("popupMessage", popupMessage));
             this.finish();
         }
-        if(!finalQuestion) {
+        else {
             questionView.setText(getQuestion(nextQuestion));
             currentQuestionId = nextQuestion;
         }
