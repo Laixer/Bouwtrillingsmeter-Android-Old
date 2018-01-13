@@ -12,8 +12,9 @@
         android:paddingLeft="10pt"
         android:paddingRight="10pt"
         android:layout_gravity="left"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentEnd="true">
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp">
     </Spinner>
 
     <Spinner
@@ -23,9 +24,9 @@
         android:paddingLeft="10pt"
         android:paddingRight="10pt"
         android:layout_gravity="left"
-        android:layout_below="@+id/categorychoise"
+        android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp">
+        android:layout_marginTop="11dp">
     </Spinner>
 
     <Spinner
@@ -35,9 +36,9 @@
             android:paddingLeft="10pt"
             android:paddingRight="10pt"
             android:layout_gravity="left"
-            android:layout_below="@+id/vibrationsourcechoise"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="18dp">
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp">
     </Spinner>
 
         <Button
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/confirm"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="22dp"
             android:layout_below="@+id/helpsettings"
             android:layout_centerHorizontal="true" />
 
@@ -56,10 +57,45 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/help"
-            android:layout_marginTop="146dp"
+            android:layout_marginTop="39dp"
             android:layout_below="@+id/marginchoise"
             android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/typetrilling"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/categorychoise"
+        android:layout_alignStart="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/margin"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/vibrationsourcechoise"
+        android:layout_alignStart="@+id/textView2" />
 
 
 </RelativeLayout>

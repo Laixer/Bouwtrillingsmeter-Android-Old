@@ -24,6 +24,7 @@ import static gemeenterotterdam.trillingmeterapp.GraphFragment.GraphType.PointGr
 public abstract class GraphFragment extends Fragment {
     //maxSize: amount of datapoints stored in memory of graph
     protected final int maxSize = 20;
+    protected final int pointsMaxSize = 100;
     protected ArrayList<DataPoint> xSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> ySerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
     protected ArrayList<DataPoint> zSerie = new ArrayList<com.jjoe64.graphview.series.DataPoint>();
@@ -37,7 +38,15 @@ public abstract class GraphFragment extends Fragment {
 
     //set layout of graph
     protected void setMainSettings(GraphType gt){
+        int rotterdamGreen = Color.rgb(24,147,60);
         graphView = new GraphView(this.getActivity());
+        graphView.getLegendRenderer().setVisible(true);
+        graphView.getLegendRenderer().setBackgroundColor(rotterdamGreen);
+        graphView.getLegendRenderer().setTextColor(Color.WHITE);
+        graphView.getGridLabelRenderer().setHorizontalAxisTitleColor(rotterdamGreen);
+        graphView.getGridLabelRenderer().setVerticalAxisTitleColor(rotterdamGreen);
+        graphView.getGridLabelRenderer().setLabelsSpace(3);
+
         time = Calendar.getInstance().getTime();
         switch(gt){
             case LineGraphSeries:
@@ -45,38 +54,45 @@ public abstract class GraphFragment extends Fragment {
                 LineGraphSeries<DataPoint> seriesLineY = new LineGraphSeries<>(new DataPoint[] {});
                 LineGraphSeries<DataPoint> seriesLineZ = new LineGraphSeries<>(new DataPoint[] {});
                 seriesLineX.setColor(Color.RED);
-                seriesLineY.setColor(Color.YELLOW);
+                seriesLineY.setColor(Color.MAGENTA);
                 seriesLineZ.setColor(Color.BLUE);
                 graphView.addSeries(seriesLineX);
                 graphView.addSeries(seriesLineY);
                 graphView.addSeries(seriesLineZ);
-                graphView.getLegendRenderer().setVisible(true);
                 seriesLineX.setTitle("X");
                 seriesLineY.setTitle("Y");
                 seriesLineZ.setTitle("Z");
                 break;
+
             case PointGraphSeries:
                 PointsGraphSeries<DataPoint> seriesPointsX = new PointsGraphSeries<>(new DataPoint[] {});
                 PointsGraphSeries<DataPoint> seriesPointsY = new PointsGraphSeries<>(new DataPoint[] {});
                 PointsGraphSeries<DataPoint> seriesPointsZ = new PointsGraphSeries<>(new DataPoint[] {});
                 seriesPointsX.setColor(Color.RED);
-                seriesPointsY.setColor(Color.YELLOW);
+                seriesPointsY.setColor(Color.MAGENTA);
                 seriesPointsZ.setColor(Color.BLUE);
                 seriesPointsX.setSize(10);
                 seriesPointsY.setSize(10);
                 seriesPointsZ.setSize(10);
-
+                graphView.getLegendRenderer().setVisible(true);
                 graphView.addSeries(seriesPointsX);
                 graphView.addSeries(seriesPointsY);
                 graphView.addSeries(seriesPointsZ);
-                graphView.getLegendRenderer().setVisible(true);
                 seriesPointsX.setTitle("X");
                 seriesPointsY.setTitle("Y");
                 seriesPointsZ.setTitle("Z");
                 break;
         }
+
     }
 
+    /**
+     *
+     * @param serieX old graph serie in X direction
+     * @param serieY old graph serie in Y direction
+     * @param serieZ old graph serie in Z direction
+     *               when new data added to serie, cleanup old data so that application does not get slow
+     */
     protected void cleanupSeries(LineGraphSeries<DataPoint> serieX, LineGraphSeries<DataPoint> serieY, LineGraphSeries<DataPoint> serieZ ){
         if(xSerie.size() > maxSize){
             xSerie.remove(0);
@@ -93,8 +109,15 @@ public abstract class GraphFragment extends Fragment {
         time = Calendar.getInstance().getTime();
     }
 
+    /**
+     *
+     * @param serieX old graph serie in X direction
+     * @param serieY old graph serie in Y direction
+     * @param serieZ old graph serie in Z direction
+     *               when new data added to serie, cleanup old data so that application does not get slow
+     */
     protected void cleanupSeries(PointsGraphSeries<DataPoint> serieX, PointsGraphSeries<DataPoint> serieY, PointsGraphSeries<DataPoint> serieZ ){
-        if(xSerie.size() > maxSize){
+        if(xSerie.size() > pointsMaxSize){
             xSerie.remove(0);
             ySerie.remove(0);
             zSerie.remove(0);

@@ -19,13 +19,16 @@
         </activity>
         <activity
             android:name=".SettingActivity"
-            android:label="@string/settings">
+            android:label="@string/settings"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ScreenSlidePagerActivity">
         </activity>
         <activity
-            android:name=".WizardActivity">
+            android:name=".WizardActivity"
+            android:label="@string/wizard"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 </manifest>

@@ -9,15 +9,16 @@
         android:id="@+id/questionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical|end"
         android:background="@drawable/back"
         android:padding="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
-        android:textSize="10pt"
-        android:textColor="@android:color/white"/>
+        android:textSize="9pt"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="52dp"
+        android:layout_alignTop="@+id/textViewWizard"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/questionYes"
@@ -25,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="88dp"
-        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="89dp"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/questionNo" />
+        android:layout_alignStart="@+id/questionText"
+        android:layout_marginStart="44dp" />
 
     <Button
         android:id="@+id/questionNo"
@@ -40,4 +41,17 @@
         android:layout_alignBaseline="@+id/questionYes"
         android:layout_alignBottom="@+id/questionYes"
         android:layout_alignEnd="@+id/questionText" />
+
+    <TextView
+        android:id="@+id/textViewWizard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/questionNo"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

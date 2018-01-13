@@ -29,6 +29,11 @@ import gemeenterotterdam.trillingmeterapp.R;
  */
 
 public class FdomGraphFragment extends GraphFragment {
+
+    /**
+     * layout settings of fdomgraph
+     * @return fdomgraph view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -36,13 +41,12 @@ public class FdomGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Fdomgraph);
         layout.addView(graphView);
-        graphView.setTitle(getResources().getString(R.string.fdomgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.fdomgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.fdomgraphyaxis));
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMaxY(50);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("hh:mm:ss")));
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("HH:mm:ss")));
         graphView.getGridLabelRenderer().setTextSize(20f);
         graphView.getGridLabelRenderer().reloadStyles();
         return rootView;

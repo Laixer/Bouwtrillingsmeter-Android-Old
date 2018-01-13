@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Vector;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,11 @@ import gemeenterotterdam.trillingmeterapp.R;
 
 public class AcceleroGraphFragment extends GraphFragment {
 
+    /**
+     *
+     * layout settings of accelerometer graph
+     * @return view of acclerometer graph
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
@@ -40,13 +46,12 @@ public class AcceleroGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Accelerograph);
         layout.addView(graphView);
-        graphView.setTitle(getResources().getString(R.string.accelerationgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.accelerationgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(Html.fromHtml(getResources().getString(R.string.accelerationgraphyaxis)).toString());
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMaxY(10);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(10);
-        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("hh:mm:ss")));
+        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new SimpleDateFormat("HH:mm:ss")));
         graphView.getGridLabelRenderer().setTextSize(20f);
         graphView.getGridLabelRenderer().reloadStyles();
         return rootView;

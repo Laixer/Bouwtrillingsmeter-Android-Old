@@ -1,35 +1,38 @@
 package gemeenterotterdam.trillingmeterapp;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
 /**
  * Created by Marijn Otte on 28-8-2017.
- * Fragment corresponding to gathering data from different sensors, showing data
+ * Fragment corresponding to gathering data from different sensors, showing data in dashboard
  */
 
 public class NumericalFragment extends Fragment {
-    private TextView Xvelocity;
-    private TextView Yvelocity;
-    private TextView Zvelocity;
-    private TextView Xacceleration;
-    private TextView Yacceleration;
-    private TextView Zacceleration;
-    private TextView Xfrequency;
-    private TextView Yfrequency;
-    private TextView Zfrequency;
-    private TextView Xfdom;
-    private TextView Yfdom;
-    private TextView Zfdom;
-    private TextView Xexceed;
-    private TextView Yexceed;
-    private TextView Zexceed;
+    private TextView xVelocity;
+    private TextView yVelocity;
+    private TextView zVelocity;
+    private TextView xAcceleration;
+    private TextView yAcceleration;
+    private TextView zAcceleration;
+    private TextView xFrequency;
+    private TextView yFrequency;
+    private TextView zFrequency;
+    private TextView xFdom;
+    private TextView yFdom;
+    private TextView zFdom;
+    private TextView xExceed;
+    private TextView yExceed;
+    private TextView zExceed;
     private DecimalFormat df42 = new DecimalFormat("00.00");
     private DecimalFormat df31 = new DecimalFormat("00.0");
 
@@ -42,26 +45,36 @@ public class NumericalFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.activity_numerical, container, false);
 
-        Xvelocity = (TextView) rootView.findViewById(R.id.xVel);
-        Yvelocity = (TextView) rootView.findViewById(R.id.yVel);
-        Zvelocity = (TextView) rootView.findViewById(R.id.zVel);
+        xVelocity = (TextView) rootView.findViewById(R.id.xVel);
+        yVelocity = (TextView) rootView.findViewById(R.id.yVel);
+        zVelocity = (TextView) rootView.findViewById(R.id.zVel);
 
-        Xacceleration = (TextView) rootView.findViewById(R.id.xAcc);
-        Yacceleration = (TextView) rootView.findViewById(R.id.yAcc);
-        Zacceleration = (TextView) rootView.findViewById(R.id.zAcc);
+        xAcceleration = (TextView) rootView.findViewById(R.id.xAcc);
+        yAcceleration = (TextView) rootView.findViewById(R.id.yAcc);
+        zAcceleration = (TextView) rootView.findViewById(R.id.zAcc);
 
-        Xfrequency = (TextView) rootView.findViewById(R.id.xFreq);
-        Yfrequency = (TextView) rootView.findViewById(R.id.yFreq);
-        Zfrequency = (TextView) rootView.findViewById(R.id.zFreq);
+        xFrequency = (TextView) rootView.findViewById(R.id.xFreq);
+        yFrequency = (TextView) rootView.findViewById(R.id.yFreq);
+        zFrequency = (TextView) rootView.findViewById(R.id.zFreq);
 
-        Xfdom = (TextView) rootView.findViewById(R.id.xFdom);
-        Yfdom = (TextView) rootView.findViewById(R.id.yFdom);
-        Zfdom = (TextView) rootView.findViewById(R.id.zFdom);
+        xFdom = (TextView) rootView.findViewById(R.id.xFdom);
+        yFdom = (TextView) rootView.findViewById(R.id.yFdom);
+        zFdom = (TextView) rootView.findViewById(R.id.zFdom);
 
-        Xexceed = (TextView) rootView.findViewById(R.id.exceedX);
-        Yexceed = (TextView) rootView.findViewById(R.id.exceedY);
-        Zexceed = (TextView) rootView.findViewById(R.id.exceedZ);
+        xExceed = (TextView) rootView.findViewById(R.id.xExceed);
+        yExceed = (TextView) rootView.findViewById(R.id.yExceed);
+        zExceed = (TextView) rootView.findViewById(R.id.zExceed);
+
         return rootView;
+    }
+
+    /**
+     * This fragment only in portrait mode
+     */
+    @Override
+    public void onResume(){
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 
@@ -71,9 +84,9 @@ public class NumericalFragment extends Fragment {
      *
      */
     public void updateVelocityData(float[] velData){
-        Xvelocity.setText(df42.format(velData[0])+" mm/s");
-        Yvelocity.setText(df42.format(velData[1])+" mm/s");
-        Zvelocity.setText(df42.format(velData[2])+" mm/s");
+        xVelocity.setText(df42.format(velData[0])+" mm/s");
+        yVelocity.setText(df42.format(velData[1])+" mm/s");
+        zVelocity.setText(df42.format(velData[2])+" mm/s");
     }
 
     /**
@@ -81,9 +94,9 @@ public class NumericalFragment extends Fragment {
      * @param accData values of Acceleration in x, y, z direction
      */
     public void updateAccelarationData(float[] accData){
-        Xacceleration.setText(df42.format(accData[0])+" mm/s2");
-        Yacceleration.setText(df42.format(accData[1])+" mm/s2");
-        Zacceleration.setText(df42.format(accData[2])+" mm/s2");
+        xAcceleration.setText(df42.format(accData[0])+" mm/s2");
+        yAcceleration.setText(df42.format(accData[1])+" mm/s2");
+        zAcceleration.setText(df42.format(accData[2])+" mm/s2");
     }
 
     /**
@@ -91,9 +104,9 @@ public class NumericalFragment extends Fragment {
      * @param freqData values of Frequency in x, y, z direction
      */
     public void updateFrequencyData(int[] freqData){
-        Xfrequency.setText(df31.format(freqData[0])+" Hz");
-        Yfrequency.setText(df31.format(freqData[1])+" Hz");
-        Zfrequency.setText(df31.format(freqData[2])+" Hz");
+        xFrequency.setText(df31.format(freqData[0])+" Hz");
+        yFrequency.setText(df31.format(freqData[1])+" Hz");
+        zFrequency.setText(df31.format(freqData[2])+" Hz");
     }
     /**
      * Update values of dominant frequency textViews every second
@@ -102,12 +115,24 @@ public class NumericalFragment extends Fragment {
 
      */
     public void updateFdomData(Fdom fdomData){
-        Xfdom.setText(df31.format(fdomData.frequencies[0])+" Hz");
-        Yfdom.setText(df31.format(fdomData.frequencies[1])+" Hz");
-        Zfdom.setText(df31.format(fdomData.frequencies[2])+" Hz");
-        Xexceed.setText(fdomData.exceed[0]+"");
-        Yexceed.setText(fdomData.exceed[1]+"");
-        Zexceed.setText(fdomData.exceed[2]+"");
+        if(isAdded()) {
+            xFdom.setText(df31.format(fdomData.frequencies[0]) + " Hz");
+            yFdom.setText(df31.format(fdomData.frequencies[1]) + " Hz");
+            zFdom.setText(df31.format(fdomData.frequencies[2]) + " Hz");
+            xExceed.setText(ExceedtoString(fdomData.exceed[0]));
+            yExceed.setText(ExceedtoString(fdomData.exceed[1]));
+            zExceed.setText(ExceedtoString(fdomData.exceed[2]));
+        }
     }
 
+    /**
+     * @param tf boolean if value is exceeded
+     * @return string corresponding to boolean, shown to user
+     */
+    public String ExceedtoString(boolean tf){
+        if (tf) {
+            return getResources().getString(R.string.Yes);
+        }
+        return getResources().getString(R.string.No);
+    }
 }

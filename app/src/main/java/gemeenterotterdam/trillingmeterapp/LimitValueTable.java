@@ -13,6 +13,11 @@ public class LimitValueTable {
 
     public static int category = 0;
 
+    /**
+     *
+     * @param freq frequency of which the limit value wants to be known
+     * @return limit value (frequency)
+     */
     public static float getLimitValue(int freq) {
         switch(category){
             case 1:

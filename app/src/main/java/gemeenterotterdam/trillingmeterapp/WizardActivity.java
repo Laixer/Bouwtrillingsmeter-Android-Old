@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -21,9 +22,10 @@ import android.widget.TextView;
  * Wizard activity. Used if user does not know settings. Iterates through list of questions
  */
 
-public class WizardActivity extends Activity {
+public class WizardActivity extends AppCompatActivity {
    private int currentQuestionId;
     private TextView questionView;
+    private TextView typeView;
     private boolean finalQuestion;
     private int categoryIndex;
     private int intensityIndex;
@@ -34,8 +36,13 @@ public class WizardActivity extends Activity {
         setContentView(R.layout.activity_wizard);
 
         currentQuestionId = 0;
+
+        typeView = (TextView) findViewById(R.id.textViewWizard);
+
         questionView = (TextView) findViewById(R.id.questionText);
         questionView.setText(getQuestion(currentQuestionId));
+
+        setLabel(currentQuestionId);
 
         Button yesButton = (Button) findViewById(R.id.questionYes);
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +68,12 @@ public class WizardActivity extends Activity {
 
         int nextQuestion = 0;
         final int nocategory = -1;
-        final int category1 = 1;
-        final int category2 = 2;
-        final int category3 = 3;
-        final int shortintensity = 1;
-        final int middleintensity = 2;
-        final int longintensity = 3;
+        final int category1 = 0;
+        final int category2 = 1;
+        final int category3 = 2;
+        final int shortintensity = 0;
+        final int middleintensity = 1;
+        final int longintensity = 2;
         final int nointensity = -1;
 
         String popupMessage = getResources().getString(R.string.wizardFinished);
@@ -83,7 +90,7 @@ public class WizardActivity extends Activity {
             case 1:
                 if(answerYes){
                     nextQuestion = 6;
-                    categoryIndex = category1;
+                    categoryIndex = category3;
                 }
                 else{
                     nextQuestion = 6;
@@ -113,7 +120,7 @@ public class WizardActivity extends Activity {
                     nextQuestion = 6;
                 }
                 else{
-                    categoryIndex = 2;
+                    categoryIndex = category2;
                     nextQuestion = 6;
                 }
                 break;
@@ -163,8 +170,9 @@ public class WizardActivity extends Activity {
             this.finish();
         }
         else {
-            questionView.setText(getQuestion(nextQuestion));
             currentQuestionId = nextQuestion;
+            questionView.setText(getQuestion(currentQuestionId));
+            setLabel(currentQuestionId);
         }
     }
 
@@ -193,6 +201,16 @@ public class WizardActivity extends Activity {
                 return getResources().getString(R.string.q9);
         }
         return "No Question";
+    }
+
+    //label of question: category or vibration
+    public void setLabel(int question){
+        if(question <= 5){
+            typeView.setText(getResources().getText(R.string.wizardCategory));
+        }
+        else{
+            typeView.setText(getResources().getText(R.string.wizardVibration));
+        }
     }
 
 

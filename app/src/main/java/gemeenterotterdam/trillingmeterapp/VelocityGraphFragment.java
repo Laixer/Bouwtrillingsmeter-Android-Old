@@ -36,7 +36,6 @@ public class VelocityGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.Velocitygraph);
         layout.addView(graphView);
-        graphView.setTitle(getResources().getString(R.string.velocitygraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.velocitygraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.velocitygraphyaxis));
         graphView.getViewport().setYAxisBoundsManual(true);

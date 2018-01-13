@@ -24,6 +24,9 @@ public class GyroscopeMeter extends HardwareSensor {
     private static final int sensorType = Sensor.TYPE_ROTATION_VECTOR;
     private static final int sensorRate = SensorManager.SENSOR_DELAY_GAME;
 
+    /**
+     * constructor
+     */
     public GyroscopeMeter(ScreenSlidePagerActivity activity) {
         super(activity);
 

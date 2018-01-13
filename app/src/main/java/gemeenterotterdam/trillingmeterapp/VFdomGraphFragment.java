@@ -39,7 +39,6 @@ public class VFdomGraphFragment extends GraphFragment {
         setMainSettings(GraphType.PointGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFdomgraph);
         layout.addView(graphView);
-        graphView.setTitle(getResources().getString(R.string.vfdomgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfdomgraphxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfdomgraphyaxis));
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -82,12 +81,13 @@ public class VFdomGraphFragment extends GraphFragment {
      */
     public void drawLimitLine(){
         LineGraphSeries<DataPoint> limitLine = new LineGraphSeries();
+        limitLine.setColor(Color.rgb(150,0,0));
         float maxFreq = LimitValueTable.getLimitValue(0);
-        limitLine.appendData(new DataPoint(0,maxFreq),true, 100);
+        limitLine.appendData(new DataPoint(0,maxFreq),true, pointsMaxSize);
         maxFreq = LimitValueTable.getLimitValue(10);
-        limitLine.appendData(new DataPoint(10,maxFreq),true, 100);
+        limitLine.appendData(new DataPoint(10,maxFreq),true, pointsMaxSize);
         maxFreq = LimitValueTable.getLimitValue(50);
-        limitLine.appendData(new DataPoint(50,maxFreq),true, 100);
+        limitLine.appendData(new DataPoint(50,maxFreq),true, pointsMaxSize);
 
         limitLine.setTitle("Grenswaarde");
         graphView.addSeries(limitLine);

@@ -49,6 +49,10 @@ public abstract class HardwareSensor implements SensorEventListener, HardwareUpd
         dataPoints = new ArrayList<DataPoint<Date>>();
     }
 
+    /**
+     * Next update methods send data to activity
+     * In activity data is published to user
+     */
     @Override
     public void updateVelocityCounter(float[] maxVelocity) {
       this.activity.updateVelocityData(maxVelocity);

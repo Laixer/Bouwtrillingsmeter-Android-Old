@@ -37,7 +37,6 @@ public class VfGraphFragment extends GraphFragment {
         setMainSettings(GraphType.LineGraphSeries);
         layout = (LinearLayout) rootView.findViewById(R.id.VFgraph);
         layout.addView(graphView);
-        graphView.setTitle(getResources().getString(R.string.vfgraph));
         graphView.getGridLabelRenderer().setHorizontalAxisTitle(getResources().getString(R.string.vfxaxis));
         graphView.getGridLabelRenderer().setVerticalAxisTitle(getResources().getString(R.string.vfyaxis));
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -58,13 +57,13 @@ public class VfGraphFragment extends GraphFragment {
         LineGraphSeries<DataPoint> serieY = new LineGraphSeries<>(new DataPoint[] {});
         LineGraphSeries<DataPoint> serieZ = new LineGraphSeries<>(new DataPoint[] {});
         serieX.setColor(Color.RED);
-        serieY.setColor(Color.YELLOW);
+        serieY.setColor(Color.MAGENTA);
         serieZ.setColor(Color.BLUE);
 
         for (gemeenterotterdam.trillingmeterapp.DataPoint<int[]> dp : velocityFrequency){
-            serieX.appendData(new DataPoint(dp.domain[0], dp.values[0]), true, 50);
-            serieY.appendData(new DataPoint(dp.domain[1], dp.values[1]), true, 50);
-            serieZ.appendData(new DataPoint(dp.domain[2], dp.values[2]), true, 50);
+            serieX.appendData(new DataPoint(dp.domain[0], dp.values[0]), true, 200);
+            serieY.appendData(new DataPoint(dp.domain[1], dp.values[1]), true, 200);
+            serieZ.appendData(new DataPoint(dp.domain[2], dp.values[2]), true, 200);
         }
 
 
